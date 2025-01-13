@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signupImg from "../../../src/assets/Auth/Sign up-amico.svg";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../api/utils";
+import { AuthContext } from "../../providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { createSignUpNewUsers, loading, setLoading, updateUserProfile } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -20,8 +24,22 @@ const SignUp = () => {
     const email = data.email;
     const password = data.password;
     console.log(photo, name, email, password);
-    reset();
-    setIsLoading(false);
+    try {
+      const signUpData = await createSignUpNewUsers(email, password);
+      await updateUserProfile({
+        displayName: name,
+        photoURL: photo,
+      });
+      toast.success("Signup Successfully");
+      navigate("/");
+      console.log(signUpData);
+    } catch (error) {
+      console.log(error);
+      toast.error("Email already in use");
+    } finally {
+      reset();
+      setLoading(false);
+    }
   };
   return (
     <div className="flex flex-col gap-8 md:gap-10 lg:gap-20 lg:flex-row justify-center items-center py-20 bg-white w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
@@ -125,11 +143,10 @@ const SignUp = () => {
 
           <div>
             <button
-              onClick={() => setIsLoading(true)}
               type="submit"
               className="bg-lime-500 w-full rounded-md py-3 text-white"
             >
-              {isLoading ? (
+              {loading ? (
                 <TbFidgetSpinner className="animate-spin m-auto" />
               ) : (
                 "Continue"

@@ -1,23 +1,34 @@
-import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../../src/assets/Auth/Login-bro.svg";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import toast from "react-hot-toast";
 const LogIn = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { signInExistingUsers, loading, setLoading } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  const handleLogin = (data) => {
+  const handleLogin = async (data) => {
     const email = data.email;
     const password = data.password;
-    console.log(email, password);
-    reset();
-    setIsLoading(false);
+    try {
+      await signInExistingUsers(email, password);
+      toast.success("Login successfully");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      toast.error("Invalid Credential Email/Password");
+    } finally {
+      reset();
+      setLoading(false);
+    }
   };
   return (
     <div>
@@ -77,11 +88,10 @@ const LogIn = () => {
 
             <div>
               <button
-                onClick={() => setIsLoading(true)}
                 type="submit"
                 className="bg-lime-500 w-full rounded-md py-3 text-white"
               >
-                {isLoading ? (
+                {loading ? (
                   <TbFidgetSpinner className="animate-spin m-auto" />
                 ) : (
                   "Continue"
