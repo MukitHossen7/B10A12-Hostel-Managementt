@@ -6,10 +6,12 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const LogIn = () => {
   const { signInExistingUsers, loading, setLoading, signInWithGoogle } =
     useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -36,6 +38,14 @@ const LogIn = () => {
       const { user } = await signInWithGoogle();
       toast.success("Google Login successful");
       navigate("/");
+      const userData = {
+        name: user?.displayName,
+        email: user?.email,
+        photo: user?.photoURL,
+        role: "customer",
+        badge: "Bronze",
+      };
+      await axiosPublic.post(`/users`, userData);
       console.log(user);
     } catch (error) {
       console.log(error);

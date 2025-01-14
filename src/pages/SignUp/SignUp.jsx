@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { imageUpload } from "../../api/utils";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
   const {
@@ -17,6 +18,7 @@ const SignUp = () => {
     signInWithGoogle,
   } = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -28,16 +30,23 @@ const SignUp = () => {
     const name = data.name;
     const email = data.email;
     const password = data.password;
-    console.log(photo, name, email, password);
     try {
-      const signUpData = await createSignUpNewUsers(email, password);
+      const { user } = await createSignUpNewUsers(email, password);
       await updateUserProfile({
         displayName: name,
         photoURL: photo,
       });
       toast.success("Signup Successfully");
+      const userData = {
+        name: user?.displayName,
+        email: user?.email,
+        photo: user?.photoURL,
+        role: "customer",
+        badge: "Bronze",
+      };
+      await axiosPublic.post(`/users`, userData);
       navigate("/");
-      console.log(signUpData);
+      console.log(user);
     } catch (error) {
       console.log(error);
       toast.error("Email already in use");
@@ -51,6 +60,15 @@ const SignUp = () => {
       const { user } = await signInWithGoogle();
       toast.success("Google Signup successful");
       navigate("/");
+
+      const userData = {
+        name: user?.displayName,
+        email: user?.email,
+        photo: user?.photoURL,
+        role: "customer",
+        badge: "Bronze",
+      };
+      await axiosPublic.post(`/users`, userData);
       console.log(user);
     } catch (error) {
       console.log(error);
