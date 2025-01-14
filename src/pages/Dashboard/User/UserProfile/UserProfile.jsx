@@ -7,7 +7,7 @@ const UserProfile = () => {
   };
   return (
     <div>
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="flex items-center justify-center py-20">
         <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
           <div className="flex flex-col items-center">
             <img

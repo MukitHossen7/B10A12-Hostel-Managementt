@@ -16,6 +16,9 @@ import AllMeals from "../pages/Dashboard/Admin/AllMeals/AllMeals";
 import AllReviews from "../pages/Dashboard/Admin/AllReviews/AllReviews";
 import ServeMeals from "../pages/Dashboard/Admin/ServeMeals/serveMeals";
 import UpComingMeal from "../pages/Dashboard/Admin/UpComingMeal/UpComingMeal";
+import RequestedMeals from "../pages/Dashboard/User/RequestedMeals/RequestedMeals";
+import MyReviews from "../pages/Dashboard/User/MyReviews/MyReviews";
+import PaymentHistory from "../pages/Dashboard/User/PaymentHistory/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -56,10 +59,7 @@ const router = createBrowserRouter([
         index: true,
         element: <Statistics></Statistics>,
       },
-      {
-        path: "user-profile",
-        element: <UserProfile></UserProfile>,
-      },
+      // Admin Route
       {
         path: "admin-profile",
         element: <AdminProfile></AdminProfile>,
@@ -87,6 +87,23 @@ const router = createBrowserRouter([
       {
         path: "coming-meals",
         element: <UpComingMeal></UpComingMeal>,
+      },
+      // User Route
+      {
+        path: "user-profile",
+        element: <UserProfile></UserProfile>,
+      },
+      {
+        path: "requested-meals",
+        element: <RequestedMeals></RequestedMeals>,
+      },
+      {
+        path: "my-reviews",
+        element: <MyReviews></MyReviews>,
+      },
+      {
+        path: "payment-history",
+        element: <PaymentHistory></PaymentHistory>,
       },
     ],
   },
