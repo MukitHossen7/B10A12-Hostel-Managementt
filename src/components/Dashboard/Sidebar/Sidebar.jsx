@@ -1,7 +1,17 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaUtensils } from "react-icons/fa";
 import useRole from "../../../hooks/useRole";
+import {
+  MdNoMealsOuline,
+  MdOutlineAdminPanelSettings,
+  MdOutlineReviews,
+  MdStars,
+} from "react-icons/md";
+import { GrUserManager } from "react-icons/gr";
+import { IoMdAddCircleOutline } from "react-icons/io";
+import { IoRestaurantOutline } from "react-icons/io5";
+import { HiOutlineCurrencyDollar, HiOutlineUserCircle } from "react-icons/hi";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,127 +44,160 @@ const Sidebar = () => {
           } md:translate-x-0 md:relative md:flex md:flex-col w-64`}
         >
           <Link to="/" className="p-4">
-            <div className="flex items-center space-x-2">
-              <span className="text-2xl font-bold text-yellow-500">
+            <div className="flex items-center space-x-2 px-6">
+              <span className="text-2xl font-bold text-yellow-500 bg-gray-900 px-3 py-2 rounded-md">
                 Hostel Manager
               </span>
             </div>
           </Link>
           {role === "admin" && (
-            <div className="flex flex-col justify-between flex-1 space-y-4 mt-8">
+            <div className="flex flex-col justify-between flex-1 space-y-6 mt-4 px-6">
               <NavLink
                 to="/dashboard/admin-profile"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-yellow-100 font-bold text-yellow-500"
+                    ? "font-medium text-yellow-500"
                     : "text-gray-700 hover:text-yellow-500"
                 }
               >
-                Admin Profile
+                <div className="flex items-center gap-3">
+                  <MdOutlineAdminPanelSettings className="text-2xl" />
+                  <span>Admin Profile</span>
+                </div>
               </NavLink>
               <NavLink
                 to="/dashboard/manage-users"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-yellow-100 font-bold text-yellow-500"
+                    ? " font-medium text-yellow-500"
                     : "text-gray-700 hover:text-yellow-500"
                 }
               >
-                Manage Users
+                <div className="flex items-center gap-3">
+                  <GrUserManager className="text-2xl" />
+                  <span>Manage Users</span>
+                </div>
               </NavLink>
               <NavLink
                 to="/dashboard/add-meals"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-yellow-100 font-bold text-yellow-500"
+                    ? " font-medium text-yellow-500"
                     : "text-gray-700 hover:text-yellow-500"
                 }
               >
-                Add Meals
+                <div className="flex items-center gap-3">
+                  <IoMdAddCircleOutline className="text-2xl" />
+                  <span>Add Meals</span>
+                </div>
               </NavLink>
               <NavLink
                 to="/dashboard/all-meals"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-yellow-100 font-bold text-yellow-500"
+                    ? " font-medium text-yellow-500"
                     : "text-gray-700 hover:text-yellow-500"
                 }
               >
-                All Meals
+                <div className="flex items-center gap-3">
+                  <MdNoMealsOuline className="text-2xl" />
+                  <span>All Meals</span>
+                </div>
               </NavLink>
               <NavLink
                 to="/dashboard/all-reviews"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-yellow-100 font-bold text-yellow-500"
+                    ? " font-medium text-yellow-500"
                     : "text-gray-700 hover:text-yellow-500"
                 }
               >
-                All Reviews
+                <div className="flex items-center gap-3">
+                  <MdOutlineReviews className="text-2xl" />
+                  <span>All Reviews</span>
+                </div>
               </NavLink>
               <NavLink
                 to="/dashboard/serve-meals"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-yellow-100 font-bold text-yellow-500"
+                    ? " font-medium text-yellow-500"
                     : "text-gray-700 hover:text-yellow-500"
                 }
               >
-                Serve Meals
+                <div className="flex items-center gap-3">
+                  <IoRestaurantOutline className="text-2xl" />
+                  <span>Serve Meals</span>
+                </div>
               </NavLink>
               <NavLink
                 to="/dashboard/coming-meals"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-yellow-100 font-bold text-yellow-500"
+                    ? " font-medium text-yellow-500"
                     : "text-gray-700 hover:text-yellow-500"
                 }
               >
-                Upcoming Meals
+                <div className="flex items-center gap-3">
+                  <FaUtensils className="text-2xl" />
+                  <span>Upcoming Meals</span>
+                </div>
               </NavLink>
             </div>
           )}
           {role === "customer" && (
-            <div className="flex flex-col justify-between flex-1 space-y-4 mt-8">
+            <div className="flex flex-col justify-between flex-1 space-y-6 mt-4 px-6">
               <NavLink
                 to="/dashboard/user-profile"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-yellow-100 font-bold text-yellow-500"
+                    ? " font-medium text-yellow-500"
                     : "text-gray-700 hover:text-yellow-500"
                 }
               >
-                My Profile
+                <div className="flex items-center gap-3">
+                  <HiOutlineUserCircle className="text-2xl" />
+                  <span>My Profile</span>
+                </div>
               </NavLink>
               <NavLink
                 to="/dashboard/requested-meals"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-yellow-100 font-bold text-yellow-500"
+                    ? " font-medium text-yellow-500"
                     : "text-gray-700 hover:text-yellow-500"
                 }
               >
-                Requested Meals
+                <div className="flex items-center gap-3">
+                  <FaUtensils className="text-2xl" />
+                  <span>Requested Meals</span>
+                </div>
               </NavLink>
               <NavLink
                 to="/dashboard/my-reviews"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-yellow-100 font-bold text-yellow-500"
+                    ? " font-medium text-yellow-500"
                     : "text-gray-700 hover:text-yellow-500"
                 }
               >
-                My Reviews
+                <div className="flex items-center gap-3">
+                  <MdStars className="text-2xl" />
+                  <span>My Reviews</span>
+                </div>
               </NavLink>
               <NavLink
                 to="/dashboard/payment-history"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-yellow-100 font-bold text-yellow-500"
+                    ? " font-medium text-yellow-500"
                     : "text-gray-700 hover:text-yellow-500"
                 }
               >
-                Payment History
+                <div className="flex items-center gap-3">
+                  <HiOutlineCurrencyDollar className="text-2xl" />
+                  <span>Payment History</span>
+                </div>
               </NavLink>
             </div>
           )}
@@ -172,125 +215,158 @@ const Sidebar = () => {
       {/* Desktop Devices */}
       <div className="hidden md:flex md:flex-col md:h-full px-8 mt-7">
         <Link to="/">
-          <span className="text-2xl font-bold text-yellow-500">
+          <span className="text-2xl font-bold text-yellow-500 bg-gray-900 px-2 py-2 rounded-md">
             Hostel Manager
           </span>
         </Link>
         {role === "admin" && (
-          <div className="flex flex-col justify-between flex-1 space-y-4 mt-8">
+          <div className="flex flex-col justify-between flex-1 space-y-7 mt-8">
             <NavLink
               to="/dashboard/admin-profile"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-yellow-100 font-bold text-yellow-500"
+                  ? " font-medium text-yellow-500"
                   : "text-gray-700 hover:text-yellow-500"
               }
             >
-              Admin Profile
+              <div className="flex items-center gap-3">
+                <MdOutlineAdminPanelSettings className="text-2xl" />
+                <span>Admin Profile</span>
+              </div>
             </NavLink>
             <NavLink
               to="/dashboard/manage-users"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-yellow-100 font-bold text-yellow-500"
+                  ? " font-medium text-yellow-500"
                   : "text-gray-700 hover:text-yellow-500"
               }
             >
-              Manage Users
+              <div className="flex items-center gap-3">
+                <GrUserManager className="text-2xl" />
+                <span>Manage Users</span>
+              </div>
             </NavLink>
             <NavLink
               to="/dashboard/add-meals"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-yellow-100 font-bold text-yellow-500"
+                  ? " font-medium text-yellow-500"
                   : "text-gray-700 hover:text-yellow-500"
               }
             >
-              Add Meals
+              <div className="flex items-center gap-3">
+                <IoMdAddCircleOutline className="text-2xl" />
+                <span>Add Meals</span>
+              </div>
             </NavLink>
             <NavLink
               to="/dashboard/all-meals"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-yellow-100 font-bold text-yellow-500"
+                  ? " font-medium text-yellow-500"
                   : "text-gray-700 hover:text-yellow-500"
               }
             >
-              All Meals
+              <div className="flex items-center gap-3">
+                <MdNoMealsOuline className="text-2xl" />
+                <span>All Meals</span>
+              </div>
             </NavLink>
             <NavLink
               to="/dashboard/all-reviews"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-yellow-100 font-bold text-yellow-500"
+                  ? " font-medium text-yellow-500"
                   : "text-gray-700 hover:text-yellow-500"
               }
             >
-              All Reviews
+              <div className="flex items-center gap-3">
+                <MdOutlineReviews className="text-2xl" />
+                <span>All Reviews</span>
+              </div>
             </NavLink>
             <NavLink
               to="/dashboard/serve-meals"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-yellow-100 font-bold text-yellow-500"
+                  ? " font-medium text-yellow-500"
                   : "text-gray-700 hover:text-yellow-500"
               }
             >
-              Serve Meals
+              <div className="flex items-center gap-3">
+                <IoRestaurantOutline className="text-2xl" />
+                <span>Serve Meals</span>
+              </div>
             </NavLink>
             <NavLink
               to="/dashboard/coming-meals"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-yellow-100 font-bold text-yellow-500"
+                  ? " font-medium text-yellow-500"
                   : "text-gray-700 hover:text-yellow-500"
               }
             >
-              Upcoming Meals
+              <div className="flex items-center gap-3">
+                <FaUtensils className="text-2xl" />
+                <span>Upcoming Meals</span>
+              </div>
             </NavLink>
           </div>
         )}
         {role === "customer" && (
-          <div className="flex flex-col justify-between flex-1 space-y-4 mt-8">
+          <div className="flex flex-col justify-between flex-1 space-y-7 mt-8">
             <NavLink
               to="/dashboard/user-profile"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-yellow-100 font-bold text-yellow-500"
+                  ? " font-medium text-yellow-500"
                   : "text-gray-700 hover:text-yellow-500"
               }
             >
-              My Profile
+              <div className="flex items-center gap-3">
+                <HiOutlineUserCircle className="text-2xl" />
+                <span>My Profile</span>
+              </div>
             </NavLink>
             <NavLink
               to="/dashboard/requested-meals"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-yellow-100 font-bold text-yellow-500"
+                  ? " font-medium text-yellow-500"
                   : "text-gray-700 hover:text-yellow-500"
               }
             >
-              Requested Meals
+              <div className="flex items-center gap-3">
+                <FaUtensils className="text-2xl" />
+                <span>Requested Meals</span>
+              </div>
             </NavLink>
             <NavLink
               to="/dashboard/my-reviews"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-yellow-100 font-bold text-yellow-500"
+                  ? " font-medium text-yellow-500"
                   : "text-gray-700 hover:text-yellow-500"
               }
             >
-              My Reviews
+              <div className="flex items-center gap-3">
+                <MdStars className="text-2xl" />
+                <span>My Reviews</span>
+              </div>
             </NavLink>
             <NavLink
               to="/dashboard/payment-history"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-yellow-100 font-bold text-yellow-500"
+                  ? " font-medium text-yellow-500"
                   : "text-gray-700 hover:text-yellow-500"
               }
             >
-              Payment History
+              <div className="flex items-center gap-3">
+                <HiOutlineCurrencyDollar className="text-2xl" />
+                <span>Payment History</span>
+              </div>
             </NavLink>
           </div>
         )}
