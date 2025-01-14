@@ -10,6 +10,13 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import AddMeals from "../pages/Dashboard/Admin/AddMeals/AddMeals";
 import Statistics from "../pages/Dashboard/Common/Statistics";
+import UserProfile from "../pages/Dashboard/User/UserProfile/UserProfile";
+import AdminProfile from "../pages/Dashboard/Admin/AdminProfile/AdminProfile";
+import AllMeals from "../pages/Dashboard/Admin/AllMeals/AllMeals";
+import AllReviews from "../pages/Dashboard/Admin/AllReviews/AllReviews";
+import ServeMeals from "../pages/Dashboard/Admin/ServeMeals/serveMeals";
+import UpComingMeal from "../pages/Dashboard/Admin/UpComingMeal/UpComingMeal";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -50,12 +57,36 @@ const router = createBrowserRouter([
         element: <Statistics></Statistics>,
       },
       {
+        path: "user-profile",
+        element: <UserProfile></UserProfile>,
+      },
+      {
+        path: "admin-profile",
+        element: <AdminProfile></AdminProfile>,
+      },
+      {
         path: "manage-users",
         element: <ManageUsers></ManageUsers>,
       },
       {
         path: "add-meals",
         element: <AddMeals></AddMeals>,
+      },
+      {
+        path: "all-meals",
+        element: <AllMeals></AllMeals>,
+      },
+      {
+        path: "all-reviews",
+        element: <AllReviews></AllReviews>,
+      },
+      {
+        path: "serve-meals",
+        element: <ServeMeals></ServeMeals>,
+      },
+      {
+        path: "coming-meals",
+        element: <UpComingMeal></UpComingMeal>,
       },
     ],
   },
