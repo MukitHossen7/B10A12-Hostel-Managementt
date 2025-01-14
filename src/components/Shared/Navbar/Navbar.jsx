@@ -18,11 +18,13 @@ const Navbar = () => {
       <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Website Name */}
-          <div className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-yellow-500">
-              Hostel Manager
-            </span>
-          </div>
+          <Link to="/">
+            <div className="flex items-center space-x-2">
+              <span className="text-2xl font-bold text-yellow-500">
+                Hostel Manager
+              </span>
+            </div>
+          </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
