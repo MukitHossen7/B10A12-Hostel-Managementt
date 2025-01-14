@@ -9,8 +9,13 @@ import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 
 const SignUp = () => {
-  const { createSignUpNewUsers, loading, setLoading, updateUserProfile } =
-    useContext(AuthContext);
+  const {
+    createSignUpNewUsers,
+    loading,
+    setLoading,
+    updateUserProfile,
+    signInWithGoogle,
+  } = useContext(AuthContext);
   const navigate = useNavigate();
   const {
     register,
@@ -41,6 +46,20 @@ const SignUp = () => {
       setLoading(false);
     }
   };
+  const handleSignUpGoogle = async () => {
+    try {
+      const { user } = await signInWithGoogle();
+      toast.success("Google Signup successful");
+      navigate("/");
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+      toast.error("Google Signup failed please try again");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-8 md:gap-10 lg:gap-20 lg:flex-row justify-center items-center py-20 bg-white w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
       <div className="">
@@ -161,11 +180,13 @@ const SignUp = () => {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <div className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer">
+        <button
+          onClick={handleSignUpGoogle}
+          className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
+        >
           <FcGoogle size={32} />
-
-          <p>Continue with Google</p>
-        </div>
+          Continue with Google
+        </button>
         <p className="px-6 text-sm text-center text-gray-400">
           Already have an account?{" "}
           <Link

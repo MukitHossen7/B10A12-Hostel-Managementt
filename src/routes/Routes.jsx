@@ -5,6 +5,11 @@ import LogIn from "../pages/LogIn/LogIn";
 import SignUp from "../pages/SignUp/SignUp";
 import MealDetails from "../pages/MealDetails/MealDetails";
 import MealsPage from "../pages/MealsPage/MealsPage";
+import UpcomingMeals from "../pages/UpcomingMeals/UpcomingMeals";
+import DashboardLayout from "../layouts/DashboardLayout";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import AddMeals from "../pages/Dashboard/Admin/AddMeals/AddMeals";
+import Statistics from "../pages/Dashboard/Common/Statistics";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,6 +24,10 @@ const router = createBrowserRouter([
         element: <MealsPage></MealsPage>,
       },
       {
+        path: "/upcoming-meals",
+        element: <UpcomingMeals></UpcomingMeals>,
+      },
+      {
         path: "/meal/:id",
         element: <MealDetails></MealDetails>,
       },
@@ -31,6 +40,24 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp></SignUp>,
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        index: true,
+        element: <Statistics></Statistics>,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "add-meals",
+        element: <AddMeals></AddMeals>,
+      },
+    ],
   },
 ]);
 

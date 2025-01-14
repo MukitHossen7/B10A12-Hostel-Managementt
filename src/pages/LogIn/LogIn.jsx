@@ -7,7 +7,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 const LogIn = () => {
-  const { signInExistingUsers, loading, setLoading } = useContext(AuthContext);
+  const { signInExistingUsers, loading, setLoading, signInWithGoogle } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const {
     register,
@@ -27,6 +28,19 @@ const LogIn = () => {
       toast.error("Invalid Credential Email/Password");
     } finally {
       reset();
+      setLoading(false);
+    }
+  };
+  const handleLoginGoogle = async () => {
+    try {
+      const { user } = await signInWithGoogle();
+      toast.success("Google Login successful");
+      navigate("/");
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+      toast.error("Google Login failed please try again");
+    } finally {
       setLoading(false);
     }
   };
@@ -111,11 +125,12 @@ const LogIn = () => {
             </p>
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
           </div>
-          <div className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer">
-            <FcGoogle size={32} />
-
-            <p>Continue with Google</p>
-          </div>
+          <button onClick={handleLoginGoogle}>
+            <div className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer">
+              <FcGoogle size={32} />
+              Continue with Google
+            </div>
+          </button>
           <p className="px-6 text-sm text-center text-gray-400">
             Don&apos;t have an account yet?{" "}
             <Link
