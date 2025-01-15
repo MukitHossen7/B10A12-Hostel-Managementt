@@ -1,30 +1,43 @@
 import { FcGoogle } from "react-icons/fc";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import loginImg from "../../../src/assets/Auth/Login-bro.svg";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { FadeLoader } from "react-spinners";
 const LogIn = () => {
-  const { signInExistingUsers, loading, setLoading, signInWithGoogle } =
+  const { signInExistingUsers, loading, setLoading, signInWithGoogle, user } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+  if (loading)
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <FadeLoader color="#10e14b" />
+      </div>
+    );
+  if (user) {
+    return <Navigate to={from} replace={true}></Navigate>;
+  }
   const handleLogin = async (data) => {
     const email = data.email;
     const password = data.password;
     try {
       await signInExistingUsers(email, password);
       toast.success("Login successfully");
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (error) {
       console.log(error);
       toast.error("Invalid Credential Email/Password");
@@ -37,7 +50,7 @@ const LogIn = () => {
     try {
       const { user } = await signInWithGoogle();
       toast.success("Google Login successful");
-      navigate("/");
+      navigate(from, { replace: true });
       const userData = {
         name: user?.displayName,
         email: user?.email,

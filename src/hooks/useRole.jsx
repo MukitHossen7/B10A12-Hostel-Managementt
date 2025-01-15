@@ -6,14 +6,14 @@ import { useQuery } from "@tanstack/react-query";
 const useRole = () => {
   const { user } = useContext(AuthContext);
   const axiosInstance = useAxiosInstance();
-  const { data: role } = useQuery({
+  const { data: role, isLoading } = useQuery({
     queryKey: ["role", user?.email],
     queryFn: async () => {
       const { data } = await axiosInstance.get(`/user/role/${user?.email}`);
       return data;
     },
   });
-  return [role];
+  return [role, isLoading];
 };
 
 export default useRole;
