@@ -1,68 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MealCard from "../MealCard/MealCard";
+import useAxiosPublic from "./../../hooks/useAxiosPublic";
 
 const MealsCategory = () => {
   const [activeTab, setActiveTab] = useState("All Meals");
-
+  const [meals, setMeals] = useState([]);
+  const axiosPublic = useAxiosPublic();
+  useEffect(() => {
+    const fetchMeals = async () => {
+      try {
+        const { data } = await axiosPublic.get(
+          `/all-meals?category=${activeTab}`
+        );
+        setMeals(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchMeals();
+  }, [activeTab]);
   const categories = ["Breakfast", "Lunch", "Dinner", "All Meals"];
-
-  // Sample meal data for demonstration
-  const meals = [
-    {
-      id: 1,
-      category: "Breakfast",
-      title: "Pancakes",
-      image: "breakfast.jpg",
-      rating: 4.5,
-      price: "$5.99",
-    },
-    {
-      id: 2,
-      category: "Lunch",
-      title: "Grilled Chicken",
-      image: "lunch.jpg",
-      rating: 4.7,
-      price: "$9.99",
-    },
-    {
-      id: 3,
-      category: "Dinner",
-      title: "Spaghetti",
-      image: "dinner.jpg",
-      rating: 4.8,
-      price: "$12.99",
-    },
-    {
-      id: 4,
-      category: "Breakfast",
-      title: "Omelette",
-      image: "breakfast2.jpg",
-      rating: 4.6,
-      price: "$4.99",
-    },
-    {
-      id: 5,
-      category: "Lunch",
-      title: "Salmon Salad",
-      image: "lunch2.jpg",
-      rating: 4.9,
-      price: "$10.99",
-    },
-    {
-      id: 6,
-      category: "Dinner",
-      title: "Steak",
-      image: "dinner2.jpg",
-      rating: 5.0,
-      price: "$15.99",
-    },
-  ];
-
-  const filteredMeals =
-    activeTab === "All Meals"
-      ? meals
-      : meals.filter((meal) => meal.category === activeTab);
-
   return (
     <section className="py-10 w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-6">
@@ -89,9 +46,9 @@ const MealsCategory = () => {
       </div>
 
       {/* Meal Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredMeals.map((meal) => (
-          <MealCard key={meal.id} meal={meal}></MealCard>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {meals?.slice(0, 3).map((meal) => (
+          <MealCard key={meal._id} meal={meal}></MealCard>
         ))}
       </div>
     </section>
