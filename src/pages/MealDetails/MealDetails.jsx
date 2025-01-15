@@ -1,24 +1,20 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { FaThumbsUp } from "react-icons/fa";
 import { useParams } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const MealDetails = () => {
   const { id } = useParams();
   const [likeCount, setLikeCount] = useState(0);
   const [reviews, setReviews] = useState([]);
-
-  // Dummy meal data for example
-  const meal = {
-    id,
-    title: "Grilled Chicken with Veggies",
-    image: "https://i.ibb.co.com/Nn6WGW4/images-4.jpg",
-    distributor: "John Doe",
-    description:
-      "A healthy meal with grilled chicken and seasonal vegetables.A healthy meal with grilled chicken and seasonal vegetables",
-    ingredients: ["Chicken", "Carrots", "Broccoli", "Garlic", "Olive Oil"],
-    postTime: "2025-01-14",
-    rating: 4.5,
-  };
-
+  const axiosPublic = useAxiosPublic();
+  const { data: detailsData = {} } = useQuery({
+    queryKey: ["mealDetails", id],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get(`/meal-details/${id}`);
+      return data;
+    },
+  });
   const handleLike = () => {
     setLikeCount(likeCount + 1);
     // Update like count on server
@@ -37,41 +33,46 @@ const MealDetails = () => {
   return (
     <div>
       <div className="px-4 py-8 md:px-16 lg:px-24">
-        <div className="flex flex-col lg:flex-row gap-10">
+        <div className="flex flex-col lg:flex-row gap-10 items-center justify-center">
           {/* Meal Image */}
           <div className="w-full lg:w-1/2">
             <img
-              src={meal.image}
-              alt={meal.title}
-              className="rounded-lg shadow-md w-full h-96 lg:h-[500px]"
+              src={detailsData?.image}
+              className="rounded-lg shadow-md w-full h-96 lg:h-[500px] object-cover"
             />
           </div>
 
           {/* Meal Info */}
           <div className="w-full lg:w-1/2">
-            <h1 className="text-3xl font-bold text-gray-800 mb-4">
-              {meal.title}
+            <h1 className="md:text-2xl lg:text-3xl font-bold text-gray-800 mb-4">
+              {detailsData?.title}
             </h1>
             <p className="text-gray-600 mb-4">
-              By: <span className="font-semibold">{meal.distributor}</span>
+              By:{" "}
+              <span className="font-semibold">
+                {detailsData?.distributor?.name}
+              </span>
             </p>
-            <p className="text-gray-700 mb-4">{meal.description}</p>
+            <p className="text-gray-700 mb-4">{detailsData?.description}</p>
 
             <div className="mb-4">
               <h2 className="text-xl font-semibold text-gray-800">
                 Ingredients:
               </h2>
               <ul className="list-disc list-inside text-gray-700">
-                {meal.ingredients.map((ingredient, index) => (
+                {detailsData?.ingredients?.map((ingredient, index) => (
                   <li key={index}>{ingredient}</li>
                 ))}
               </ul>
             </div>
 
-            <p className="text-gray-600 mb-4">Posted on: {meal.postTime}</p>
+            <p className="text-gray-600 mb-4">
+              Posted on: {detailsData?.postTime}
+            </p>
 
             <p className="text-gray-600 mb-4">
-              Rating: <span className="font-semibold">{meal.rating}</span>
+              Rating:{" "}
+              <span className="font-semibold">{detailsData?.rating}</span>
             </p>
 
             <div className="flex items-center gap-4">

@@ -13,16 +13,13 @@ const MealCard = ({ meal }) => {
         <div className="p-4">
           <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
           <p className="text-gray-600 mb-2">
-            <span className="font-semibold">Price:</span> {price}
+            <span className="font-semibold">Price:</span> {price} $
           </p>
           <p className="text-gray-600 mb-4">
             <span className="font-semibold">Rating:</span> {rating} ⭐
           </p>
-          <Link to="/meal/1">
-            <button
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg"
-              onClick={() => console.log(`Redirect to /meal/${_id}`)}
-            >
+          <Link to={`/meal/${_id}`}>
+            <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
               View Details
             </button>
           </Link>
