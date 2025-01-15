@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { IoIosLogOut, IoMdNotifications } from "react-icons/io";
 import toast from "react-hot-toast";
+import useRole from "../../../hooks/useRole";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [role] = useRole();
   const handleLogOut = () => {
     logOut().then(() => {
       toast.success("Log_out successfully");
@@ -60,12 +62,22 @@ const Navbar = () => {
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded">
                     <p className="px-4 py-2 text-black">{user?.displayName}</p>
-                    <Link
-                      to="/dashboard"
-                      className="block px-4 py-2 text-black hover:bg-gray-100 transition"
-                    >
-                      Dashboard
-                    </Link>
+                    {role === "admin" ? (
+                      <Link
+                        to="/dashboard/admin-profile"
+                        className="block px-4 py-2 text-black hover:bg-gray-100 transition"
+                      >
+                        Dashboard
+                      </Link>
+                    ) : (
+                      <Link
+                        to="/dashboard/user-profile"
+                        className="block px-4 py-2 text-black hover:bg-gray-100 transition"
+                      >
+                        Dashboard
+                      </Link>
+                    )}
+
                     <button
                       className="  text-left mx-4 mb-4 mt-2 px-4 py-2 text-black border  border-gray-500 flex items-center gap-2 rounded-lg "
                       onClick={handleLogOut}

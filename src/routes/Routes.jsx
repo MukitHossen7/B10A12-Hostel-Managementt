@@ -21,6 +21,7 @@ import MyReviews from "../pages/Dashboard/User/MyReviews/MyReviews";
 import PaymentHistory from "../pages/Dashboard/User/PaymentHistory/PaymentHistory";
 import PrivateRoutes from "./PrivateRoutes";
 import AdminRoute from "./AdminRoute";
+import ViewMeals from "../pages/Dashboard/Admin/ViewMeals/ViewMeals";
 
 const router = createBrowserRouter([
   {
@@ -119,6 +120,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <UpComingMeal></UpComingMeal>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "view-meals/:id",
+        element: (
+          <AdminRoute>
+            <ViewMeals></ViewMeals>,
           </AdminRoute>
         ),
       },

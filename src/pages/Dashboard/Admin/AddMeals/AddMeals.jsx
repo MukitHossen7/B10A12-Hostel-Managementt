@@ -22,9 +22,7 @@ const AddMeals = () => {
 
   const onSubmit = async (data) => {
     const ingredient = data.ingredients.split(",");
-    const formattedDateTime = moment
-      .tz(data?.postTime, "Asia/Dhaka")
-      .format("YYYY/MM/DD HH:mm");
+    const formattedDateTime = moment(data?.postTime).format("lll");
     const image = await imageUpload(data?.image[0]);
     const mealData = {
       title: data.title,
