@@ -1,17 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosInstance from "./../../../../hooks/useAxiosInstance";
-import { useContext } from "react";
-import { AuthContext } from "../../../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 const AllMeals = () => {
   const axiosInstance = useAxiosInstance();
-  const { user } = useContext(AuthContext);
   const { data: allMeals = [], refetch } = useQuery({
-    queryKey: ["allMeals", user?.email],
+    queryKey: ["allMeals"],
     queryFn: async () => {
-      const { data } = await axiosInstance.get(`/all-meals/${user?.email}`);
+      const { data } = await axiosInstance.get(`/all-meals-admin`);
       return data;
     },
   });

@@ -7,11 +7,14 @@ import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import ReactStars from "react-rating-stars-component";
+import { useQueryClient } from "@tanstack/react-query";
 const MealDetails = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const axiosInstance = useAxiosInstance();
+  const queryClient = useQueryClient();
+
   const { data: detailsData = {}, refetch } = useQuery({
     queryKey: ["mealDetails", id],
     queryFn: async () => {
@@ -26,8 +29,26 @@ const MealDetails = () => {
       return data;
     },
   });
-  console.log(reviews);
+
+  const { data: userData = {} } = useQuery({
+    queryKey: ["userData", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get(
+        `/check-subscription/${user?.email}`
+      );
+      return data;
+    },
+  });
   const handleMealRequest = () => {
+    if (!user) {
+      toast.error("Please Login!");
+      return;
+    }
+    if (userData.badge === "Bronze") {
+      toast.error("Please get Subscription");
+      return;
+    }
+    console.log(id);
     console.log("request is working");
   };
 
@@ -54,6 +75,7 @@ const MealDetails = () => {
     try {
       await axiosPublic.post(`/reviews`, reviewData);
       await axiosPublic.patch(`/update-reviews/${detailsData?._id}`);
+      queryClient.invalidateQueries(["reviews", id]);
       e.target.reset();
     } catch (error) {
       console.log(error);
@@ -156,12 +178,11 @@ const MealDetails = () => {
                     <select
                       id="rating"
                       name="rating"
+                      defaultValue=" Select a rating"
                       required
                       className="w-full border rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      <option value="" disabled selected>
-                        Select a rating
-                      </option>
+                      <option value="Select a rating">Select a rating</option>
                       <option value="1">1 - Poor</option>
                       <option value="2">2 - Fair</option>
                       <option value="3">3 - Good</option>
@@ -216,7 +237,7 @@ const MealDetails = () => {
                 </div>
               ))
             ) : (
-              <p className="text-gray-600">
+              <p className="text-gray-900 font-semibold text-center text-2xl">
                 No reviews yet. Be the first to review!
               </p>
             )}
