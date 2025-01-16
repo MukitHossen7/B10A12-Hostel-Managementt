@@ -22,6 +22,7 @@ import PaymentHistory from "../pages/Dashboard/User/PaymentHistory/PaymentHistor
 import PrivateRoutes from "./PrivateRoutes";
 import AdminRoute from "./AdminRoute";
 import ViewMeals from "../pages/Dashboard/Admin/ViewMeals/ViewMeals";
+import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: "/meal/:id",
         element: <MealDetails></MealDetails>,
+      },
+      {
+        path: "/checkout/:name",
+        element: (
+          <PrivateRoutes>
+            <CheckoutPage></CheckoutPage>
+          </PrivateRoutes>
+        ),
       },
     ],
   },
