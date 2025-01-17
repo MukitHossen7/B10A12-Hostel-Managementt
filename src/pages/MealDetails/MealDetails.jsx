@@ -15,6 +15,7 @@ const MealDetails = () => {
   const axiosInstance = useAxiosInstance();
   const queryClient = useQueryClient();
 
+  //get meal details
   const { data: detailsData = {}, refetch } = useQuery({
     queryKey: ["mealDetails", id],
     queryFn: async () => {
@@ -34,7 +35,7 @@ const MealDetails = () => {
   });
 
   //handle meal request
-  const handleMealRequest = () => {
+  const handleMealRequest = async () => {
     if (!user) {
       toast.error("Please Login!");
       return;
@@ -43,8 +44,31 @@ const MealDetails = () => {
       toast.error("Please get Subscription");
       return;
     }
-    console.log(id);
-    console.log("request is working");
+    const requestMealsData = {
+      customer: {
+        name: user?.displayName,
+        email: user?.email,
+      },
+      foodId: detailsData._id,
+      category: detailsData.category,
+      description: detailsData.description,
+      distributor: detailsData.distributor,
+      image: detailsData.image,
+      ingredients: detailsData.ingredients,
+      likes: detailsData.likes,
+      postTime: detailsData.postTime,
+      price: detailsData.price,
+      rating: detailsData.rating,
+      reviews: detailsData.reviews,
+      title: detailsData.title,
+      status: "Pending",
+    };
+    try {
+      await axiosInstance.post(`/request-meal`, requestMealsData);
+      toast.success("Request sent successfully!");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   //handle like
