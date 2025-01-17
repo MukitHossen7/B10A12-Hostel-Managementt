@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query";
 const RequestedMeals = () => {
   const axiosInstance = useAxiosInstance();
   const { user } = useContext(AuthContext);
-  console.log(user);
   const { data: requestMeals = [] } = useQuery({
     queryKey: ["requestedMeals", user?.email],
     queryFn: async () => {
