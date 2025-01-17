@@ -72,6 +72,10 @@ const CheckoutForm = ({ closeModal, packageData }) => {
         transactionId: paymentIntent.id,
       };
       await axiosInstance.post(`/payment-info`, paymentInfo);
+      await axiosInstance.patch(`/update-based`, {
+        email: user?.email,
+        packageType: packageData?.name,
+      });
       toast.success("Payment successfully");
       navigate("/dashboard/payment-history");
       closeModal();

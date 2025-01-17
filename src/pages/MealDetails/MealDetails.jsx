@@ -22,14 +22,7 @@ const MealDetails = () => {
       return data;
     },
   });
-  const { data: reviews = [] } = useQuery({
-    queryKey: ["reviews", id],
-    queryFn: async () => {
-      const { data } = await axiosPublic.get(`/reviews/${id}`);
-      return data;
-    },
-  });
-
+  //get subscription
   const { data: userData = {} } = useQuery({
     queryKey: ["userData", user?.email],
     queryFn: async () => {
@@ -39,6 +32,8 @@ const MealDetails = () => {
       return data;
     },
   });
+
+  //handle meal request
   const handleMealRequest = () => {
     if (!user) {
       toast.error("Please Login!");
@@ -52,6 +47,7 @@ const MealDetails = () => {
     console.log("request is working");
   };
 
+  //handle like
   const handleLike = async (likeId) => {
     if (!user) {
       toast.error("Please Login!");
@@ -61,6 +57,7 @@ const MealDetails = () => {
     toast.success("Like added successfully!");
     refetch();
   };
+  //handle review
   const handleReview = async (e) => {
     e.preventDefault();
     const description = e.target.description.value;
@@ -71,11 +68,13 @@ const MealDetails = () => {
       foodId: detailsData?._id,
       foodImg: detailsData?.image,
     };
-    console.log(reviewData);
     try {
-      await axiosPublic.post(`/reviews`, reviewData);
-      await axiosPublic.patch(`/update-reviews/${detailsData?._id}`);
-      queryClient.invalidateQueries(["reviews", id]);
+      await axiosPublic.patch(
+        `/update-reviews/${detailsData?._id}`,
+        reviewData
+      );
+
+      queryClient.invalidateQueries(["userData", id]);
       e.target.reset();
     } catch (error) {
       console.log(error);
@@ -150,7 +149,7 @@ const MealDetails = () => {
         <div className="mt-8 flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-[40%]">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Reviews ({detailsData?.reviewsCount})
+              Reviews ({detailsData?.reviews?.length})
             </h2>
 
             <div className="mb-6">
@@ -200,8 +199,8 @@ const MealDetails = () => {
           </div>
 
           <div className="w-full lg:w-[60%] lg:mt-12">
-            {reviews.length > 0 ? (
-              reviews.map((review) => (
+            {detailsData?.reviews?.length > 0 ? (
+              detailsData?.reviews?.map((review) => (
                 <div key={review._id} className="py-2">
                   <div className="bg-white shadow-md rounded-md px-4 py-4 border border-gray-100 flex items-center gap-4">
                     <div>
