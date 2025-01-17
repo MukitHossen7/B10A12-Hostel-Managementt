@@ -12,7 +12,8 @@ const MembershipSection = () => {
       setPackages(data);
     };
     fetchPackages();
-  }, []);
+  }, [axiosPublic]);
+
   return (
     <section className="py-12">
       <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto ">

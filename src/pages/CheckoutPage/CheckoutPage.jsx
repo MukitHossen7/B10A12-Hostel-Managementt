@@ -43,7 +43,11 @@ const CheckoutPage = () => {
           Subscribe Now
         </button>
       </div>
-      <PurchaseModal closeModal={closeModal} isOpen={isOpen}></PurchaseModal>
+      <PurchaseModal
+        packageData={packageData}
+        closeModal={closeModal}
+        isOpen={isOpen}
+      ></PurchaseModal>
     </div>
   );
 };

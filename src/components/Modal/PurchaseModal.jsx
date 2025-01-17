@@ -8,7 +8,12 @@ import {
 } from "@headlessui/react";
 import { Fragment } from "react";
 
-const PurchaseModal = ({ closeModal, isOpen }) => {
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./Form/CheckoutForm";
+
+const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PUBLISHABLE_KEY);
+const PurchaseModal = ({ closeModal, isOpen, packageData }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -40,11 +45,16 @@ const PurchaseModal = ({ closeModal, isOpen }) => {
                   as="h3"
                   className="text-lg font-medium text-center leading-6 text-gray-900"
                 >
-                  Review Info Before Purchase
+                  Please Purchase your Product
                 </DialogTitle>
 
                 {/* payment related work */}
-                <h1>Hello Payment</h1>
+                <Elements stripe={stripePromise}>
+                  <CheckoutForm
+                    closeModal={closeModal}
+                    packageData={packageData}
+                  ></CheckoutForm>
+                </Elements>
               </DialogPanel>
             </TransitionChild>
           </div>
