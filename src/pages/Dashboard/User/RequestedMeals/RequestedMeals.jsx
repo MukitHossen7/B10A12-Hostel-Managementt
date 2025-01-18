@@ -16,6 +16,7 @@ const RequestedMeals = () => {
       return data;
     },
   });
+  console.log(requestMeals);
   const handleCancel = async (cancelId) => {
     try {
       await axiosInstance.delete(`/request-meal/cancel/${cancelId}`);
@@ -56,7 +57,7 @@ const RequestedMeals = () => {
             <tbody>
               {requestMeals?.map((meal) => (
                 <tr
-                  key={meal._id}
+                  key={meal?._id}
                   className="hover:bg-gray-50 transition-colors"
                 >
                   <td className="px-4 py-2 border-t">{meal?.title}</td>
@@ -73,7 +74,7 @@ const RequestedMeals = () => {
                   </td>
                   <td className="px-4 py-2 border-t text-center">
                     <button
-                      onClick={() => handleCancel(meal._id)}
+                      onClick={() => handleCancel(meal?._id)}
                       disabled={meal?.status === "Delivered"}
                       className={`bg-red-600 text-white px-4 py-1 rounded-full hover:bg-red-600 transition-colors text-sm ${
                         meal?.status === "Delivered" &&

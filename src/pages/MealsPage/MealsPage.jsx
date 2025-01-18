@@ -54,6 +54,13 @@ const MealsPage = () => {
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
   };
+  const handlePriceRange = (e) => {
+    const minPrice = parseInt(e.target.min.value);
+    const maxPrice = parseInt(e.target.max.value);
+    console.log(minPrice, maxPrice);
+    // setPriceRange([minPrice, maxPrice]);
+    // fetchMeals(1, true);
+  };
   return (
     <div className="w-11/12 md:11/12 lg:w-11/12 xl:container mx-auto px-4 py-6">
       <h1 className="text-3xl font-bold text-center mb-6">All Meals</h1>
@@ -80,12 +87,14 @@ const MealsPage = () => {
             type="number"
             placeholder="Min"
             className="border border-gray-300 px-2 py-1 rounded-md w-16"
+            onChange={handlePriceRange}
           />
           <span>-</span>
           <input
             type="number"
             placeholder="Max"
             className="border border-gray-300 px-2 py-1 rounded-md w-16"
+            onChange={handlePriceRange}
           />
         </div>
       </div>

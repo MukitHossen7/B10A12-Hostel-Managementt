@@ -36,7 +36,7 @@ const AddMeals = () => {
         name: user?.displayName,
         email: user?.email,
       },
-      rating: 0,
+      rating: [],
       likes: 0,
       reviews: 0,
     };

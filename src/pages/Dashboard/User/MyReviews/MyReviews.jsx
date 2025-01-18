@@ -14,6 +14,7 @@ const MyReviews = () => {
       return data;
     },
   });
+  console.log(allReviews);
   return (
     <div>
       <div className="min-h-screen  py-10 px-5">
@@ -45,9 +46,7 @@ const MyReviews = () => {
                   >
                     <td className="px-4 py-2">{review?.foodData?.title}</td>
                     <td className="px-4 py-2">{review?.foodData?.likes}</td>
-                    <td className="px-4 py-2">
-                      {review?.foodData?.review + 1}
-                    </td>
+                    <td className="px-4 py-2">{review?.description}</td>
                     <td className="px-4 py-2 flex items-center space-x-2">
                       <button
                         className="bg-blue-100 text-blue-500 hover:bg-blue-200 p-2 rounded"

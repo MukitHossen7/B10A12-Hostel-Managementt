@@ -20,10 +20,10 @@ const MealDetails = () => {
     queryKey: ["mealDetails", id],
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/meal-details/${id}`);
-      return data;
+      return data.meal;
     },
   });
-  console.log(detailsData);
+
   //get all reviews by food id
   const { data: reviewsData = [] } = useQuery({
     queryKey: ["reviews", id],
@@ -32,6 +32,7 @@ const MealDetails = () => {
       return data;
     },
   });
+
   // get subscription
   const { data: userData = {} } = useQuery({
     queryKey: ["userData", user?.email],
@@ -115,7 +116,7 @@ const MealDetails = () => {
         likes: detailsData?.likes,
         postTime: detailsData?.postTime,
         price: detailsData?.price,
-        rating: detailsData?.rating,
+        rating: detailsData?.averageRating,
         review: detailsData?.reviews,
         title: detailsData?.title,
       },
@@ -128,6 +129,9 @@ const MealDetails = () => {
       await axiosInstance.post(`/reviews`, reviewData);
       await axiosInstance.patch(`/update-reviews/${detailsData?._id}`, {
         status: "inc",
+      });
+      await axiosInstance.patch(`/update-rating/${detailsData?._id}`, {
+        rating: rating,
       });
       queryClient.invalidateQueries(["reviews", id]);
       e.target.reset();
@@ -188,7 +192,9 @@ const MealDetails = () => {
             </p>
             <p className="text-gray-600 mb-4">
               Rating:{" "}
-              <span className="font-semibold">{detailsData?.rating}</span>
+              <span className="font-semibold">
+                {detailsData?.averageRating}/5
+              </span>
             </p>
 
             <div className="flex items-center gap-4">
