@@ -2,11 +2,12 @@ import useAxiosInstance from "./../../../../hooks/useAxiosInstance";
 import { useContext } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const RequestedMeals = () => {
   const axiosInstance = useAxiosInstance();
   const { user } = useContext(AuthContext);
-  const { data: requestMeals = [] } = useQuery({
+  const { data: requestMeals = [], refetch } = useQuery({
     queryKey: ["requestedMeals", user?.email],
     queryFn: async () => {
       const { data } = await axiosInstance.get(
@@ -15,6 +16,16 @@ const RequestedMeals = () => {
       return data;
     },
   });
+  const handleCancel = async (cancelId) => {
+    try {
+      await axiosInstance.delete(`/request-meal/cancel/${cancelId}`);
+      toast.success("Order Cancelled successfully");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      refetch();
+    }
+  };
   return (
     <div>
       <div className="min-h-screen p-4 md:p-8">
@@ -61,7 +72,14 @@ const RequestedMeals = () => {
                     {meal?.status}
                   </td>
                   <td className="px-4 py-2 border-t text-center">
-                    <button className="bg-red-600 text-white px-4 py-1 rounded-full hover:bg-red-600 transition-colors text-sm">
+                    <button
+                      onClick={() => handleCancel(meal._id)}
+                      disabled={meal?.status === "Delivered"}
+                      className={`bg-red-600 text-white px-4 py-1 rounded-full hover:bg-red-600 transition-colors text-sm ${
+                        meal?.status === "Delivered" &&
+                        "hover:cursor-not-allowed"
+                      }`}
+                    >
                       Cancel
                     </button>
                   </td>

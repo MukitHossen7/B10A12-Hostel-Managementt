@@ -79,10 +79,10 @@ const ManageUsers = () => {
                         user?.badge === "Gold"
                           ? "bg-[#FFD700]"
                           : user?.badge === "Silver"
-                          ? "bg-[#C0C0C0,]"
+                          ? "bg-gray-400"
                           : user?.badge === "Platinum"
-                          ? "bg-[#e5e4e2]"
-                          : "bg-orange-400" // Default for Bronze
+                          ? "bg-blue-300"
+                          : "bg-gray-900" // Default for Bronze
                       }`}
                     >
                       {user?.badge}
