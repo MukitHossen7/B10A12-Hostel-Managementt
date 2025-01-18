@@ -50,9 +50,7 @@ const RequestedMeals = () => {
                 >
                   <td className="px-4 py-2 border-t">{meal?.title}</td>
                   <td className="px-4 py-2 border-t">{meal?.likes}</td>
-                  <td className="px-4 py-2 border-t">
-                    {meal?.reviews?.length}
-                  </td>
+                  <td className="px-4 py-2 border-t">{meal?.reviews}</td>
                   <td
                     className={`px-4 py-2 border-t ${
                       meal?.status === "Delivered"

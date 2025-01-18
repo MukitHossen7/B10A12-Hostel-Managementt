@@ -115,6 +115,7 @@ const MealDetails = () => {
         postTime: detailsData?.postTime,
         price: detailsData?.price,
         rating: detailsData?.rating,
+        review: detailsData?.reviews,
         title: detailsData?.title,
       },
       customer: {

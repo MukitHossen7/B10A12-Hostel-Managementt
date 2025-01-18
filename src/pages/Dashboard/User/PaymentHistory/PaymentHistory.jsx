@@ -21,7 +21,7 @@ const PaymentHistory = () => {
         <h1 className="text-2xl font-bold text-center mb-6">Payment History</h1>
 
         {payments && payments?.length > 0 ? (
-          <div className="overflow-x-auto shadow-md rounded-lg">
+          <div className="overflow-x-auto shadow-sm rounded-lg">
             <table className="table-auto  w-full bg-white border border-gray-200">
               <thead className="bg-gray-100">
                 <tr>
