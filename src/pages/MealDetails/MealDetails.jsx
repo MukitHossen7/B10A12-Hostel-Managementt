@@ -23,7 +23,15 @@ const MealDetails = () => {
       return data;
     },
   });
-  //get subscription
+  //get all reviews by food id
+  const { data: reviewsData = [] } = useQuery({
+    queryKey: ["reviews", id],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get(`/reviews/${id}`);
+      return data;
+    },
+  });
+  // get subscription
   const { data: userData = {} } = useQuery({
     queryKey: ["userData", user?.email],
     queryFn: async () => {
@@ -84,21 +92,42 @@ const MealDetails = () => {
   //handle review
   const handleReview = async (e) => {
     e.preventDefault();
+    if (!user) {
+      toast.error("Please Login!");
+      return;
+    }
     const description = e.target.description.value;
     const rating = parseInt(e.target.rating.value);
     const reviewData = {
       description,
-      rating,
+      reviewRatings: rating,
       foodId: detailsData?._id,
-      foodImg: detailsData?.image,
+      foodData: {
+        foodImg: detailsData?.image,
+        category: detailsData?.category,
+        description: detailsData?.description,
+        distributor: {
+          email: detailsData?.distributor?.email,
+          name: detailsData?.distributor?.name,
+        },
+        ingredients: detailsData?.ingredients,
+        likes: detailsData?.likes,
+        postTime: detailsData?.postTime,
+        price: detailsData?.price,
+        rating: detailsData?.rating,
+        title: detailsData?.title,
+      },
+      customer: {
+        name: user?.displayName,
+        email: user?.email,
+      },
     };
     try {
-      await axiosPublic.patch(
-        `/update-reviews/${detailsData?._id}`,
-        reviewData
-      );
-
-      queryClient.invalidateQueries(["userData", id]);
+      await axiosInstance.post(`/reviews`, reviewData);
+      await axiosInstance.patch(`/update-reviews/${detailsData?._id}`, {
+        status: "inc",
+      });
+      queryClient.invalidateQueries(["reviews", id]);
       e.target.reset();
     } catch (error) {
       console.log(error);
@@ -173,7 +202,7 @@ const MealDetails = () => {
         <div className="mt-8 flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-[40%]">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Reviews ({detailsData?.reviews?.length})
+              Reviews ({detailsData?.reviews})
             </h2>
 
             <div className="mb-6">
@@ -223,13 +252,13 @@ const MealDetails = () => {
           </div>
 
           <div className="w-full lg:w-[60%] lg:mt-12">
-            {detailsData?.reviews?.length > 0 ? (
-              detailsData?.reviews?.map((review) => (
+            {reviewsData?.length > 0 ? (
+              reviewsData?.map((review) => (
                 <div key={review._id} className="py-2">
                   <div className="bg-white shadow-md rounded-md px-4 py-4 border border-gray-100 flex items-center gap-4">
                     <div>
                       <img
-                        src={review?.foodImg}
+                        src={review?.foodData?.foodImg}
                         className="w-14 h-14 object-cover rounded-md"
                       ></img>
                     </div>
@@ -240,16 +269,16 @@ const MealDetails = () => {
                       <div>
                         <ReactStars
                           count={5}
-                          value={review?.rating}
+                          value={review?.reviewRatings}
                           size={24}
                           isHalf={true}
                           emptyIcon={<i className="far fa-star"></i>}
                           halfIcon={<i className="fa fa-star-half-alt"></i>}
                           fullIcon={<i className="fa fa-star"></i>}
                           activeColor={
-                            review?.rating >= 4
+                            review?.reviewRatings >= 4
                               ? "#4caf50"
-                              : review?.rating >= 3
+                              : review?.reviewRatings >= 3
                               ? "#ffc107"
                               : "#f44336"
                           }

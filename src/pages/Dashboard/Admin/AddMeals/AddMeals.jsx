@@ -38,7 +38,7 @@ const AddMeals = () => {
       },
       rating: 0,
       likes: 0,
-      reviews: [],
+      reviews: 0,
     };
     try {
       const { data } = await axiosInstance.post(`/add-meals`, mealData);
