@@ -1,29 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import { FaSearch, FaUserShield } from "react-icons/fa";
+import { FaUserShield } from "react-icons/fa";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
-import { FadeLoader } from "react-spinners";
+// import { FadeLoader } from "react-spinners";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const ManageUsers = () => {
   const axiosInstance = useAxiosInstance();
-  const {
-    data: allUsers = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["allUsers"],
+  const [search, setSearch] = useState("");
+  const { data: allUsers = [], refetch } = useQuery({
+    queryKey: ["allUsers", search],
     queryFn: async () => {
-      const { data } = await axiosInstance.get(`/users`);
+      const { data } = await axiosInstance.get(`/users?search=${search}`);
       return data;
     },
+    enabled: true,
   });
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <FadeLoader color="#10e14b" />
-      </div>
-    );
   const handleAdmin = async (id) => {
     try {
       await axiosInstance.patch(`/users/role/${id}`, { role: "admin" });
@@ -34,6 +27,17 @@ const ManageUsers = () => {
       refetch();
     }
   };
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value.toLowerCase());
+    refetch();
+  };
+  // if (isLoading)
+  //   return (
+  //     <div className="flex justify-center items-center min-h-screen">
+  //       <FadeLoader color="#10e14b" />
+  //     </div>
+  //   );
   return (
     <div className="">
       <div className="p-4 md:p-8 min-h-screen container mx-auto bg-gray-50">
@@ -43,16 +47,11 @@ const ManageUsers = () => {
         {/* Search Bar */}
         <div className="flex items-center mb-6">
           <input
+            onChange={handleSearch}
             type="text"
             placeholder="Search by username or email"
             className="w-full md:w-1/3 p-2 border rounded-l-md focus:outline-none focus:ring-1  focus:ring-gray-500"
           />
-          <button
-            className="p-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600"
-            title="Search"
-          >
-            <FaSearch />
-          </button>
         </div>
 
         {/* User Table */}
