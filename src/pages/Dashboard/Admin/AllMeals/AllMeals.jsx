@@ -2,9 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosInstance from "./../../../../hooks/useAxiosInstance";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
+import { useState } from "react";
+import AllMealsModal from "../../../../components/Modal/AllMealsModal";
 
 const AllMeals = () => {
   const axiosInstance = useAxiosInstance();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentMeal, setCurrentMeal] = useState(null);
   const { data: allMeals = [], refetch } = useQuery({
     queryKey: ["allMeals"],
     queryFn: async () => {
@@ -36,6 +41,19 @@ const AllMeals = () => {
       }
     });
   };
+  const handleEditClick = (meal) => {
+    setCurrentMeal(meal);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setCurrentMeal(null);
+  };
+  const handleFormSubmit = async (updatedMeal) => {
+    console.log(updatedMeal);
+  };
+
   return (
     <div>
       <div className="p-6 min-h-screen">
@@ -59,25 +77,33 @@ const AllMeals = () => {
                 <tr key={meal._id} className="border-t">
                   <td className="px-4 py-4 text-sm">{meal?.title}</td>
                   <td className="px-4 py-4 text-sm">{meal?.likes}</td>
-                  <td className="px-4 py-4 text-sm">{meal?.reviewsCount}</td>
+                  <td className="px-4 py-4 text-sm">{meal?.reviews}</td>
                   <td className="px-4 py-4 text-sm">{meal?.rating}</td>
                   <td className="px-4 py-4 text-sm">
                     {meal?.distributor?.name}
                   </td>
                   <td className="px-4 py-2 text-center flex flex-wrap gap-2 ">
                     <Link to={`/dashboard/view-meals/${meal._id}`}>
-                      <button className="px-2 py-1 lg:py-2 text-white bg-blue-500 rounded hover:bg-blue-600">
-                        View
+                      <button
+                        className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded"
+                        aria-label="View Meal"
+                      >
+                        <FaEye />
                       </button>
                     </Link>
-                    <button className="px-2 py-1 lg:py-2 text-white bg-green-500 rounded hover:bg-green-600">
-                      Update
+                    <button
+                      onClick={() => handleEditClick(meal)}
+                      className="bg-blue-100 text-blue-500 hover:bg-blue-200 p-2 rounded"
+                      aria-label="Edit Review"
+                    >
+                      <FaEdit />
                     </button>
                     <button
                       onClick={() => handleDelete(meal._id)}
-                      className="px-2 py-1 lg:py-2 text-white bg-red-500 rounded hover:bg-red-600"
+                      className="bg-red-100 text-red-500 hover:bg-red-200 p-2 rounded"
+                      aria-label="Delete Review"
                     >
-                      Delete
+                      <FaTrash />
                     </button>
                   </td>
                 </tr>
@@ -86,6 +112,12 @@ const AllMeals = () => {
           </table>
         </div>
       </div>
+      <AllMealsModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        meal={currentMeal}
+        onSubmit={handleFormSubmit}
+      ></AllMealsModal>
     </div>
   );
 };

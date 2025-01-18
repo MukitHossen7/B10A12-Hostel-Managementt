@@ -13,7 +13,13 @@ const AdminProfile = () => {
       return data;
     },
   });
-
+  const { data: allMeals = [] } = useQuery({
+    queryKey: ["allMeals"],
+    queryFn: async () => {
+      const { data } = await axiosInstance.get(`/all-meals-admin`);
+      return data;
+    },
+  });
   return (
     <div>
       <div className=" flex items-center justify-center py-12 md:py-20">
@@ -35,7 +41,9 @@ const AdminProfile = () => {
             <p className="text-gray-600">{admin?.email}</p>
             <div className="mt-4">
               <span className="text-gray-500 text-sm">Meals Added:</span>
-              <span className="ml-2 text-lg font-bold text-green-600">120</span>
+              <span className="ml-2 text-lg font-bold text-green-600">
+                {allMeals?.length}
+              </span>
             </div>
           </div>
 
