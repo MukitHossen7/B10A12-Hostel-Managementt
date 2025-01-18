@@ -15,7 +15,7 @@ const PackageCard = ({ pack }) => {
           {pack?.name} Package
         </h3>
         <p className="text-2xl font-semibold text-center text-gray-700 mb-4">
-          {pack.price}
+          ${pack.price}/Per Month
         </p>
       </div>
     </Link>

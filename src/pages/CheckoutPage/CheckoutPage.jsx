@@ -27,7 +27,9 @@ const CheckoutPage = () => {
         <h2 className="text-2xl font-bold text-gray-800">
           {packageData?.name}
         </h2>
-        <p className="text-xl text-gray-600 mt-2">{packageData?.price}</p>
+        <p className="text-xl text-gray-600 mt-2">
+          ${packageData?.price}/Per Month
+        </p>
         <ul className="mt-4 text-gray-700">
           {packageData?.benefits?.map((benefit, index) => (
             <li key={index} className="flex items-center space-x-2">
