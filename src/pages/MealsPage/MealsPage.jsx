@@ -6,7 +6,7 @@ import AllMealCard from "../../components/AllMealCard/AllMealCard";
 const MealsPage = () => {
   const [meals, setMeals] = useState([]);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("All");
+  const [category, setCategory] = useState("");
   const axiosPublic = useAxiosPublic();
   // const [priceRange, setPriceRange] = useState([0, 100]);
   // const [hasMore, setHasMore] = useState(true);
@@ -18,7 +18,7 @@ const MealsPage = () => {
     );
     setMeals(data);
   };
-  //   ...data?.meals
+
   useEffect(() => {
     // setMeals([]);
     // setPage(1);
@@ -27,6 +27,7 @@ const MealsPage = () => {
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
   };
+  console.log(category);
   return (
     <div className="container mx-auto px-4 py-6">
       <h1 className="text-3xl font-bold text-center mb-6">All Meals</h1>
@@ -42,7 +43,7 @@ const MealsPage = () => {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
-          <option value="All">All Categories</option>
+          <option value="">All Categories</option>
           <option value="Breakfast">Breakfast</option>
           <option value="Lunch">Lunch</option>
           <option value="Dinner">Dinner</option>
