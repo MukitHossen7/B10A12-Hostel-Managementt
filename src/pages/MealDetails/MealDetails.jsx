@@ -23,6 +23,7 @@ const MealDetails = () => {
       return data;
     },
   });
+  console.log(detailsData);
   //get all reviews by food id
   const { data: reviewsData = [] } = useQuery({
     queryKey: ["reviews", id],
@@ -151,7 +152,7 @@ const MealDetails = () => {
 
           {/* Meal Info */}
           <div className="w-full lg:w-1/2">
-            <h1 className="md:text-2xl lg:text-3xl font-bold text-gray-800 mb-4">
+            <h1 className="md:text-2xl lg:text-3xl font-semibold text-gray-800 mb-4">
               {detailsData?.title}
             </h1>
             <p className="text-gray-600 mb-4">
@@ -173,10 +174,18 @@ const MealDetails = () => {
               </ul>
             </div>
 
-            <p className="text-gray-600 mb-4">
-              Posted on: {detailsData?.postTime}
+            <p className="text-gray-600 mb-2">
+              <span className="font-semibold">Posted on</span> :{" "}
+              {detailsData?.postTime}
             </p>
-
+            <p className="text-gray-600 mb-2">
+              <span className="font-semibold">Category</span> :{" "}
+              {detailsData?.category}
+            </p>
+            <p className="text-gray-600 mb-4">
+              <span className="font-semibold">Price</span> :{" "}
+              {detailsData?.price}$
+            </p>
             <p className="text-gray-600 mb-4">
               Rating:{" "}
               <span className="font-semibold">{detailsData?.rating}</span>

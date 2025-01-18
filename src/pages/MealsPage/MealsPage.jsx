@@ -2,15 +2,15 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "./../../hooks/useAxiosPublic";
 import AllMealCard from "../../components/AllMealCard/AllMealCard";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const MealsPage = () => {
   const [meals, setMeals] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const axiosPublic = useAxiosPublic();
-  // const [priceRange, setPriceRange] = useState([0, 100]);
-  // const [hasMore, setHasMore] = useState(true);
   // const [page, setPage] = useState(1);
+  // const [hasMore, setHasMore] = useState(true);
 
   const fetchMeals = async () => {
     const { data } = await axiosPublic.get(
@@ -19,17 +19,43 @@ const MealsPage = () => {
     setMeals(data);
   };
 
+  // const fetchMeals = async (pageNum = 1, reset = false) => {
+  //   try {
+  //     const { data } = await axiosPublic.get(
+  //       `/api/meals?search=${search}&category=${category}&page=${pageNum}`
+  //     );
+  //     if (reset) {
+  //       setMeals(data);
+  //     } else {
+  //       setMeals((prevMeals) => [...prevMeals, ...data]);
+  //     }
+  //     if (data.length === 0) {
+  //       setHasMore(false);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching meals:", error);
+  //     setHasMore(false);
+  //   }
+  // };
+  // const fetchMoreMeals = () => {
+  //   const nextPage = page + 1;
+  //   setPage(nextPage);
+  //   fetchMeals(nextPage);
+  // };
   useEffect(() => {
-    // setMeals([]);
-    // setPage(1);
     fetchMeals();
   }, [search, category]);
+
+  // useEffect(() => {
+  //   setPage(1);
+  //   setHasMore(true);
+  //   fetchMeals(1, true);
+  // }, [search, category]);
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
   };
-  console.log(category);
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="w-11/12 md:11/12 lg:w-11/12 xl:container mx-auto px-4 py-6">
       <h1 className="text-3xl font-bold text-center mb-6">All Meals</h1>
       <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
         <input
@@ -68,11 +94,23 @@ const MealsPage = () => {
           <h2 className="text-3xl font-semibold italic">No meals found</h2>
         </div>
       )}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {meals?.map((meal) => (
-          <AllMealCard key={meal._id} meal={meal}></AllMealCard>
-        ))}
-      </div>
+      <InfiniteScroll
+        dataLength={meals.length}
+        next={fetchMeals}
+        hasMore={true}
+        loader={<h4>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: "center", marginTop: "20px" }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {meals?.map((meal) => (
+            <AllMealCard key={meal._id} meal={meal}></AllMealCard>
+          ))}
+        </div>
+      </InfiniteScroll>
     </div>
   );
 };
