@@ -78,7 +78,7 @@ const AllMeals = () => {
                   <td className="px-4 py-4 text-sm">{meal?.title}</td>
                   <td className="px-4 py-4 text-sm">{meal?.likes}</td>
                   <td className="px-4 py-4 text-sm">{meal?.reviews}</td>
-                  <td className="px-4 py-4 text-sm">{meal?.rating}</td>
+                  <td className="px-4 py-4 text-sm">{meal?.averageRating}</td>
                   <td className="px-4 py-4 text-sm">
                     {meal?.distributor?.name}
                   </td>

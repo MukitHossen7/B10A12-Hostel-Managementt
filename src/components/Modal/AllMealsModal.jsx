@@ -52,7 +52,7 @@ const AllMealsModal = ({ isOpen, onClose, currentMeal }) => {
           &times;
         </button>
         <div className="p-6 max-h-[90vh] overflow-y-auto">
-          <h2 className="text-2xl font-semibold mb-4">Edit Meal</h2>
+          <h2 className="text-2xl font-semibold mb-4">Update Meal</h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
