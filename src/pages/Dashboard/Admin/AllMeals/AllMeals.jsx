@@ -9,7 +9,7 @@ import AllMealsModal from "../../../../components/Modal/AllMealsModal";
 const AllMeals = () => {
   const axiosInstance = useAxiosInstance();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentMeal, setCurrentMeal] = useState(null);
+  const [currentMeal, setCurrentMeal] = useState({});
   const { data: allMeals = [], refetch } = useQuery({
     queryKey: ["allMeals"],
     queryFn: async () => {
@@ -50,9 +50,9 @@ const AllMeals = () => {
     setIsModalOpen(false);
     setCurrentMeal(null);
   };
-  const handleFormSubmit = async (updatedMeal) => {
-    console.log(updatedMeal);
-  };
+  // const handleFormSubmit = async (updatedMeal) => {
+  //   console.log(updatedMeal);
+  // };
 
   return (
     <div>
@@ -115,8 +115,7 @@ const AllMeals = () => {
       <AllMealsModal
         isOpen={isModalOpen}
         onClose={handleModalClose}
-        meal={currentMeal}
-        onSubmit={handleFormSubmit}
+        currentMeal={currentMeal}
       ></AllMealsModal>
     </div>
   );

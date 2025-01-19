@@ -1,9 +1,44 @@
 /* eslint-disable react/prop-types */
-const AllMealsModal = ({ isOpen, onClose }) => {
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+import { useForm } from "react-hook-form";
 
-    onClose();
+import moment from "moment-timezone";
+import { imageUpload } from "../../api/utils";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
+import toast from "react-hot-toast";
+
+const AllMealsModal = ({ isOpen, onClose, currentMeal }) => {
+  const axiosInstance = useAxiosInstance();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const ingredient = data.ingredients.split(",");
+    const formattedDateTime = moment(data?.postTime).format("lll");
+    const image = await imageUpload(data?.image[0]);
+    const mealData = {
+      title: data.title,
+      description: data.description,
+      category: data.category,
+      postTime: formattedDateTime,
+      ingredients: ingredient,
+      image,
+      price: parseInt(data.price),
+    };
+
+    try {
+      await axiosInstance.patch(
+        `/all-meals/updata/${currentMeal._id}`,
+        mealData
+      );
+      toast.success("Meals updated successfully");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      onClose();
+    }
   };
 
   if (!isOpen) return null;
@@ -18,97 +53,179 @@ const AllMealsModal = ({ isOpen, onClose }) => {
         </button>
         <div className="p-6 max-h-[90vh] overflow-y-auto">
           <h2 className="text-2xl font-semibold mb-4">Edit Meal</h2>
-          <form onSubmit={handleFormSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Title
-              </label>
-              <input
-                type="text"
-                name="title"
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                required
-              />
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  htmlFor="title"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Meal Title<span className="text-red-500 font-bold">*</span>
+                </label>
+                <input
+                  defaultValue={currentMeal?.title}
+                  id="title"
+                  type="text"
+                  {...register("title", { required: "Title is required" })}
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                />
+                {errors.title && (
+                  <p className="text-red-500 text-xs mt-1 font-medium">
+                    {errors.title.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="category"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Category<span className="text-red-500 font-bold">*</span>
+                </label>
+                <select
+                  defaultValue={currentMeal?.category}
+                  id="category"
+                  {...register("category", {
+                    required: "Category is required",
+                  })}
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                >
+                  <option value="">Select a category</option>
+                  <option value="Breakfast">Breakfast</option>
+                  <option value="Lunch">Lunch</option>
+                  <option value="Dinner">Dinner</option>
+                </select>
+                {errors.category && (
+                  <p className="text-red-500 text-xs mt-1 font-medium">
+                    {errors.category.message}
+                  </p>
+                )}
+              </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Category
-              </label>
-              <input
-                type="text"
-                name="category"
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Image
+              <label
+                htmlFor="image"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Meal Image<span className="text-red-500 font-bold">*</span>
               </label>
               <input
                 type="file"
-                name="image"
+                id="image"
+                {...register("image", { required: "Image is required" })}
                 accept="image/*"
-                className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                className="w-full p-2 border border-gray-300 rounded-md"
               />
+              {errors.image && (
+                <p className="text-red-500 text-xs mt-1 font-medium">
+                  {errors.image.message}
+                </p>
+              )}
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Ingredients
-              </label>
-              <input
-                type="text"
-                name="ingredients"
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                required
-              />
+            <div className="grid lg:grid-cols-2 gap-5">
+              <div>
+                <label
+                  htmlFor="ingredients"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Ingredients<span className="text-red-500 font-bold">*</span>
+                </label>
+                <textarea
+                  id="ingredients"
+                  rows="3"
+                  placeholder="Separate each ingredient with a comma"
+                  {...register("ingredients", {
+                    required: "Ingredients are required",
+                  })}
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                />
+                {errors.ingredients && (
+                  <p className="text-red-500 text-xs mt-1 font-medium">
+                    {errors.ingredients.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="description"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Description<span className="text-red-500 font-bold">*</span>
+                </label>
+                <textarea
+                  defaultValue={currentMeal?.description}
+                  id="description"
+                  rows="3"
+                  {...register("description", {
+                    required: "Description is required",
+                  })}
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                />
+                {errors.description && (
+                  <p className="text-red-500 text-xs mt-1 font-medium">
+                    {errors.description.message}
+                  </p>
+                )}
+              </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Description
-              </label>
-              <textarea
-                name="description"
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                rows="4"
-                required
-              ></textarea>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  htmlFor="price"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Price<span className="text-red-500 font-bold">*</span>
+                </label>
+                <input
+                  defaultValue={currentMeal?.price}
+                  type="number"
+                  id="price"
+                  {...register("price", { required: "Price is required" })}
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                />
+                {errors.price && (
+                  <p className="text-red-500 text-xs mt-1 font-medium">
+                    {errors.price.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="postTime"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Post Time<span className="text-red-500 font-bold">*</span>
+                </label>
+                <input
+                  type="datetime-local"
+                  id="postTime"
+                  {...register("postTime", {
+                    required: "Post Time is required",
+                  })}
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                />
+                {errors.postTime && (
+                  <p className="text-red-500 text-xs mt-1 font-medium">
+                    {errors.postTime.message}
+                  </p>
+                )}
+              </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Price
-              </label>
-              <input
-                type="number"
-                name="price"
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                required
-              />
+            <div className="mt-4 text-right">
+              <button
+                type="submit"
+                className="py-2 px-4 rounded-md bg-blue-500 text-white"
+              >
+                Update Meal
+              </button>
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Post Time
-              </label>
-              <input
-                type="text"
-                value={new Date().toLocaleString()}
-                readOnly
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-100"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              Submit
-            </button>
           </form>
         </div>
       </div>

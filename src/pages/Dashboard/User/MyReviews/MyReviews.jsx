@@ -14,7 +14,6 @@ const MyReviews = () => {
       return data;
     },
   });
-  console.log(allReviews);
   return (
     <div>
       <div className="min-h-screen  py-10 px-5">
@@ -39,7 +38,7 @@ const MyReviews = () => {
                 </tr>
               </thead>
               <tbody>
-                {allReviews.map((review) => (
+                {allReviews?.map((review) => (
                   <tr
                     key={review._id}
                     className="border-t hover:bg-gray-50 transition duration-150"
