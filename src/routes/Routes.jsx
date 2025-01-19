@@ -23,6 +23,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import AdminRoute from "./AdminRoute";
 import ViewMeals from "../pages/Dashboard/Admin/ViewMeals/ViewMeals";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
+import ViewMealsReviews from "../pages/Dashboard/User/ViewMealsReviews/ViewMealsReviews";
 
 const router = createBrowserRouter([
   {
@@ -156,6 +157,10 @@ const router = createBrowserRouter([
       {
         path: "payment-history",
         element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "view-meals-reviews/:id",
+        element: <ViewMealsReviews></ViewMealsReviews>,
       },
     ],
   },

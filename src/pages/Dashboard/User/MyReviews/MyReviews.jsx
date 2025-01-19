@@ -4,6 +4,7 @@ import { AuthContext } from "../../../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyReviews = () => {
   const axiosInstance = useAxiosInstance();
@@ -91,12 +92,14 @@ const MyReviews = () => {
                       >
                         <FaTrash />
                       </button>
-                      <button
-                        className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded"
-                        aria-label="View Meal"
-                      >
-                        <FaEye />
-                      </button>
+                      <Link to={`/dashboard/view-meals-reviews/${review._id}`}>
+                        <button
+                          className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded"
+                          aria-label="View Meal"
+                        >
+                          <FaEye />
+                        </button>
+                      </Link>
                     </td>
                   </tr>
                 ))}
