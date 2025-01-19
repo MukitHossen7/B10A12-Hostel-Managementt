@@ -11,10 +11,11 @@ const MealsPage = () => {
   const axiosPublic = useAxiosPublic();
   // const [page, setPage] = useState(1);
   // const [hasMore, setHasMore] = useState(true);
-
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
   const fetchMeals = async () => {
     const { data } = await axiosPublic.get(
-      `/api/meals?search=${search}&category=${category}`
+      `/api/meals?search=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}`
     );
     setMeals(data);
   };
@@ -44,7 +45,7 @@ const MealsPage = () => {
   // };
   useEffect(() => {
     fetchMeals();
-  }, [search, category]);
+  }, [search, category, minPrice, maxPrice]);
 
   // useEffect(() => {
   //   setPage(1);
@@ -55,11 +56,9 @@ const MealsPage = () => {
     setSearch(e.target.value.toLowerCase());
   };
   const handlePriceRange = (e) => {
-    const minPrice = parseInt(e.target.min.value);
-    const maxPrice = parseInt(e.target.max.value);
-    console.log(minPrice, maxPrice);
-    // setPriceRange([minPrice, maxPrice]);
-    // fetchMeals(1, true);
+    const { name, value } = e.target;
+    if (name === "min") setMinPrice(value);
+    if (name === "max") setMaxPrice(value);
   };
   return (
     <div className="w-11/12 md:11/12 lg:w-11/12 xl:container mx-auto px-4 py-6">
@@ -85,16 +84,18 @@ const MealsPage = () => {
           <span>Price:</span>
           <input
             type="number"
+            name="min"
             placeholder="Min"
             className="border border-gray-300 px-2 py-1 rounded-md w-16"
-            onChange={handlePriceRange}
+            onChange={(e) => handlePriceRange(e)}
           />
           <span>-</span>
           <input
             type="number"
+            name="max"
             placeholder="Max"
             className="border border-gray-300 px-2 py-1 rounded-md w-16"
-            onChange={handlePriceRange}
+            onChange={(e) => handlePriceRange(e)}
           />
         </div>
       </div>
