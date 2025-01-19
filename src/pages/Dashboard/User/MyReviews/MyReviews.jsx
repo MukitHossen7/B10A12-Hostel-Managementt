@@ -3,17 +3,46 @@ import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const MyReviews = () => {
   const axiosInstance = useAxiosInstance();
   const { user } = useContext(AuthContext);
-  const { data: allReviews = [] } = useQuery({
+  const { data: allReviews = [], refetch } = useQuery({
     queryKey: ["allReviews", user?.email],
     queryFn: async () => {
       const { data } = await axiosInstance.get(`/reviews/user/${user?.email}`);
       return data;
     },
   });
+  const handleDeleteReview = async (reviewsId, foodId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { data } = await axiosInstance.delete(
+          `/delete-reviews/${reviewsId}`
+        );
+        await axiosInstance.patch(`/update-reviews/${foodId}`, {
+          status: "dec",
+        });
+        if (data.deletedCount > 0) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your Reviews has been deleted.",
+            icon: "success",
+          });
+          refetch();
+        }
+      }
+    });
+  };
   return (
     <div>
       <div className="min-h-screen  py-10 px-5">
@@ -54,6 +83,9 @@ const MyReviews = () => {
                         <FaEdit />
                       </button>
                       <button
+                        onClick={() =>
+                          handleDeleteReview(review._id, review.foodId)
+                        }
                         className="bg-red-100 text-red-500 hover:bg-red-200 p-2 rounded"
                         aria-label="Delete Review"
                       >
