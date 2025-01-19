@@ -1,14 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import UserReviewsModal from "../../../../components/Modal/UserReviewsModal";
 
 const MyReviews = () => {
   const axiosInstance = useAxiosInstance();
   const { user } = useContext(AuthContext);
+  const [reviewData, setReviewData] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: allReviews = [], refetch } = useQuery({
     queryKey: ["allReviews", user?.email],
     queryFn: async () => {
@@ -44,6 +47,14 @@ const MyReviews = () => {
       }
     });
   };
+  const handleUpdateReview = (reviewData) => {
+    setReviewData(reviewData);
+    setIsModalOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setReviewData(null);
+  };
   return (
     <div>
       <div className="min-h-screen  py-10 px-5">
@@ -78,6 +89,7 @@ const MyReviews = () => {
                     <td className="px-4 py-2">{review?.description}</td>
                     <td className="px-4 py-2 flex items-center space-x-2">
                       <button
+                        onClick={() => handleUpdateReview(review)}
                         className="bg-blue-100 text-blue-500 hover:bg-blue-200 p-2 rounded"
                         aria-label="Edit Review"
                       >
@@ -108,6 +120,12 @@ const MyReviews = () => {
           </div>
         </div>
       </div>
+      <UserReviewsModal
+        isOpen={isModalOpen}
+        reviewData={reviewData}
+        onClose={handleModalClose}
+        refetch={refetch}
+      ></UserReviewsModal>
     </div>
   );
 };

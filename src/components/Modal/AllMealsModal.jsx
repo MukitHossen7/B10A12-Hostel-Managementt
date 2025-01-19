@@ -6,7 +6,7 @@ import { imageUpload } from "../../api/utils";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import toast from "react-hot-toast";
 
-const AllMealsModal = ({ isOpen, onClose, currentMeal }) => {
+const AllMealsModal = ({ isOpen, onClose, currentMeal, refetch }) => {
   const axiosInstance = useAxiosInstance();
   const {
     register,
@@ -38,6 +38,7 @@ const AllMealsModal = ({ isOpen, onClose, currentMeal }) => {
       console.log(error);
     } finally {
       onClose();
+      refetch();
     }
   };
 

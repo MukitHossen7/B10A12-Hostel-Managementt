@@ -50,9 +50,6 @@ const AllMeals = () => {
     setIsModalOpen(false);
     setCurrentMeal(null);
   };
-  // const handleFormSubmit = async (updatedMeal) => {
-  //   console.log(updatedMeal);
-  // };
 
   return (
     <div>
@@ -114,6 +111,7 @@ const AllMeals = () => {
       </div>
       <AllMealsModal
         isOpen={isModalOpen}
+        refetch={refetch}
         onClose={handleModalClose}
         currentMeal={currentMeal}
       ></AllMealsModal>
