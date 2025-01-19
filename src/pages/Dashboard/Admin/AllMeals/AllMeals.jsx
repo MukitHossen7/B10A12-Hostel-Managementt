@@ -9,11 +9,14 @@ import AllMealsModal from "../../../../components/Modal/AllMealsModal";
 const AllMeals = () => {
   const axiosInstance = useAxiosInstance();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sortOption, setSortOption] = useState("");
   const [currentMeal, setCurrentMeal] = useState({});
   const { data: allMeals = [], refetch } = useQuery({
-    queryKey: ["allMeals"],
+    queryKey: ["allMeals", sortOption],
     queryFn: async () => {
-      const { data } = await axiosInstance.get(`/all-meals-admin`);
+      const { data } = await axiosInstance.get(
+        `/all-meals-admin?sortBy=${sortOption}`
+      );
       return data;
     },
   });
@@ -55,6 +58,26 @@ const AllMeals = () => {
     <div>
       <div className="p-6 min-h-screen">
         <h1 className="text-2xl font-bold text-gray-700 mb-4">All Meals</h1>
+        <div className="flex justify-start gap-4 mb-5">
+          <button
+            className={`px-4 py-2 rounded ${
+              sortOption === "likes" ? "bg-blue-500 text-white" : "bg-gray-200"
+            }`}
+            onClick={() => setSortOption("likes")}
+          >
+            Sort by Likes
+          </button>
+          <button
+            className={`px-4 py-2 rounded ${
+              sortOption === "reviews"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200"
+            }`}
+            onClick={() => setSortOption("reviews")}
+          >
+            Sort by Reviews
+          </button>
+        </div>
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
             <thead className="bg-gray-100">

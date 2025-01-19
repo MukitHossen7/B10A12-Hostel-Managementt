@@ -14,6 +14,7 @@ const UserProfile = () => {
     },
   });
   console.log(users);
+
   return (
     <div className="flex items-center justify-center py-10">
       <div className="bg-white shadow-md rounded-lg w-full max-w-4xl">
@@ -59,9 +60,9 @@ const UserProfile = () => {
                   users?.badge === "Gold"
                     ? "bg-[#FFD700]"
                     : users?.badge === "Silver"
-                    ? "bg-[#C0C0C0,]"
+                    ? "bg-[#b0aeae]"
                     : users?.badge === "Platinum"
-                    ? "bg-[#e5e4e2]"
+                    ? "bg-[#e5e4e2] text-gray-900"
                     : "bg-orange-400" // Default for Bronze
                 }`}
               >
