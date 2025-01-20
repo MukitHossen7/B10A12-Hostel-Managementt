@@ -2,16 +2,46 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { FaEye, FaThumbsUp, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AllReviews = () => {
   const axiosInstance = useAxiosInstance();
-  const { data: allReviews = [] } = useQuery({
+  const { data: allReviews = [], refetch } = useQuery({
     queryKey: ["all-reviews"],
     queryFn: async () => {
       const { data } = await axiosInstance.get(`/get-admin-reviews`);
       return data;
     },
   });
+  const handleDeleteReview = async (reviewId, foodId) => {
+    console.log(reviewId, foodId);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { data } = await axiosInstance.delete(
+          `/delete-reviews/${reviewId}`
+        );
+        await axiosInstance.patch(`/update-reviews/${foodId}`, {
+          status: "dec",
+        });
+        if (data.deletedCount > 0) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Reviews has been deleted",
+            icon: "success",
+          });
+          refetch();
+        }
+      }
+    });
+  };
   return (
     <div>
       <div className="p-6 min-h-screen">
@@ -48,7 +78,12 @@ const AllReviews = () => {
                         <FaEye className="" />
                       </button>
                     </Link>
-                    <button className="bg-red-100 text-red-500 hover:bg-red-200 p-2 rounded transition">
+                    <button
+                      onClick={() =>
+                        handleDeleteReview(review._id, review?.foodId)
+                      }
+                      className="bg-red-100 text-red-500 hover:bg-red-200 p-2 rounded transition"
+                    >
                       <FaTrashAlt className="" />
                     </button>
                   </td>
