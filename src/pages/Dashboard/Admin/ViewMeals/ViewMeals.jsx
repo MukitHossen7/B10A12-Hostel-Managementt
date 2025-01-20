@@ -5,7 +5,7 @@ import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 const ViewMeals = () => {
   const { id } = useParams();
   const axiosInstance = useAxiosInstance();
-
+  console.log(id);
   const { data: meals = {} } = useQuery({
     queryKey: ["meals", id],
     queryFn: async () => {
@@ -13,6 +13,7 @@ const ViewMeals = () => {
       return data;
     },
   });
+  console.log(meals);
   return (
     <div>
       <div className="min-h-screen flex justify-center items-center">
@@ -90,7 +91,7 @@ const ViewMeals = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <span>💬</span>
-                <span>{meals?.reviewsCount}</span>
+                <span>{meals?.reviews}</span>
               </div>
             </div>
           </div>

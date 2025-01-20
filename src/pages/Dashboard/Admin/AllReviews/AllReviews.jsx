@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { FaEye, FaThumbsUp, FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const AllReviews = () => {
   const axiosInstance = useAxiosInstance();
@@ -11,7 +12,6 @@ const AllReviews = () => {
       return data;
     },
   });
-  console.log(allReviews);
   return (
     <div>
       <div className="p-6 min-h-screen">
@@ -43,9 +43,11 @@ const AllReviews = () => {
                     {review?.foodData?.review + 1}
                   </td>
                   <td className="py-3 px-4 text-sm flex justify-center space-x-4">
-                    <button className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded transition ">
-                      <FaEye className="" />
-                    </button>
+                    <Link to={`/dashboard/view-meals/${review?.foodId}`}>
+                      <button className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded transition ">
+                        <FaEye className="" />
+                      </button>
+                    </Link>
                     <button className="bg-red-100 text-red-500 hover:bg-red-200 p-2 rounded transition">
                       <FaTrashAlt className="" />
                     </button>
