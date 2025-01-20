@@ -82,7 +82,7 @@ const ViewMeals = () => {
             <div className="mt-6 flex items-center space-x-8">
               <div className="flex items-center space-x-2">
                 <span className="text-yellow-400">★</span>
-                <span>{meals?.rating}</span>
+                <span>{meals?.averageRating}</span>
                 <span className="text-sm">/ 5</span>
               </div>
               <div className="flex items-center space-x-2">
