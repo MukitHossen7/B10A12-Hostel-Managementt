@@ -58,9 +58,12 @@ const AddMeals = () => {
   };
   return (
     <div>
-      <div className="w-full lg:w-9/12 mx-auto p-5 bg-white shadow-md">
+      <div className="w-full lg:w-9/12 mx-auto p-5">
         <h2 className="text-2xl font-semibold mb-4">Add New Meal</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-4 bg-white border border-gray-100 rounded-md shadow-md p-4"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label

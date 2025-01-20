@@ -78,8 +78,8 @@ const AllMeals = () => {
             Sort by Reviews
           </button>
         </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+        <div className="overflow-x-auto shadow-md bg-white rounded-md">
+          <table className="min-w-full bg-white border border-gray-100 rounded-lg shadow-lg">
             <thead className="bg-gray-100">
               <tr>
                 <th className="px-4 py-2 text-left font-medium">Title</th>

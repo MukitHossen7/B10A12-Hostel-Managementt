@@ -40,7 +40,7 @@ const ManageUsers = () => {
   //   );
   return (
     <div className="">
-      <div className="p-4 md:p-8 min-h-screen container mx-auto bg-gray-50">
+      <div className="p-4 min-h-screen md:p-8 container mx-auto">
         {/* Title */}
         <h1 className="text-2xl font-bold mb-6 text-gray-800">Manage Users</h1>
 
@@ -55,8 +55,8 @@ const ManageUsers = () => {
         </div>
 
         {/* User Table */}
-        <div className="overflow-x-auto">
-          <table className="table-auto w-full bg-white shadow-2xl rounded-lg text-gray-700">
+        <div className="overflow-x-auto shadow-md bg-white rounded-md">
+          <table className="table-auto w-full text-gray-800 bg-white border border-gray-100 rounded-lg shadow-lg">
             <thead className="text-gray-600 border-b">
               <tr className="">
                 <th className="p-3 text-left font-medium">Username</th>

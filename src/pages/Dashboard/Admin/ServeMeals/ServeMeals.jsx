@@ -32,7 +32,7 @@ const ServeMeals = () => {
     // });
   };
   return (
-    <div className="min-h-screen   py-10 px-5">
+    <div className="min-h-screen py-10 px-5 ">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-2xl font-semibold mb-4">Serve Meals</h1>
         <div className="flex justify-between items-center mb-6">
@@ -43,8 +43,8 @@ const ServeMeals = () => {
             className="w-full md:w-1/3 px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
-        <div className="overflow-x-auto shadow-sm rounded-lg">
-          <table className="table-auto w-full bg-white shadow-md rounded-lg">
+        <div className="overflow-x-auto shadow-md bg-white rounded-md">
+          <table className="table-auto w-full bg-white border border-gray-100 rounded-lg shadow-lg">
             <thead className="bg-gray-100">
               <tr>
                 <th className="px-4 py-2 text-left text-gray-700 font-medium">
