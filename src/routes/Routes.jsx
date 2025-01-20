@@ -54,16 +54,17 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+      {
+        path: "/login",
+        element: <LogIn></LogIn>,
+      },
+      {
+        path: "/signup",
+        element: <SignUp></SignUp>,
+      },
     ],
   },
-  {
-    path: "/login",
-    element: <LogIn></LogIn>,
-  },
-  {
-    path: "/signup",
-    element: <SignUp></SignUp>,
-  },
+
   {
     path: "/dashboard",
     element: (
@@ -74,93 +75,133 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Statistics></Statistics>,
+        element: (
+          <PrivateRoutes>
+            <Statistics></Statistics>
+          </PrivateRoutes>
+        ),
       },
       // Admin Route
       {
         path: "admin-profile",
         element: (
-          <AdminRoute>
-            <AdminProfile></AdminProfile>
-          </AdminRoute>
+          <PrivateRoutes>
+            <AdminRoute>
+              <AdminProfile></AdminProfile>
+            </AdminRoute>
+          </PrivateRoutes>
         ),
       },
       {
         path: "manage-users",
         element: (
-          <AdminRoute>
-            <ManageUsers></ManageUsers>
-          </AdminRoute>
+          <PrivateRoutes>
+            <AdminRoute>
+              <ManageUsers></ManageUsers>
+            </AdminRoute>
+          </PrivateRoutes>
         ),
       },
       {
         path: "add-meals",
         element: (
-          <AdminRoute>
-            <AddMeals></AddMeals>
-          </AdminRoute>
+          <PrivateRoutes>
+            <AdminRoute>
+              <AddMeals></AddMeals>
+            </AdminRoute>
+          </PrivateRoutes>
         ),
       },
       {
         path: "all-meals",
         element: (
-          <AdminRoute>
-            <AllMeals></AllMeals>
-          </AdminRoute>
+          <PrivateRoutes>
+            <AdminRoute>
+              <AllMeals></AllMeals>
+            </AdminRoute>
+          </PrivateRoutes>
         ),
       },
       {
         path: "all-reviews",
         element: (
-          <AdminRoute>
-            <AllReviews></AllReviews>
-          </AdminRoute>
+          <PrivateRoutes>
+            <AdminRoute>
+              <AllReviews></AllReviews>
+            </AdminRoute>
+          </PrivateRoutes>
         ),
       },
       {
         path: "serve-meals",
         element: (
-          <AdminRoute>
-            <ServeMeals></ServeMeals>
-          </AdminRoute>
+          <PrivateRoutes>
+            <AdminRoute>
+              <ServeMeals></ServeMeals>
+            </AdminRoute>
+          </PrivateRoutes>
         ),
       },
       {
         path: "coming-meals",
         element: (
-          <AdminRoute>
-            <UpComingMeal></UpComingMeal>
-          </AdminRoute>
+          <PrivateRoutes>
+            <AdminRoute>
+              <UpComingMeal></UpComingMeal>
+            </AdminRoute>
+          </PrivateRoutes>
         ),
       },
       {
         path: "view-meals/:id",
         element: (
-          <AdminRoute>
-            <ViewMeals></ViewMeals>,
-          </AdminRoute>
+          <PrivateRoutes>
+            <AdminRoute>
+              <ViewMeals></ViewMeals>,
+            </AdminRoute>
+          </PrivateRoutes>
         ),
       },
       // User Route
       {
         path: "user-profile",
-        element: <UserProfile></UserProfile>,
+        element: (
+          <PrivateRoutes>
+            <UserProfile></UserProfile>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "requested-meals",
-        element: <RequestedMeals></RequestedMeals>,
+        element: (
+          <PrivateRoutes>
+            <RequestedMeals></RequestedMeals>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "my-reviews",
-        element: <MyReviews></MyReviews>,
+        element: (
+          <PrivateRoutes>
+            <MyReviews></MyReviews>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "payment-history",
-        element: <PaymentHistory></PaymentHistory>,
+        element: (
+          <PrivateRoutes>
+            <PaymentHistory></PaymentHistory>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "view-meals-reviews/:id",
-        element: <ViewMealsReviews></ViewMealsReviews>,
+        element: (
+          <PrivateRoutes>
+            <ViewMealsReviews></ViewMealsReviews>
+          </PrivateRoutes>
+        ),
       },
     ],
   },

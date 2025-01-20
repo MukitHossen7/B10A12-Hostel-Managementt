@@ -6,7 +6,7 @@ const PackageCard = ({ pack }) => {
     <Link to={`/checkout/${pack?.name}`}>
       <div
         className={`p-6 rounded-lg shadow-lg ${
-          pack?.name === "Gold" && "bg-yellow-300"
+          pack?.name === "Gold" && "bg-amber-200"
         } ${pack?.name === "Silver" && "bg-gray-200"} ${
           pack?.name === "Platinum" && "bg-blue-300"
         } hover:scale-105 transform transition-all`}

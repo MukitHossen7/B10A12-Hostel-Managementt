@@ -7,7 +7,7 @@ import { imageUpload } from "../../api/utils";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import toast from "react-hot-toast";
 
-const UpcomingMealModal = ({ isOpen, onClose }) => {
+const UpcomingMealModal = ({ isOpen, onClose, refetch }) => {
   const { user } = useContext(AuthContext);
   const axiosInstance = useAxiosInstance();
   const {
@@ -42,6 +42,7 @@ const UpcomingMealModal = ({ isOpen, onClose }) => {
       if (data.insertedId) {
         onClose();
         reset();
+        refetch();
         toast.success("Upcoming meal added successfully!");
       }
     } catch (error) {

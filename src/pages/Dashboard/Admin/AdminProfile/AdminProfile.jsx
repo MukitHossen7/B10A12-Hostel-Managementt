@@ -25,7 +25,7 @@ const AdminProfile = () => {
       <div className=" flex items-center justify-center py-12 md:py-20">
         <div className="bg-white shadow-md rounded-lg w-full max-w-3xl">
           {/* Profile Banner */}
-          <div className="h-40 w-full bg-green-500 rounded-t-lg relative">
+          <div className="h-40 w-full bg-gradient-to-r from-blue-600 to-blue-800 rounded-t-lg relative">
             <div className="absolute -bottom-12 left-8">
               <img
                 src={admin?.photo}

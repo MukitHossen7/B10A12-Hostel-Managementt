@@ -101,7 +101,7 @@ const ManageUsers = () => {
                     <button
                       onClick={() => handleAdmin(user._id)}
                       disabled={user?.role === "admin"}
-                      className={`px-4 py-2 bg-gray-900 text-yellow-500 rounded-md hover:bg-gray-900 ${
+                      className={`px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-600 ${
                         user?.role === "admin" ? "cursor-not-allowed" : ""
                       }`}
                     >

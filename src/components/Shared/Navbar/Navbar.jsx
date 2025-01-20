@@ -1,9 +1,12 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { IoIosLogOut, IoMdNotifications } from "react-icons/io";
 import toast from "react-hot-toast";
 import useRole from "../../../hooks/useRole";
+import navLogo from "../../../../src/assets/logo/New Project.png";
+import navIcon from "../../../../src/assets/logo/profile.png";
+import { CiLogout } from "react-icons/ci";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -16,38 +19,54 @@ const Navbar = () => {
     });
   };
   return (
-    <nav className="bg-gray-900 text-white shadow-md sticky top-0 z-50">
+    <nav className="bg-gray-100/50 text-gray-900 shadow-md sticky top-0 z-50 backdrop-blur-md ">
       <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Website Name */}
           <Link to="/">
             <div className="flex items-center space-x-2">
-              <span className="text-2xl font-bold text-yellow-500">
-                Hostel Manager
+              <img
+                src={navLogo}
+                className="rounded-full w-8 h-8 object-cover"
+              ></img>
+              <span className="text-xl md:text-2xl font-bold text-gray-800">
+                <span className="text-blue-600">Hostel</span>Management
               </span>
             </div>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6">
-            <Link
+          <div className="hidden lg:flex items-center space-x-6">
+            <NavLink
               to="/"
-              className="hover:text-yellow-400 transition text-lg font-medium"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 text-lg "
+                  : "hover:text-blue-600 transition text-lg "
+              }
             >
               Home
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/meals"
-              className="hover:text-yellow-400 transition text-lg font-medium"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 text-lg "
+                  : "hover:text-blue-600 transition text-lg "
+              }
             >
               Meals
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/upcoming-meals"
-              className="hover:text-yellow-400 transition text-lg font-medium"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 text-lg "
+                  : "hover:text-blue-600 transition text-lg "
+              }
             >
               Upcoming Meals
-            </Link>
+            </NavLink>
             <div>
               <IoMdNotifications className="text-2xl" />
             </div>
@@ -56,30 +75,32 @@ const Navbar = () => {
                 <img
                   src={user?.photoURL}
                   alt="Profile"
-                  className="h-10 w-10 object-cover rounded-full ring-1 ring-yellow-500 cursor-pointer"
+                  className="h-10 w-10 object-cover rounded-full ring-2 ring-blue-500 cursor-pointer"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 />
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded">
-                    <p className="px-4 py-2 text-black">{user?.displayName}</p>
+                  <div className="absolute right-0 mt-3 w-40 bg-gray-100 shadow-lg rounded">
+                    <p className="px-4 py-2 text-gray-800">
+                      {user?.displayName}
+                    </p>
                     {role === "admin" ? (
                       <Link
                         to="/dashboard/admin-profile"
-                        className="block px-4 py-2 text-black hover:bg-gray-100 transition"
+                        className="block px-4  text-gray-800 transition"
                       >
                         Dashboard
                       </Link>
                     ) : (
                       <Link
                         to="/dashboard/user-profile"
-                        className="block px-4 py-2 text-black hover:bg-gray-100 transition"
+                        className="block px-4  text-gray-800 transition"
                       >
                         Dashboard
                       </Link>
                     )}
 
                     <button
-                      className="  text-left mx-4 mb-4 mt-2 px-4 py-2 text-black border  border-gray-500 flex items-center gap-2 rounded-lg "
+                      className="text-left mx-4 mb-4 mt-4 px-4 py-2 text-gray-100 flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-800 transition"
                       onClick={handleLogOut}
                     >
                       Logout
@@ -91,42 +112,30 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/login"
-                className="bg-yellow-500 text-gray-900 px-4 py-2 rounded hover:bg-yellow-600 transition"
+                className="bg-gradient-to-r from-blue-600 to-blue-800 transition text-gray-100 px-4 py-2 rounded-md"
               >
                 Join Us
               </Link>
             )}
           </div>
-
-          {/* Mobile Menu Toggle */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-300 hover:text-white focus:outline-none"
             >
-              <svg
-                className="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {isMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16m-7 6h7"
-                  />
-                )}
-              </svg>
+              {isMenuOpen ? (
+                <img
+                  src={user?.photoURL || navIcon}
+                  alt="User Profile"
+                  className="h-8 w-8 rounded-full object-cover ring-2 ring-blue-600"
+                />
+              ) : (
+                <img
+                  src={user?.photoURL || navIcon}
+                  alt="User Profile"
+                  className="h-8 w-8 rounded-full object-cover ring-2 ring-blue-600"
+                />
+              )}
             </button>
           </div>
         </div>
@@ -134,46 +143,70 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-gray-800">
-          <Link
-            to="/"
-            className="block px-4 py-2 text-white hover:bg-gray-700 transition"
-          >
-            Home
-          </Link>
-          <Link
-            to="/meals"
-            className="block px-4 py-2 text-white hover:bg-gray-700 transition"
-          >
-            Meals
-          </Link>
-          <Link
-            to="/upcoming-meals"
-            className="block px-4 py-2 text-white hover:bg-gray-700 transition"
-          >
-            Upcoming Meals
-          </Link>
+        <div className="lg:hidden bg-gray-100/80 pb-3">
+          <div className="flex flex-col gap-2 pt-3">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "block px-4 text-blue-600 transition"
+                  : "block px-4 text-gray-800 transition"
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/meals"
+              className={({ isActive }) =>
+                isActive
+                  ? "block px-4 text-blue-600 transition"
+                  : "block px-4 text-gray-800 transition"
+              }
+            >
+              Meals
+            </NavLink>
+            <NavLink
+              to="/upcoming-meals"
+              className={({ isActive }) =>
+                isActive
+                  ? "block px-4 text-blue-600 transition"
+                  : "block px-4 text-gray-800 transition"
+              }
+            >
+              Upcoming Meals
+            </NavLink>
+          </div>
           {user ? (
-            <>
+            <div>
+              {role === "admin" ? (
+                <Link
+                  to="/dashboard/admin-profile"
+                  className="block px-4 text-gray-800 transition mt-2"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  to="/dashboard/user-profile"
+                  className="block px-4 text-gray-800 transition mt-2"
+                >
+                  Dashboard
+                </Link>
+              )}
+
               <button
-                className="block px-4 py-2 text-white hover:bg-gray-700 transition"
-                onClick={() => console.log("Dashboard")}
+                className=" px-4 py-2 ml-4 mt-4 rounded-md text-gray-100 bg-gradient-to-r from-blue-600 to-blue-800 transition flex items-center gap-1"
+                onClick={handleLogOut}
               >
-                Dashboard
-              </button>
-              <button
-                className="block px-4 py-2 text-white hover:bg-gray-700 transition"
-                onClick={() => console.log("Logout")}
-              >
+                <CiLogout />
                 Logout
               </button>
-            </>
+            </div>
           ) : (
-            <Link
-              to="/join"
-              className="block bg-yellow-500 text-gray-900 px-4 py-2 hover:bg-yellow-600 transition"
-            >
-              Join Us
+            <Link to="/login">
+              <button className="inline-block rounded-md  bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100 px-4 py-2 ml-4 mt-3 transition">
+                Join Us
+              </button>
             </Link>
           )}
         </div>

@@ -215,7 +215,7 @@ const Sidebar = () => {
       {/* Desktop Devices */}
       <div className="hidden md:flex md:flex-col md:h-full px-8 mt-7">
         <Link to="/">
-          <span className="text-2xl font-bold text-yellow-500 bg-gray-900 px-2 py-2 rounded-md">
+          <span className="text-2xl font-bold text-blue-600 bg-gray-100 px-2 py-2 rounded-tl-lg rounded-br-lg">
             Hostel Manager
           </span>
         </Link>

@@ -90,6 +90,7 @@ const UpComingMeal = () => {
       <UpcomingMealModal
         isOpen={isOpen}
         onClose={handleCloseModal}
+        refetch={refetch}
       ></UpcomingMealModal>
     </div>
   );
