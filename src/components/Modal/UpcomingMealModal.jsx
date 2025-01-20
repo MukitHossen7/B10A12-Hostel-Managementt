@@ -1,14 +1,52 @@
 /* eslint-disable react/prop-types */
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../providers/AuthProvider";
+import moment from "moment-timezone";
+import { imageUpload } from "../../api/utils";
+import useAxiosInstance from "../../hooks/useAxiosInstance";
+import toast from "react-hot-toast";
 
 const UpcomingMealModal = ({ isOpen, onClose }) => {
+  const { user } = useContext(AuthContext);
+  const axiosInstance = useAxiosInstance();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
+    const ingredient = data.ingredients.split(",");
+    const formattedDateTime = moment(data?.postTime).format("lll");
+    const image = await imageUpload(data?.image[0]);
+    const upcomingData = {
+      title: data.title,
+      description: data.description,
+      category: data.category,
+      postTime: formattedDateTime,
+      ingredients: ingredient,
+      image,
+      price: parseInt(data.price),
+      distributor: {
+        name: user?.displayName,
+        email: user?.email,
+      },
+      rating: [],
+      likes: 0,
+      reviews: 0,
+      status: "upcoming",
+    };
+    console.log(upcomingData);
+    try {
+      const { data } = await axiosInstance.post(`/add-meals`, upcomingData);
+      console.log(data);
+      if (data.insertedId) {
+        onClose();
+        toast.success("Upcoming meal added successfully!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   if (!isOpen) return null;
   return (
