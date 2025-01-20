@@ -71,10 +71,14 @@ const ServeMeals = () => {
                     key={meal?._id}
                     className="border-t hover:bg-gray-50 transition-colors"
                   >
-                    <td className="px-4 py-2">{meal?.title}</td>
-                    <td className="px-4 py-2">{meal?.customer?.email}</td>
-                    <td className="px-4 py-2">{meal?.customer?.name}</td>
-                    <td className="px-4 py-2">
+                    <td className="px-4 py-2 text-sm">{meal?.title}</td>
+                    <td className="px-4 py-2 text-sm">
+                      {meal?.customer?.email}
+                    </td>
+                    <td className="px-4 py-2 text-sm">
+                      {meal?.customer?.name}
+                    </td>
+                    <td className="px-4 py-2 text-sm">
                       <span
                         className={`px-2 py-1 text-sm rounded-full ${
                           meal.status === "Delivered"
