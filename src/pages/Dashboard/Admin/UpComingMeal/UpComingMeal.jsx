@@ -1,26 +1,40 @@
-import { Link } from "react-router-dom";
 import { MdPublish } from "react-icons/md";
 import { useState } from "react";
 import UpcomingMealModal from "../../../../components/Modal/UpcomingMealModal";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const UpComingMeal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const axiosInstance = useAxiosInstance();
-  const { data: upcoming = [] } = useQuery({
+  const { data: upcoming = [], refetch } = useQuery({
     queryKey: ["upcoming"],
     queryFn: async () => {
       const { data } = await axiosInstance.get(`/upcoming-meals-admin`);
       return data;
     },
   });
-  console.log(upcoming);
   const handleOpenModal = () => {
     setIsOpen(true);
   };
   const handleCloseModal = () => {
     setIsOpen(false);
+  };
+  const handlePublish = async (publishId) => {
+    const { data } = await axiosInstance.get(
+      `/upcoming-meals-admin/${publishId}`
+    );
+    if (data.likes >= 10) {
+      console.log(publishId);
+      await axiosInstance.patch(
+        `/update-status-upcoming-meals-admin/${publishId}`
+      );
+      toast.success("Meal published successfully!");
+      refetch();
+    } else {
+      toast.error("The meal needs to have at least 10 likes to be published!");
+    }
   };
   return (
     <div>
@@ -58,15 +72,14 @@ const UpComingMeal = () => {
                   <td className="px-4 py-4 text-sm">{meal?.likes}</td>
 
                   <td className="px-4 py-2 text-center flex justify-center ">
-                    <Link>
-                      <button
-                        className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded flex items-center"
-                        aria-label="View Meal"
-                      >
-                        <MdPublish className="text-xl" />
-                        <span className="font-medium">Publish</span>
-                      </button>
-                    </Link>
+                    <button
+                      onClick={() => handlePublish(meal._id)}
+                      className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded flex items-center"
+                      aria-label="View Meal"
+                    >
+                      <MdPublish className="text-xl" />
+                      <span className="font-medium">Publish</span>
+                    </button>
                   </td>
                 </tr>
               ))}

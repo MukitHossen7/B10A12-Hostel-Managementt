@@ -39,6 +39,10 @@ const UpcomingMeals = () => {
       await axiosInstance.patch(`/update-like/${likeId}`, {
         userEmail: user?.email,
       });
+      await axiosInstance.post(`/upcoming-meal-like`, {
+        likeId: likeId,
+        userEmail: user?.email,
+      });
       toast.success("Like added successfully!");
       refetch();
     } catch (error) {
@@ -48,28 +52,8 @@ const UpcomingMeals = () => {
     }
   };
 
-  // Fetching upcoming meals (replace with your API endpoint).
-
-  // const handleLike = (mealId) => {
-  //   if (["Silver", "Gold", "Platinum"].includes(userSubscription)) {
-  //     // Add a like to the meal
-  //     fetch(`/api/like-meal/${mealId}`, { method: "POST" })
-  //       .then((res) => res.json())
-  //       .then((updatedMeal) => {
-  //         setMeals((prevMeals) =>
-  //           prevMeals.map((meal) =>
-  //             meal.id === mealId ? { ...meal, likes: updatedMeal.likes } : meal
-  //           )
-  //         );
-  //       })
-  //       .catch((err) => console.error(err));
-  //   } else {
-  //     alert("Upgrade your subscription to like meals.");
-  //   }
-  // };
-
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-gray-50 w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto pt-6 pb-14">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
         Upcoming Meals
       </h1>
@@ -98,7 +82,9 @@ const UpcomingMeals = () => {
               >
                 Like
               </button>
-              <span className="text-gray-600">{meal?.likes} Likes</span>
+              <span className="text-gray-600 font-medium">
+                {meal?.likes} Likes
+              </span>
             </div>
           </div>
         ))}
