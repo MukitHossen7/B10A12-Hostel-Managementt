@@ -2,8 +2,20 @@ import { Link } from "react-router-dom";
 import { MdPublish } from "react-icons/md";
 import { useState } from "react";
 import UpcomingMealModal from "../../../../components/Modal/UpcomingMealModal";
+import useAxiosInstance from "../../../../hooks/useAxiosInstance";
+import { useQuery } from "@tanstack/react-query";
+
 const UpComingMeal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const axiosInstance = useAxiosInstance();
+  const { data: upcoming = [] } = useQuery({
+    queryKey: ["upcoming"],
+    queryFn: async () => {
+      const { data } = await axiosInstance.get(`/upcoming-meals-admin`);
+      return data;
+    },
+  });
+  console.log(upcoming);
   const handleOpenModal = () => {
     setIsOpen(true);
   };
@@ -33,29 +45,31 @@ const UpComingMeal = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="border-t">
-                <td className="px-4 py-4 text-sm">
-                  <img
-                    className="w-10 h-10 object-cover rounded-lg"
-                    src="https://example.com/image.jpg"
-                    alt=""
-                  />
-                </td>
-                <td className="px-4 py-4 text-sm">Pizza</td>
-                <td className="px-4 py-4 text-sm">2</td>
+              {upcoming.map((meal) => (
+                <tr key={meal._id} className="border-t">
+                  <td className="px-4 py-4 text-sm">
+                    <img
+                      className="w-10 h-10 object-cover rounded-lg"
+                      src={meal?.image}
+                      alt=""
+                    />
+                  </td>
+                  <td className="px-4 py-4 text-sm">{meal?.title}</td>
+                  <td className="px-4 py-4 text-sm">{meal?.likes}</td>
 
-                <td className="px-4 py-2 text-center flex justify-center ">
-                  <Link>
-                    <button
-                      className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded flex items-center"
-                      aria-label="View Meal"
-                    >
-                      <MdPublish className="text-xl" />
-                      <span className="font-medium">Publish</span>
-                    </button>
-                  </Link>
-                </td>
-              </tr>
+                  <td className="px-4 py-2 text-center flex justify-center ">
+                    <Link>
+                      <button
+                        className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded flex items-center"
+                        aria-label="View Meal"
+                      >
+                        <MdPublish className="text-xl" />
+                        <span className="font-medium">Publish</span>
+                      </button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

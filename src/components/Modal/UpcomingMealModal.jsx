@@ -13,6 +13,7 @@ const UpcomingMealModal = ({ isOpen, onClose }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
@@ -36,12 +37,11 @@ const UpcomingMealModal = ({ isOpen, onClose }) => {
       reviews: 0,
       status: "upcoming",
     };
-    console.log(upcomingData);
     try {
       const { data } = await axiosInstance.post(`/add-meals`, upcomingData);
-      console.log(data);
       if (data.insertedId) {
         onClose();
+        reset();
         toast.success("Upcoming meal added successfully!");
       }
     } catch (error) {
