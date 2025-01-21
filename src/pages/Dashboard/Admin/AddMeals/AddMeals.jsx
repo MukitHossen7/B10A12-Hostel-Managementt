@@ -9,6 +9,7 @@ import { imageUpload } from "../../../../api/utils";
 import useAxiosInstance from "./../../../../hooks/useAxiosInstance";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AddMeals = () => {
   const {
@@ -59,6 +60,9 @@ const AddMeals = () => {
   return (
     <div>
       <div className="w-full lg:w-10/12 mx-auto p-5">
+        <Helmet>
+          <title>Add Meals || Hostel Management</title>
+        </Helmet>
         <h2 className="text-2xl font-semibold mb-4">Add New Meal</h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -97,7 +101,9 @@ const AddMeals = () => {
                 {...register("category", { required: "Category is required" })}
                 className="w-full p-2 border border-gray-300 rounded-md"
               >
-                <option value="">Select a category</option>
+                <option disabled value="">
+                  Select a category
+                </option>
                 <option value="Breakfast">Breakfast</option>
                 <option value="Lunch">Lunch</option>
                 <option value="Dinner">Dinner</option>

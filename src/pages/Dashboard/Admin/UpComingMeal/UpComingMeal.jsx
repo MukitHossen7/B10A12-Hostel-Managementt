@@ -4,6 +4,7 @@ import UpcomingMealModal from "../../../../components/Modal/UpcomingMealModal";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const UpComingMeal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +40,9 @@ const UpComingMeal = () => {
   return (
     <div>
       <div className="py-10 px-5 min-h-screen ">
+        <Helmet>
+          <title>Upcoming Meals || Hostel Management</title>
+        </Helmet>
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:justify-between mb-5">
           <h1 className="text-2xl font-semibold  ">Upcoming Meals</h1>
           <button

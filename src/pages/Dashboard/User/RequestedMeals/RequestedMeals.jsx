@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const RequestedMeals = () => {
   const axiosInstance = useAxiosInstance();
@@ -30,6 +31,9 @@ const RequestedMeals = () => {
   return (
     <div>
       <div className="min-h-screen py-10 px-5">
+        <Helmet>
+          <title>Requested Meals || Hostel Management</title>
+        </Helmet>
         <h1 className="text-2xl font-semibold text-gray-800 r mb-6">
           Requested Meals
         </h1>

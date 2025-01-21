@@ -3,6 +3,7 @@ import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { FaEye, FaThumbsUp, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AllReviews = () => {
   const axiosInstance = useAxiosInstance();
@@ -45,6 +46,9 @@ const AllReviews = () => {
   return (
     <div>
       <div className="py-10 px-5 min-h-screen">
+        <Helmet>
+          <title>All Reviews || Hostel Management</title>
+        </Helmet>
         <h1 className="text-2xl font-bold mb-4">All Reviews</h1>
         <div className="overflow-x-auto shadow-md bg-white rounded-md">
           <table className="min-w-full bg-white border border-gray-100 rounded-lg shadow-lg">

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { FaCheck, FaCheckDouble } from "react-icons/fa";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 const ServeMeals = () => {
   const axiosInstance = useAxiosInstance();
   const [search, setSearch] = useState("");
@@ -33,6 +34,9 @@ const ServeMeals = () => {
   };
   return (
     <div className="min-h-screen py-10 px-5">
+      <Helmet>
+        <title>Serve Meals || Hostel Management</title>
+      </Helmet>
       <div className="">
         <h1 className="text-2xl font-semibold mb-4">Serve Meals</h1>
         <div className="flex justify-between items-center mb-6">

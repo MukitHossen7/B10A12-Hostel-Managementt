@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import PurchaseModal from "../../components/Modal/PurchaseModal";
+import { Helmet } from "react-helmet-async";
 
 const CheckoutPage = () => {
   const { name } = useParams();
@@ -28,6 +29,9 @@ const CheckoutPage = () => {
           packageData?.name === "Platinum" && "bg-blue-300"
         } p-6`}
       >
+        <Helmet>
+          <title>Checkout || Hostel Management</title>
+        </Helmet>
         <h2 className="text-2xl font-bold text-gray-800">
           {packageData?.name}
         </h2>

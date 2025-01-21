@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const ViewMealsReviews = () => {
   const axiosInstance = useAxiosInstance();
@@ -16,6 +17,9 @@ const ViewMealsReviews = () => {
   return (
     <div>
       <div className="py-10 px-3 lg:px-5 flex justify-center items-center">
+        <Helmet>
+          <title>View Meals || Hostel Management</title>
+        </Helmet>
         <div className="bg-white shadow rounded-md p-4 w-full">
           <div className="flex flex-col gap-6 lg:gap-8 lg:flex-row items-center">
             {/* Image Section */}
@@ -71,10 +75,10 @@ const ViewMealsReviews = () => {
                   Distributor
                 </h4>
                 <p className="text-gray-500">
-                  Name: ${reviews?.foodData?.distributor?.name}
+                  Name: {reviews?.foodData?.distributor?.name}
                 </p>
                 <p className="text-gray-500">
-                  Email: ${reviews?.foodData?.distributor?.email}
+                  Email: {reviews?.foodData?.distributor?.email}
                 </p>
               </div>
             </div>

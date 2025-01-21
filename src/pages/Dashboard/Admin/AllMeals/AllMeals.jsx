@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { useState } from "react";
 import AllMealsModal from "../../../../components/Modal/AllMealsModal";
+import { Helmet } from "react-helmet-async";
 
 const AllMeals = () => {
   const axiosInstance = useAxiosInstance();
@@ -57,6 +58,9 @@ const AllMeals = () => {
   return (
     <div>
       <div className="py-10 px-5 min-h-screen">
+        <Helmet>
+          <title>All Meals || Hostel Management</title>
+        </Helmet>
         <h1 className="text-2xl font-bold text-gray-700 mb-4">All Meals</h1>
         <div className="flex justify-start gap-4 mb-5">
           <button

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
+import { Helmet } from "react-helmet-async";
 
 const AdminProfile = () => {
   const { user } = useContext(AuthContext);
@@ -23,6 +24,9 @@ const AdminProfile = () => {
   return (
     <div>
       <div className="flex items-center justify-center py-12 md:py-20">
+        <Helmet>
+          <title>My Profile || Hostel Management</title>
+        </Helmet>
         <div className="bg-white shadow-md rounded-md w-full max-w-3xl">
           {/* Profile Banner */}
           <div className="h-40 w-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-t-lg relative">

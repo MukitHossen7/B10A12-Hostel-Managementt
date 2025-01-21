@@ -4,6 +4,7 @@ import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 // import { FadeLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const axiosInstance = useAxiosInstance();
@@ -35,6 +36,9 @@ const ManageUsers = () => {
   return (
     <div className="">
       <div className="min-h-screen py-10 px-5">
+        <Helmet>
+          <title>Manage Users || Hostel Management</title>
+        </Helmet>
         {/* Title */}
         <h1 className="text-2xl font-semibold mb-6 text-gray-800">
           Manage Users

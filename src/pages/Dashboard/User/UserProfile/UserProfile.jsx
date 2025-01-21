@@ -3,6 +3,7 @@ import { AuthContext } from "../../../../providers/AuthProvider";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { useQuery } from "@tanstack/react-query";
 import profileLogo from "../../../../../src/assets/logo/New Project.png";
+import { Helmet } from "react-helmet-async";
 const UserProfile = () => {
   const { user } = useContext(AuthContext);
   const axiosInstance = useAxiosInstance();
@@ -17,6 +18,9 @@ const UserProfile = () => {
 
   return (
     <div className="flex items-center justify-center py-10">
+      <Helmet>
+        <title>My Profile || Hostel Management</title>
+      </Helmet>
       <div className="bg-white shadow-md rounded-md w-full max-w-4xl">
         {/* Profile Banner */}
         <div className="relative bg-gradient-to-r from-blue-400 to-blue-500 h-48 flex items-center justify-between px-10">

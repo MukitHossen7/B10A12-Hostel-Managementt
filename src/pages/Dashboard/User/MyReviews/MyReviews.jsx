@@ -6,6 +6,7 @@ import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import UserReviewsModal from "../../../../components/Modal/UserReviewsModal";
+import { Helmet } from "react-helmet-async";
 
 const MyReviews = () => {
   const axiosInstance = useAxiosInstance();
@@ -58,6 +59,9 @@ const MyReviews = () => {
   return (
     <div>
       <div className="min-h-screen py-10 px-5">
+        <Helmet>
+          <title>My Reviews || Hostel Management</title>
+        </Helmet>
         <div className="mx-auto">
           <h1 className="text-2xl font-semibold mb-6">My Reviews</h1>
           <div className="overflow-x-auto shadow-md rounded-md bg-white">

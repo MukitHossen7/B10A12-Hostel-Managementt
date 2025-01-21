@@ -2,6 +2,7 @@ import { useContext } from "react";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const PaymentHistory = () => {
   const { user } = useContext(AuthContext);
@@ -18,6 +19,9 @@ const PaymentHistory = () => {
   return (
     <div>
       <div className="py-10 px-5">
+        <Helmet>
+          <title>Payment History || Hostel Management</title>
+        </Helmet>
         <h1 className="text-2xl font-bold mb-6">Payment History</h1>
 
         {payments && payments?.length > 0 ? (

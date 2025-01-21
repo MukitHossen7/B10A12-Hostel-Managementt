@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
+import { Helmet } from "react-helmet-async";
 
 const ViewMeals = () => {
   const { id } = useParams();
@@ -16,6 +17,9 @@ const ViewMeals = () => {
   return (
     <div>
       <div className="py-10 px-3 lg:px-5 flex justify-center items-center">
+        <Helmet>
+          <title>View Meals || Hostel Management</title>
+        </Helmet>
         <div className="bg-white shadow rounded-md w-full p-4">
           <div className="flex flex-col gap-8 lg:flex-row items-center ">
             {/* Image Section */}
