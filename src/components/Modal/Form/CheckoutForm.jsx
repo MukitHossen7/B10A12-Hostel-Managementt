@@ -103,7 +103,7 @@ const CheckoutForm = ({ closeModal, packageData }) => {
       <div className="flex justify-between">
         <button
           type="submit"
-          className="bg-gray-900 text-yellow-400 py-2 px-5 rounded-lg"
+          className="bg-gradient-to-r from-blue-600 to-blue-800 py-2 text-gray-100 px-5 rounded-lg"
           disabled={!stripe || !clientSecret}
         >
           Pay

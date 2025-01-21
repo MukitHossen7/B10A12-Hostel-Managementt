@@ -22,7 +22,11 @@ const CheckoutPage = () => {
   return (
     <div className="py-20">
       <div
-        className={`max-w-md mx-4 md:mx-auto rounded overflow-hidden shadow-lg ${packageData?.color} p-6`}
+        className={`max-w-md mx-4 md:mx-auto rounded overflow-hidden shadow-lg ${
+          packageData?.name === "Gold" && "bg-amber-300"
+        } ${packageData?.name === "Silver" && "bg-gray-200"} ${
+          packageData?.name === "Platinum" && "bg-blue-300"
+        } p-6`}
       >
         <h2 className="text-2xl font-bold text-gray-800">
           {packageData?.name}
@@ -40,7 +44,7 @@ const CheckoutPage = () => {
         </ul>
         <button
           onClick={() => setIsOpen(true)}
-          className="mt-6 w-full bg-yellow-500 text-white py-2 rounded-full hover:bg-yellow-600"
+          className="mt-6 w-full hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800  text-gray-100 py-2 rounded-full hover:bg-yellow-600"
         >
           Subscribe Now
         </button>
