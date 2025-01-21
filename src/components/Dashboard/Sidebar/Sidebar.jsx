@@ -27,11 +27,11 @@ const Sidebar = () => {
         {/* Hamburger Icon for Mobile Devices */}
         <div className="md:hidden flex items-center justify-between p-4 ">
           <Link to="/">
-            <span className="text-2xl font-bold text-yellow-500">
+            <span className="text-xl md:text-2xl font-semibold text-blue-600 bg-gray-100 px-2 py-2 rounded-tl-lg rounded-br-lg">
               Hostel Manager
             </span>
           </Link>
-          <button onClick={toggleSidebar} className="text-2xl text-yellow-500">
+          <button onClick={toggleSidebar} className="text-xl text-blue-500">
             {isOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
@@ -45,13 +45,13 @@ const Sidebar = () => {
         >
           <Link to="/" className="p-4">
             <div className="flex items-center space-x-2 px-6">
-              <span className="text-2xl font-bold text-yellow-500 bg-gray-900 px-3 py-2 rounded-md">
+              <span className="text-xl md:text-2xl font-semibold text-blue-600 bg-gray-100 px-2 py-2 rounded-tl-lg rounded-br-lg">
                 Hostel Manager
               </span>
             </div>
           </Link>
           {role === "admin" && (
-            <div className="flex flex-col justify-between flex-1 space-y-6 mt-4 px-6">
+            <div className="flex flex-col justify-between flex-1 space-y-6 mt-2 px-6">
               <NavLink
                 to="/dashboard/admin-profile"
                 className={({ isActive }) =>

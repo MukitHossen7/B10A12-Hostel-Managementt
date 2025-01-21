@@ -39,7 +39,9 @@ const UserReviewsModal = ({ isOpen, onClose, reviewData, refetch }) => {
             &times;
           </button>
           <div className="p-6 max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl font-semibold mb-4">Update Meal</h2>
+            <h2 className="text-xl md:text-2xl font-semibold mb-4">
+              Update Meal
+            </h2>
             <form
               onSubmit={handleReviewsFrom}
               className="bg-white shadow-md rounded-md p-4"
@@ -79,7 +81,7 @@ const UserReviewsModal = ({ isOpen, onClose, reviewData, refetch }) => {
                 </div>
               </div>
 
-              <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600 transition">
+              <button className="mt-4 hover:bg-gradient-l bg-gradient-to-r from-blue-600 to-blue-800  text-gray-100 px-4 py-2 rounded-md shadow transition">
                 Submit Review
               </button>
             </form>

@@ -226,7 +226,7 @@ const UpcomingMealModal = ({ isOpen, onClose, refetch }) => {
               <div className="mt-6">
                 <button
                   type="submit"
-                  className="py-2 px-4 rounded-md bg-blue-500 text-white"
+                  className="py-2 px-4 rounded-md hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-white"
                 >
                   UpLoad Meal
                 </button>

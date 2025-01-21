@@ -15,11 +15,11 @@ const ViewMealsReviews = () => {
   });
   return (
     <div>
-      <div className="min-h-screen flex justify-center items-center">
-        <div className=" p-8 md:p-16 bg-white  shadow-md rounded-md">
-          <div className="flex flex-col gap-8 lg:flex-row items-center ">
+      <div className="py-10 px-3 lg:px-5 flex justify-center items-center">
+        <div className="bg-white shadow rounded-md p-4 w-full">
+          <div className="flex flex-col gap-6 lg:gap-8 lg:flex-row items-center">
             {/* Image Section */}
-            <div className="w-full lg:w-1/2 overflow-hidden rounded-xl">
+            <div className="w-full lg:w-1/2 overflow-hidden rounded-md">
               <img
                 src={reviews?.foodData?.foodImg}
                 className="w-full h-full lg:h-[400px] object-cover transform transition duration-500 ease-in-out hover:scale-105 shadow-lg"
@@ -28,14 +28,14 @@ const ViewMealsReviews = () => {
 
             {/* Content Section */}
             <div className="w-full lg:w-1/2">
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-800 tracking-wide">
+              <h1 className="text-2xl md:text-3xl lg:text-3xl font-semibold text-gray-800 tracking-wide">
                 {reviews?.foodData?.title}
               </h1>
-              <p className="mt-2 text-base lg:text-xl text-gray-600">
+              <p className="mt-2 text-base lg:text-lg text-gray-600">
                 {reviews?.foodData?.description}
               </p>
               <div className="mt-4 flex items-center space-x-4">
-                <span className="px-6 py-2 bg-teal-200 text-teal-700 rounded-full text-sm">
+                <span className="px-6 py-1 bg-blue-300 text-gray-800 rounded-full text-sm">
                   {reviews?.foodData?.category}
                 </span>
                 <span className="text-sm text-gray-500">
@@ -56,7 +56,7 @@ const ViewMealsReviews = () => {
                   ))}
                 </ul>
                 <div>
-                  <h3 className="text-2xl font-bold text-teal-600 mt-3">
+                  <h3 className="text-xl lg:text-2xl font-medium text-blue-600 mt-3">
                     Price: ${reviews?.foodData?.price}
                   </h3>
                 </div>

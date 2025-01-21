@@ -222,7 +222,7 @@ const AllMealsModal = ({ isOpen, onClose, currentMeal, refetch }) => {
             <div className="mt-4 text-right">
               <button
                 type="submit"
-                className="py-2 px-4 rounded-md bg-blue-500 text-white"
+                className="py-2 px-4 rounded-md hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100"
               >
                 Update Meal
               </button>
