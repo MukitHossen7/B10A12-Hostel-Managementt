@@ -1,19 +1,19 @@
-## Project Name: Hostel Management Client
+## Project Name : Hostel Management Client
 
-## Admin Credentials:
+## Admin Credentials :
 
 - **Username:** cr7@gmail.com
 - **Password:** 1412Mu@
 
-## Live Site URL:
+## Live Site URL :
 
 -- https://b10a12-final-project-ffb43.web.app
 
-## Purpose:
+## Purpose :
 
 - The Hostel Management System is a MERN stack-based web application designed to streamline hostel meal management for students. It enables administrators to manage students, meals, and reviews efficiently while providing students with an intuitive platform to log in, view, and request meals.
 
-## Features:
+## Features :
 
 1. **Student Login and Profile Management**:
    - Students can log in to access their profiles.
@@ -43,13 +43,13 @@
     - Users remain logged in even after refreshing the page.
     - Secure authentication via JWT tokens and Axios interceptor for API requests.
 
-## Additional Pages:
+## Additional Pages :
 
 - **Join Us Page:** User registration and social login options are implemented.
 - **User Dashboard:** Displays user profile, requested meals, reviews, and payment history.
 - **Admin Dashboard:** Offers comprehensive tools for managing the system effectively.
 
-## Technology Stack:
+## Technology Stack :
 
 - **Front-End:** React.js, Tailwind CSS, React Router, React Hook Form
 - **Back-End:** Node.js, Express.js
