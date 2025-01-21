@@ -80,7 +80,7 @@ import bannerImg from "../../../src/assets/images/slider-2.jpg";
 
 const Banner = () => {
   return (
-    <section className="relative bg-gray-100 h-[350px] md:h-[550px]">
+    <section className="relative bg-gray-100 h-[300px] md:h-[550px]">
       {/* Background Image */}
       <div
         className="absolute inset-0  w-full h-full"
@@ -95,18 +95,18 @@ const Banner = () => {
           backgroundRepeat: "no-repeat",
         }}
       ></div>
-      <div className="absolute inset-0 bg-blue-800 bg-opacity-60"></div>
+      <div className="absolute inset-0 bg-blue-800 bg-opacity-50"></div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-6 space-y-6 h-full">
-        <h1 className="text-4xl md:text-5xl font-bold">
+      <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-6 space-y-5 h-full">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold">
           Welcome to the <br></br> Hostel Management
         </h1>
-        <p className="text-lg md:text-xl max-w-2xl">
+        <p className="text-base md:text-lg lg:text-xl md:max-w-xl  lg:max-w-2xl text-gray-100">
           Easily manage student meals, reviews, and requests efficiently in your
           university hostel.
         </p>
-        <div className="flex flex-col sm:flex-row w-full sm:w-auto">
+        <div className="flex flex-row w-full sm:w-auto">
           <input
             type="text"
             placeholder="Search for meals or reviews..."

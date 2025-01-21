@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { MdDetails } from "react-icons/md";
 // eslint-disable-next-line react/prop-types
 const MealCard = ({ meal }) => {
   const { title, image, averageRating, price, _id } = meal || {};
@@ -19,7 +19,8 @@ const MealCard = ({ meal }) => {
             <span className="font-semibold">Rating:</span> {averageRating} ⭐
           </p>
           <Link to={`/meal/${_id}`}>
-            <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
+            <button className="hover:bg-gradient-to-l  bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-md flex flex-row items-center gap-1 ">
+              <MdDetails className="text-xl" />
               View Details
             </button>
           </Link>

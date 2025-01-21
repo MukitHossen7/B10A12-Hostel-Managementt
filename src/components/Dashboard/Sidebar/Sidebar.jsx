@@ -56,8 +56,8 @@ const Sidebar = () => {
                 to="/dashboard/admin-profile"
                 className={({ isActive }) =>
                   isActive
-                    ? "font-medium text-yellow-500"
-                    : "text-gray-700 hover:text-yellow-500"
+                    ? " font-medium text-blue-500"
+                    : "text-gray-700 hover:text-blue-500"
                 }
               >
                 <div className="flex items-center gap-3">
@@ -69,8 +69,8 @@ const Sidebar = () => {
                 to="/dashboard/manage-users"
                 className={({ isActive }) =>
                   isActive
-                    ? " font-medium text-yellow-500"
-                    : "text-gray-700 hover:text-yellow-500"
+                    ? " font-medium text-blue-500"
+                    : "text-gray-700 hover:text-blue-500"
                 }
               >
                 <div className="flex items-center gap-3">
@@ -82,8 +82,8 @@ const Sidebar = () => {
                 to="/dashboard/add-meals"
                 className={({ isActive }) =>
                   isActive
-                    ? " font-medium text-yellow-500"
-                    : "text-gray-700 hover:text-yellow-500"
+                    ? " font-medium text-blue-500"
+                    : "text-gray-700 hover:text-blue-500"
                 }
               >
                 <div className="flex items-center gap-3">
@@ -95,8 +95,8 @@ const Sidebar = () => {
                 to="/dashboard/all-meals"
                 className={({ isActive }) =>
                   isActive
-                    ? " font-medium text-yellow-500"
-                    : "text-gray-700 hover:text-yellow-500"
+                    ? " font-medium text-blue-500"
+                    : "text-gray-700 hover:text-blue-500"
                 }
               >
                 <div className="flex items-center gap-3">
@@ -108,8 +108,8 @@ const Sidebar = () => {
                 to="/dashboard/all-reviews"
                 className={({ isActive }) =>
                   isActive
-                    ? " font-medium text-yellow-500"
-                    : "text-gray-700 hover:text-yellow-500"
+                    ? " font-medium text-blue-500"
+                    : "text-gray-700 hover:text-blue-500"
                 }
               >
                 <div className="flex items-center gap-3">
@@ -121,8 +121,8 @@ const Sidebar = () => {
                 to="/dashboard/serve-meals"
                 className={({ isActive }) =>
                   isActive
-                    ? " font-medium text-yellow-500"
-                    : "text-gray-700 hover:text-yellow-500"
+                    ? " font-medium text-blue-500"
+                    : "text-gray-700 hover:text-blue-500"
                 }
               >
                 <div className="flex items-center gap-3">
@@ -134,8 +134,8 @@ const Sidebar = () => {
                 to="/dashboard/coming-meals"
                 className={({ isActive }) =>
                   isActive
-                    ? " font-medium text-yellow-500"
-                    : "text-gray-700 hover:text-yellow-500"
+                    ? " font-medium text-blue-500"
+                    : "text-gray-700 hover:text-blue-500"
                 }
               >
                 <div className="flex items-center gap-3">
@@ -151,8 +151,8 @@ const Sidebar = () => {
                 to="/dashboard/user-profile"
                 className={({ isActive }) =>
                   isActive
-                    ? " font-medium text-yellow-500"
-                    : "text-gray-700 hover:text-yellow-500"
+                    ? " font-medium text-blue-500"
+                    : "text-gray-700 hover:text-blue-500"
                 }
               >
                 <div className="flex items-center gap-3">
@@ -164,8 +164,8 @@ const Sidebar = () => {
                 to="/dashboard/requested-meals"
                 className={({ isActive }) =>
                   isActive
-                    ? " font-medium text-yellow-500"
-                    : "text-gray-700 hover:text-yellow-500"
+                    ? " font-medium text-blue-500"
+                    : "text-gray-700 hover:text-blue-500"
                 }
               >
                 <div className="flex items-center gap-3">
@@ -177,8 +177,8 @@ const Sidebar = () => {
                 to="/dashboard/my-reviews"
                 className={({ isActive }) =>
                   isActive
-                    ? " font-medium text-yellow-500"
-                    : "text-gray-700 hover:text-yellow-500"
+                    ? " font-medium text-blue-500"
+                    : "text-gray-700 hover:text-blue-500"
                 }
               >
                 <div className="flex items-center gap-3">
@@ -190,8 +190,8 @@ const Sidebar = () => {
                 to="/dashboard/payment-history"
                 className={({ isActive }) =>
                   isActive
-                    ? " font-medium text-yellow-500"
-                    : "text-gray-700 hover:text-yellow-500"
+                    ? " font-medium text-blue-500"
+                    : "text-gray-700 hover:text-blue-500"
                 }
               >
                 <div className="flex items-center gap-3">
@@ -225,8 +225,8 @@ const Sidebar = () => {
               to="/dashboard/admin-profile"
               className={({ isActive }) =>
                 isActive
-                  ? " font-medium text-yellow-500"
-                  : "text-gray-700 hover:text-yellow-500"
+                  ? " font-medium text-blue-500"
+                  : "text-gray-700 hover:text-blue-500"
               }
             >
               <div className="flex items-center gap-3">
@@ -238,8 +238,8 @@ const Sidebar = () => {
               to="/dashboard/manage-users"
               className={({ isActive }) =>
                 isActive
-                  ? " font-medium text-yellow-500"
-                  : "text-gray-700 hover:text-yellow-500"
+                  ? " font-medium text-blue-500"
+                  : "text-gray-700 hover:text-blue-500"
               }
             >
               <div className="flex items-center gap-3">
@@ -251,8 +251,8 @@ const Sidebar = () => {
               to="/dashboard/add-meals"
               className={({ isActive }) =>
                 isActive
-                  ? " font-medium text-yellow-500"
-                  : "text-gray-700 hover:text-yellow-500"
+                  ? " font-medium text-blue-500"
+                  : "text-gray-700 hover:text-blue-500"
               }
             >
               <div className="flex items-center gap-3">
@@ -264,8 +264,8 @@ const Sidebar = () => {
               to="/dashboard/all-meals"
               className={({ isActive }) =>
                 isActive
-                  ? " font-medium text-yellow-500"
-                  : "text-gray-700 hover:text-yellow-500"
+                  ? " font-medium text-blue-500"
+                  : "text-gray-700 hover:text-blue-500"
               }
             >
               <div className="flex items-center gap-3">
@@ -277,8 +277,8 @@ const Sidebar = () => {
               to="/dashboard/all-reviews"
               className={({ isActive }) =>
                 isActive
-                  ? " font-medium text-yellow-500"
-                  : "text-gray-700 hover:text-yellow-500"
+                  ? " font-medium text-blue-500"
+                  : "text-gray-700 hover:text-blue-500"
               }
             >
               <div className="flex items-center gap-3">
@@ -290,8 +290,8 @@ const Sidebar = () => {
               to="/dashboard/serve-meals"
               className={({ isActive }) =>
                 isActive
-                  ? " font-medium text-yellow-500"
-                  : "text-gray-700 hover:text-yellow-500"
+                  ? " font-medium text-blue-500"
+                  : "text-gray-700 hover:text-blue-500"
               }
             >
               <div className="flex items-center gap-3">
@@ -303,8 +303,8 @@ const Sidebar = () => {
               to="/dashboard/coming-meals"
               className={({ isActive }) =>
                 isActive
-                  ? " font-medium text-yellow-500"
-                  : "text-gray-700 hover:text-yellow-500"
+                  ? " font-medium text-blue-500"
+                  : "text-gray-700 hover:text-blue-500"
               }
             >
               <div className="flex items-center gap-3">
@@ -320,8 +320,8 @@ const Sidebar = () => {
               to="/dashboard/user-profile"
               className={({ isActive }) =>
                 isActive
-                  ? " font-medium text-yellow-500"
-                  : "text-gray-700 hover:text-yellow-500"
+                  ? " font-medium text-blue-500"
+                  : "text-gray-700 hover:text-blue-500"
               }
             >
               <div className="flex items-center gap-3">
@@ -333,8 +333,8 @@ const Sidebar = () => {
               to="/dashboard/requested-meals"
               className={({ isActive }) =>
                 isActive
-                  ? " font-medium text-yellow-500"
-                  : "text-gray-700 hover:text-yellow-500"
+                  ? " font-medium text-blue-500"
+                  : "text-gray-700 hover:text-blue-500"
               }
             >
               <div className="flex items-center gap-3">
@@ -346,8 +346,8 @@ const Sidebar = () => {
               to="/dashboard/my-reviews"
               className={({ isActive }) =>
                 isActive
-                  ? " font-medium text-yellow-500"
-                  : "text-gray-700 hover:text-yellow-500"
+                  ? " font-medium text-blue-500"
+                  : "text-gray-700 hover:text-blue-500"
               }
             >
               <div className="flex items-center gap-3">
@@ -359,8 +359,8 @@ const Sidebar = () => {
               to="/dashboard/payment-history"
               className={({ isActive }) =>
                 isActive
-                  ? " font-medium text-yellow-500"
-                  : "text-gray-700 hover:text-yellow-500"
+                  ? " font-medium text-blue-500"
+                  : "text-gray-700 hover:text-blue-500"
               }
             >
               <div className="flex items-center gap-3">

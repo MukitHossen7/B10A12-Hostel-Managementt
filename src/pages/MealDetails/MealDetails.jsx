@@ -144,22 +144,22 @@ const MealDetails = () => {
 
   return (
     <div>
-      <div className="px-4 py-8 md:px-16 lg:px-24">
-        <div className="flex flex-col lg:flex-row gap-10 items-center justify-center">
+      <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto pt-8 pb-12">
+        <div className="flex flex-col lg:flex-row gap-7 md:gap-10 items-center justify-center">
           {/* Meal Image */}
           <div className="w-full lg:w-1/2">
             <img
               src={detailsData?.image}
-              className="rounded-lg shadow-md w-full h-96 lg:h-[450px] object-cover"
+              className="rounded-lg shadow-md w-full h-72 md:h-96 lg:h-[420px] object-cover"
             />
           </div>
 
           {/* Meal Info */}
           <div className="w-full lg:w-1/2">
-            <h1 className="md:text-2xl lg:text-3xl font-semibold text-gray-800 mb-4">
+            <h1 className="text-2xl lg:text-3xl font-semibold text-gray-800 mb-3">
               {detailsData?.title}
             </h1>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-600 mb-3">
               By:{" "}
               <span className="font-semibold">
                 {detailsData?.distributor?.name}
@@ -200,13 +200,13 @@ const MealDetails = () => {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => handleLike(detailsData._id)}
-                className={`flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600 transition `}
+                className={`flex items-center gap-2  text-gray-100 px-4 py-2 rounded-md shadow bg-gradient-to-r from-blue-600 to-blue-800 `}
               >
                 <FaThumbsUp /> Like({detailsData?.likes})
               </button>
               <button
                 onClick={handleMealRequest}
-                className="bg-green-500 text-white px-4 py-2 rounded-md shadow hover:bg-green-600 transition"
+                className=" text-gray-100 px-4 py-2 rounded-md shadow hover:bg-gradient-to-l bg-gradient-to-r from-green-500 to-green-600 "
               >
                 Request Meal
               </button>
@@ -217,14 +217,14 @@ const MealDetails = () => {
         {/* Reviews Section */}
         <div className="mt-8 flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-[40%]">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
               Reviews ({detailsData?.reviews})
             </h2>
 
             <div className="mb-6">
               <form
                 onSubmit={handleReview}
-                className="bg-white shadow-md rounded-md p-4"
+                className="bg-white shadow rounded-md p-4"
               >
                 <div className="">
                   <textarea
@@ -260,18 +260,18 @@ const MealDetails = () => {
                   </div>
                 </div>
 
-                <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600 transition">
+                <button className="mt-4  text-gray-100 px-4 py-2 rounded-md shadow hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800">
                   Submit Review
                 </button>
               </form>
             </div>
           </div>
 
-          <div className="w-full lg:w-[60%] lg:mt-12">
+          <div className="w-full lg:w-[60%] -mt-5  lg:mt-12">
             {reviewsData?.length > 0 ? (
               reviewsData?.map((review) => (
                 <div key={review._id} className="py-2">
-                  <div className="bg-white shadow-md rounded-md px-4 py-4 border border-gray-100 flex items-center gap-4">
+                  <div className="bg-white shadow rounded-md px-4 py-4 border border-gray-100 flex items-center gap-4">
                     <div>
                       <img
                         src={review?.foodData?.foodImg}
@@ -305,7 +305,7 @@ const MealDetails = () => {
                 </div>
               ))
             ) : (
-              <p className="text-gray-900 font-semibold text-center text-2xl">
+              <p className="text-gray-800 font-semibold text-center text-xl md:text-2xl">
                 No reviews yet. Be the first to review!
               </p>
             )}

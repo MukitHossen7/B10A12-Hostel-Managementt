@@ -61,17 +61,19 @@ const MealsPage = () => {
     if (name === "max") setMaxPrice(value);
   };
   return (
-    <div className="w-11/12 md:11/12 lg:w-11/12 xl:container mx-auto px-4 py-6">
-      <h1 className="text-3xl font-bold text-center mb-6">All Meals</h1>
+    <div className="w-11/12 md:11/12 lg:w-11/12 xl:container mx-auto px-4 pt-8 pb-14">
+      <h1 className="text-2xl md:text-3xl font-semibold text-center mb-6">
+        All Meals
+      </h1>
       <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
         <input
           type="text"
           placeholder="Search meals..."
-          className="border border-gray-300 px-4 py-2 rounded-md w-full md:w-1/3"
+          className="border border-gray-300 px-4 py-2 rounded-md w-[55%] md:w-1/4"
           onChange={handleSearch}
         />
         <select
-          className="border border-gray-300 px-4 py-2 rounded-md"
+          className="border border-gray-300 px-4 py-2 rounded-md w-[55%] md:w-1/4"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
@@ -86,7 +88,7 @@ const MealsPage = () => {
             type="number"
             name="min"
             placeholder="Min"
-            className="border border-gray-300 px-2 py-1 rounded-md w-16"
+            className="border border-gray-300 px-2 py-1 rounded-md w-16 "
             onChange={(e) => handlePriceRange(e)}
           />
           <span>-</span>

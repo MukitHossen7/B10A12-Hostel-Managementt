@@ -127,13 +127,13 @@ const Navbar = () => {
                 <img
                   src={user?.photoURL || navIcon}
                   alt="User Profile"
-                  className="h-8 w-8 rounded-full object-cover ring-2 ring-blue-600"
+                  className="h-7 w-7 rounded-full object-cover ring-2 ring-blue-600"
                 />
               ) : (
                 <img
                   src={user?.photoURL || navIcon}
                   alt="User Profile"
-                  className="h-8 w-8 rounded-full object-cover ring-2 ring-blue-600"
+                  className="h-7 w-7 rounded-full object-cover ring-2 ring-blue-600"
                 />
               )}
             </button>

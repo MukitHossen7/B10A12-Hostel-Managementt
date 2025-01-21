@@ -53,8 +53,8 @@ const UpcomingMeals = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto pt-6 pb-14">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+    <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto  pt-6 pb-14">
+      <h1 className="text-2xl md:text-3xl font-semibold text-center text-gray-800 mb-6">
         Upcoming Meals
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -76,13 +76,13 @@ const UpcomingMeals = () => {
             <div className="flex justify-between items-center mt-4">
               <button
                 onClick={() => handleLike(meal._id)}
-                className={`px-4 py-2 rounded-md text-white bg-green-500 hover:bg-green-600 ${
+                className={`px-4 py-2 rounded-md text-gray-100 hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 ${
                   userBadge?.badge === "Bronze" && "hover:cursor-not-allowed"
                 }`}
               >
                 Like
               </button>
-              <span className="text-gray-600 font-medium">
+              <span className="text-gray-700 font-medium">
                 {meal?.likes} Likes
               </span>
             </div>
