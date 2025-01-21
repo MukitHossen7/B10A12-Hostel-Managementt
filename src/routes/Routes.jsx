@@ -24,11 +24,13 @@ import AdminRoute from "./AdminRoute";
 import ViewMeals from "../pages/Dashboard/Admin/ViewMeals/ViewMeals";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
 import ViewMealsReviews from "../pages/Dashboard/User/ViewMealsReviews/ViewMealsReviews";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayouts></MainLayouts>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
