@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAxiosPublic from "./../../hooks/useAxiosPublic";
 import AllMealCard from "../../components/AllMealCard/AllMealCard";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Helmet } from "react-helmet-async";
 
 const MealsPage = () => {
   const [meals, setMeals] = useState([]);
@@ -62,6 +63,9 @@ const MealsPage = () => {
   };
   return (
     <div className="w-11/12 md:11/12 lg:w-11/12 xl:container mx-auto px-4 pt-8 pb-14">
+      <Helmet>
+        <title>Meals || Hostel Management</title>
+      </Helmet>
       <h1 className="text-2xl md:text-3xl font-semibold text-center mb-6">
         All Meals
       </h1>

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from "react-hot-toast";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
+import { Helmet } from "react-helmet-async";
 
 const UpcomingMeals = () => {
   //  subscription level fetched from DB.
@@ -54,6 +55,9 @@ const UpcomingMeals = () => {
 
   return (
     <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto  pt-6 pb-14">
+      <Helmet>
+        <title>Upcoming Meals || Hostel Management</title>
+      </Helmet>
       <h1 className="text-2xl md:text-3xl font-semibold text-center text-gray-800 mb-6">
         Upcoming Meals
       </h1>

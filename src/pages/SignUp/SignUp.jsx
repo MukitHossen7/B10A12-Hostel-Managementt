@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 const SignUp = () => {
   const { createSignUpNewUsers, updateUserProfile, signInWithGoogle } =
     useContext(AuthContext);
@@ -76,6 +77,9 @@ const SignUp = () => {
   };
   return (
     <div className="flex flex-col gap-8 md:gap-10 lg:gap-20 lg:flex-row justify-center items-center py-10 md:py-14 lg:py-20 bg-white w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto">
+      <Helmet>
+        <title>SignUp || Hostel Management</title>
+      </Helmet>
       <div className="">
         <img src={signupImg} className="w-full md:w-[400px] lg:w-[500px]"></img>
       </div>

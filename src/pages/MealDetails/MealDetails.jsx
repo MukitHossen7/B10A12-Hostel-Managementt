@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import useAxiosInstance from "../../hooks/useAxiosInstance";
 import ReactStars from "react-rating-stars-component";
 import { useQueryClient } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 const MealDetails = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
@@ -144,6 +145,9 @@ const MealDetails = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Meals Details || Hostel Management</title>
+      </Helmet>
       <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto pt-8 pb-12">
         <div className="flex flex-col lg:flex-row gap-7 md:gap-10 items-center justify-center">
           {/* Meal Image */}
