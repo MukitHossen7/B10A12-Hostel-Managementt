@@ -21,7 +21,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div>
+    <div className="">
       {/* mobile devices */}
       <div className="md:hidden">
         {/* Hamburger Icon for Mobile Devices */}

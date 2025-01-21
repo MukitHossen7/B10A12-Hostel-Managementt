@@ -17,13 +17,13 @@ const PaymentHistory = () => {
   });
   return (
     <div>
-      <div className="min-h-screen py-10 px-5">
-        <h1 className="text-2xl font-bold text-center mb-6">Payment History</h1>
+      <div className="py-10 px-5">
+        <h1 className="text-2xl font-bold mb-6">Payment History</h1>
 
         {payments && payments?.length > 0 ? (
-          <div className="overflow-x-auto shadow-sm rounded-lg">
-            <table className="table-auto  w-full bg-white border border-gray-200">
-              <thead className="bg-gray-100">
+          <div className="overflow-x-auto shadow-md rounded-md bg-white ">
+            <table className="table-auto w-full bg-white border border-gray-200">
+              <thead className="bg-gray-100 table-auto w-full">
                 <tr>
                   <th className="px-4 py-3 text-left text-gray-700 font-medium">
                     Email
@@ -46,7 +46,7 @@ const PaymentHistory = () => {
                 {payments?.map((payment) => (
                   <tr
                     key={payment?._id}
-                    className="border-b hover:bg-gray-50 transition duration-150"
+                    className="border-b text-sm hover:bg-gray-50 transition duration-150"
                   >
                     <td className="px-4 py-2">{payment?.customer?.email}</td>
                     <td className="px-4 py-2">{payment?.customer?.name}</td>

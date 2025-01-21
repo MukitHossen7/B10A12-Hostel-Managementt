@@ -38,12 +38,12 @@ const UpComingMeal = () => {
   };
   return (
     <div>
-      <div className="p-6 md:p-8 min-h-screen ">
-        <div className="flex items-center justify-between mb-5">
-          <h1 className="text-2xl font-bold  ">Upcoming Meals</h1>
+      <div className="py-10 px-5 min-h-screen ">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:justify-between mb-5">
+          <h1 className="text-2xl font-semibold  ">Upcoming Meals</h1>
           <button
             onClick={handleOpenModal}
-            className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
+            className=" text-gray-100 px-6 py-2 rounded bg-gradient-to-r from-blue-600 to-blue-800"
           >
             Add Upcoming Meal
           </button>

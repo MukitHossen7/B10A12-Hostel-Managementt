@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { useQuery } from "@tanstack/react-query";
-
+import profileLogo from "../../../../../src/assets/logo/New Project.png";
 const UserProfile = () => {
   const { user } = useContext(AuthContext);
   const axiosInstance = useAxiosInstance();
@@ -17,38 +17,38 @@ const UserProfile = () => {
 
   return (
     <div className="flex items-center justify-center py-10">
-      <div className="bg-white shadow-md rounded-lg w-full max-w-4xl">
+      <div className="bg-white shadow-md rounded-md w-full max-w-4xl">
         {/* Profile Banner */}
-        <div className="relative bg-gradient-to-r from-teal-400 to-cyan-500 h-48 flex items-center justify-between px-10">
+        <div className="relative bg-gradient-to-r from-blue-400 to-blue-500 h-48 flex items-center justify-between px-10">
           <div className="text-white">
-            <h1 className="text-xl md:text-2xl font-bold">
+            <h1 className="text-xl md:text-2xl font-semibold">
               Hostel Management System
             </h1>
-            <p className="mt-1 mb-3 md:mb-0">
+            <p className="mt-1 text-sm md:text-base mb-3 md:mb-0">
               Ensuring seamless hostel operations
             </p>
           </div>
           <img
-            src="https://via.placeholder.com/100x100"
+            src={profileLogo}
             alt="Hostel Icon"
-            className="w-14 md:w-20 lg:w-24 h-14 md:h-20 lg:h-24 rounded-full border-4 border-white shadow-md"
+            className="w-14 md:w-20 lg:w-24 object-cover h-14 md:h-20 lg:h-24 rounded-full border-4 border-white shadow-md"
           />
         </div>
 
         {/* Profile Section */}
         <div className="relative">
           {/* Profile Picture */}
-          <div className="absolute -top-12 left-8">
+          <div className="absolute -top-10 lg:-top-14  left-8">
             <img
               src={users?.photo || "https://via.placeholder.com/150"}
               alt="User"
-              className="w-28 h-28 object-cover rounded-full border-4 border-white shadow-lg"
+              className=" w-16 md:w-20 lg:w-28 h-16 md:h-20 lg:h-28 object-cover rounded-full border-4 border-white shadow-lg"
             />
           </div>
 
           {/* User Info */}
-          <div className="pt-16 px-8">
-            <h2 className="text-3xl font-bold text-gray-800">
+          <div className="pt-10 md:pt-12 lg:pt-16 px-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
               {users?.name || "User Name"}
             </h2>
             <p className="text-gray-600">
@@ -56,14 +56,14 @@ const UserProfile = () => {
             </p>
             <div className="mt-2 flex gap-3">
               <span
-                className={`px-3 py-1 text-sm font-semibold rounded-full text-white ${
+                className={`px-3 py-1 text-sm font-semibold rounded-full  ${
                   users?.badge === "Gold"
-                    ? "bg-[#FFD700]"
+                    ? "bg-amber-300 text-gray-700"
                     : users?.badge === "Silver"
-                    ? "bg-[#b0aeae]"
+                    ? "bg-gray-200 text-gray-700"
                     : users?.badge === "Platinum"
-                    ? "bg-[#e5e4e2] text-gray-900"
-                    : "bg-orange-400" // Default for Bronze
+                    ? "bg-blue-300 text-gray-700"
+                    : "bg-gray-700 text-white" // Default for Bronze
                 }`}
               >
                 {users?.badge} Member
@@ -83,43 +83,8 @@ const UserProfile = () => {
             hostel.
           </p>
         </div>
-
-        {/* Key Statistics */}
-        {/* <div className="mt-6 px-8">
-          <h3 className="text-xl font-semibold text-gray-700 mb-4">
-            Key Statistics
-          </h3>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="bg-teal-100 p-4 rounded-lg shadow">
-              <h4 className="text-teal-600 text-lg font-semibold">
-                Meals Managed
-              </h4>
-              <p className="text-2xl font-bold text-gray-800">
-                {user.mealsManaged || 0}
-              </p>
-            </div>
-            <div className="bg-cyan-100 p-4 rounded-lg shadow">
-              <h4 className="text-cyan-600 text-lg font-semibold">
-                Reviews Moderated
-              </h4>
-              <p className="text-2xl font-bold text-gray-800">
-                {user.reviewsModerated || 0}
-              </p>
-            </div>
-            <div className="bg-yellow-100 p-4 rounded-lg shadow">
-              <h4 className="text-yellow-600 text-lg font-semibold">
-                Years of Service
-              </h4>
-              <p className="text-2xl font-bold text-gray-800">
-                {user.yearsOfService || 0}
-              </p>
-            </div>
-          </div>
-        </div> */}
-
-        {/* Footer Section */}
         <div className="mt-8 px-8 pb-6">
-          <button className="bg-teal-500 text-white px-6 py-2 rounded-md shadow hover:bg-teal-600 transition">
+          <button className=" text-gray-100 px-6 py-2 rounded-md shadow bg-gradient-to-r from-blue-600 to-blue-800">
             Edit Profile
           </button>
         </div>

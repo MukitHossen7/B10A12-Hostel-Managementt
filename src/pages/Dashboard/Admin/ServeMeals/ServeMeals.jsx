@@ -32,19 +32,19 @@ const ServeMeals = () => {
     // });
   };
   return (
-    <div className="min-h-screen py-10 px-5 ">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen py-10 px-5">
+      <div className="">
         <h1 className="text-2xl font-semibold mb-4">Serve Meals</h1>
         <div className="flex justify-between items-center mb-6">
           <input
             type="text"
             onChange={handleSearch}
             placeholder="Search by name, email, or title"
-            className="w-full md:w-1/3 px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+            className="w-full lg:w-1/3 px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
         <div className="overflow-x-auto shadow-md bg-white rounded-md">
-          <table className="table-auto w-full bg-white border border-gray-100 rounded-lg shadow-lg">
+          <table className="min-w-full  bg-white border border-gray-100 rounded-lg shadow-lg">
             <thead className="bg-gray-100">
               <tr>
                 <th className="px-4 py-2 text-left text-gray-700 font-medium">
@@ -83,7 +83,7 @@ const ServeMeals = () => {
                         className={`px-2 py-1 text-sm rounded-full ${
                           meal.status === "Delivered"
                             ? "bg-green-200 text-green-600"
-                            : "bg-yellow-200 text-yellow-600"
+                            : "bg-blue-200 text-gray-700"
                         }`}
                       >
                         {meal.status}
@@ -93,7 +93,7 @@ const ServeMeals = () => {
                       {meal.status === "Pending" ? (
                         <button
                           onClick={() => handleServe(meal._id)}
-                          className="text-yellow-600 hover:text-yellow-600 flex items-center justify-center bg-gray-900 px-3 py-[2px] rounded-full"
+                          className="bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100 flex items-center justify-center  px-3 py-[2px] rounded-full"
                         >
                           <FaCheck className="mr-1" />
                           Serve

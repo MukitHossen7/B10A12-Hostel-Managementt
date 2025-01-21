@@ -29,16 +29,16 @@ const RequestedMeals = () => {
   };
   return (
     <div>
-      <div className="min-h-screen p-4 md:p-8">
-        <h1 className="text-2xl font-semibold text-gray-800 text-center mb-6">
+      <div className="min-h-screen py-10 px-5">
+        <h1 className="text-2xl font-semibold text-gray-800 r mb-6">
           Requested Meals
         </h1>
-        <div className="overflow-x-auto shadow-md rounded-lg">
+        <div className="overflow-x-auto bg-white shadow-md rounded-md">
           <table className="table-auto w-full bg-white border border-gray-200">
             <thead className="bg-gray-100">
               <tr>
                 <th className="px-4 py-2 text-left text-gray-700 font-medium">
-                  Meal Title
+                  Meal
                 </th>
                 <th className="px-4 py-2 text-left text-gray-700 font-medium">
                   Likes
@@ -58,7 +58,7 @@ const RequestedMeals = () => {
               {requestMeals?.map((meal) => (
                 <tr
                   key={meal?._id}
-                  className="hover:bg-gray-50 transition-colors"
+                  className="hover:bg-gray-50 text-sm transition-colors"
                 >
                   <td className="px-4 py-2 border-t">{meal?.title}</td>
                   <td className="px-4 py-2 border-t">{meal?.likes}</td>

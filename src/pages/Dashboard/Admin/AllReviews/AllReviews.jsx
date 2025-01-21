@@ -44,7 +44,7 @@ const AllReviews = () => {
   };
   return (
     <div>
-      <div className="p-6 min-h-screen">
+      <div className="py-10 px-5 min-h-screen">
         <h1 className="text-2xl font-bold mb-4">All Reviews</h1>
         <div className="overflow-x-auto shadow-md bg-white rounded-md">
           <table className="min-w-full bg-white border border-gray-100 rounded-lg shadow-lg">
@@ -52,7 +52,7 @@ const AllReviews = () => {
               <tr>
                 <th className="py-3 px-4 text-left font-medium">Meal Title</th>
                 <th className="py-3 px-4 font-medium">Likes</th>
-                <th className="py-3 px-4 font-medium">Reviews Count</th>
+                <th className="py-3 px-4 font-medium">Reviews</th>
                 <th className="py-3 px-4 text-center font-medium">Actions</th>
               </tr>
             </thead>

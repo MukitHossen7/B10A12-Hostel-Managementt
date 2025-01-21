@@ -56,12 +56,14 @@ const AllMeals = () => {
 
   return (
     <div>
-      <div className="p-6 min-h-screen">
+      <div className="py-10 px-5 min-h-screen">
         <h1 className="text-2xl font-bold text-gray-700 mb-4">All Meals</h1>
         <div className="flex justify-start gap-4 mb-5">
           <button
             className={`px-4 py-2 rounded ${
-              sortOption === "likes" ? "bg-blue-500 text-white" : "bg-gray-200"
+              sortOption === "likes"
+                ? "bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100"
+                : "bg-gray-200"
             }`}
             onClick={() => setSortOption("likes")}
           >
@@ -70,7 +72,7 @@ const AllMeals = () => {
           <button
             className={`px-4 py-2 rounded ${
               sortOption === "reviews"
-                ? "bg-blue-500 text-white"
+                ? "bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100"
                 : "bg-gray-200"
             }`}
             onClick={() => setSortOption("reviews")}
@@ -86,9 +88,7 @@ const AllMeals = () => {
                 <th className="px-4 py-2 text-left font-medium">Likes</th>
                 <th className="px-4 py-2 text-left font-medium">Reviews</th>
                 <th className="px-4 py-2 text-left font-medium">Rating</th>
-                <th className="px-4 py-2 text-left font-medium">
-                  Distributor Name
-                </th>
+                <th className="px-4 py-2 text-left font-medium">Distributor</th>
                 <th className="px-4 py-2 text-center font-medium">Actions</th>
               </tr>
             </thead>
@@ -102,7 +102,7 @@ const AllMeals = () => {
                   <td className="px-4 py-4 text-sm">
                     {meal?.distributor?.name}
                   </td>
-                  <td className="px-4 py-2 text-center flex flex-wrap gap-2 ">
+                  <td className="px-4 py-2 text-center flex flex-row items-center gap-2 ">
                     <Link to={`/dashboard/view-meals/${meal._id}`}>
                       <button
                         className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded"

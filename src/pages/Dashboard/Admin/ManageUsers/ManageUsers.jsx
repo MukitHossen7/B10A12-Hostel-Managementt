@@ -32,17 +32,13 @@ const ManageUsers = () => {
     setSearch(e.target.value.toLowerCase());
     refetch();
   };
-  // if (isLoading)
-  //   return (
-  //     <div className="flex justify-center items-center min-h-screen">
-  //       <FadeLoader color="#10e14b" />
-  //     </div>
-  //   );
   return (
     <div className="">
-      <div className="p-4 min-h-screen md:p-8 container mx-auto">
+      <div className="min-h-screen py-10 px-5">
         {/* Title */}
-        <h1 className="text-2xl font-bold mb-6 text-gray-800">Manage Users</h1>
+        <h1 className="text-2xl font-semibold mb-6 text-gray-800">
+          Manage Users
+        </h1>
 
         {/* Search Bar */}
         <div className="flex items-center mb-6">
@@ -50,14 +46,14 @@ const ManageUsers = () => {
             onChange={handleSearch}
             type="text"
             placeholder="Search by username or email"
-            className="w-full md:w-1/3 p-2 border rounded-l-md focus:outline-none focus:ring-1  focus:ring-gray-500"
+            className="w-full lg:w-1/3 p-2 border rounded-md focus:outline-none focus:ring-1  focus:ring-gray-500"
           />
         </div>
 
         {/* User Table */}
         <div className="overflow-x-auto shadow-md bg-white rounded-md">
           <table className="table-auto w-full text-gray-800 bg-white border border-gray-100 rounded-lg shadow-lg">
-            <thead className="text-gray-600 border-b">
+            <thead className="text-gray-700 border-b">
               <tr className="">
                 <th className="p-3 text-left font-medium">Username</th>
                 <th className="p-3 text-left font-medium">Email</th>
@@ -74,14 +70,14 @@ const ManageUsers = () => {
                   <td className="p-3">{user?.email}</td>
                   <td className="p-3">
                     <span
-                      className={`px-3 rounded-full py-1 text-sm font-semibold text-white ${
+                      className={`px-3 rounded-full py-1 text-sm ${
                         user?.badge === "Gold"
-                          ? "bg-[#FFD700]"
+                          ? "bg-amber-300 text-gray-800"
                           : user?.badge === "Silver"
-                          ? "bg-gray-400"
+                          ? "bg-gray-200 text-gray-800"
                           : user?.badge === "Platinum"
-                          ? "bg-blue-300"
-                          : "bg-gray-900" // Default for Bronze
+                          ? "bg-blue-300 text-gray-800"
+                          : "bg-gray-800 text-gray-100"
                       }`}
                     >
                       {user?.badge}
@@ -89,8 +85,8 @@ const ManageUsers = () => {
                   </td>
                   <td className="p-3">
                     <span
-                      className={`px-3 rounded-full py-1 text-sm font-semibold text-white ${
-                        user?.role === "admin" ? "bg-green-600" : "bg-gray-800" // Default for Bronze
+                      className={`px-3 rounded-full py-1 text-sm  text-gray-100 ${
+                        user?.role === "admin" ? "bg-green-500" : "bg-blue-500"
                       }`}
                     >
                       {" "}
@@ -101,12 +97,12 @@ const ManageUsers = () => {
                     <button
                       onClick={() => handleAdmin(user._id)}
                       disabled={user?.role === "admin"}
-                      className={`px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-600 ${
+                      className={`px-4 py-2 flex items-center gap-[2px] text-gray-100 rounded-md bg-gradient-to-r from-blue-600 to-blue-800 ${
                         user?.role === "admin" ? "cursor-not-allowed" : ""
                       }`}
                     >
-                      <FaUserShield className="inline mr-2" />
-                      Make Admin
+                      <FaUserShield />
+                      Admin
                     </button>
                   </td>
                 </tr>

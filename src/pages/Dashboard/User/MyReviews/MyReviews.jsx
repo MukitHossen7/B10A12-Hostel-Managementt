@@ -57,10 +57,10 @@ const MyReviews = () => {
   };
   return (
     <div>
-      <div className="min-h-screen  py-10 px-5">
+      <div className="min-h-screen py-10 px-5">
         <div className="mx-auto">
           <h1 className="text-2xl font-semibold mb-6">My Reviews</h1>
-          <div className="overflow-x-auto shadow-sm rounded-lg">
+          <div className="overflow-x-auto shadow-md rounded-md bg-white">
             <table className="table-auto w-full  bg-white border border-gray-100">
               <thead className="bg-gray-100 ">
                 <tr>
@@ -82,7 +82,7 @@ const MyReviews = () => {
                 {allReviews?.map((review) => (
                   <tr
                     key={review._id}
-                    className="border-t hover:bg-gray-50 transition duration-150"
+                    className="border-t hover:bg-gray-50 text-sm transition duration-150"
                   >
                     <td className="px-4 py-2">{review?.foodData?.title}</td>
                     <td className="px-4 py-2">{review?.foodData?.likes}</td>

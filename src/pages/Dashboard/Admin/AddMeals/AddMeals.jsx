@@ -58,7 +58,7 @@ const AddMeals = () => {
   };
   return (
     <div>
-      <div className="w-full lg:w-9/12 mx-auto p-5">
+      <div className="w-full lg:w-10/12 mx-auto p-5">
         <h2 className="text-2xl font-semibold mb-4">Add New Meal</h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -258,7 +258,7 @@ const AddMeals = () => {
           <div className="mt-4 text-right">
             <button
               type="submit"
-              className="py-2 px-4 rounded-md bg-blue-500 text-white"
+              className="py-2 px-4 rounded-md bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100"
             >
               Add Meal
             </button>
