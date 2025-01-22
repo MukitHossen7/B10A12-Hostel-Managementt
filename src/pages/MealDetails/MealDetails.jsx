@@ -9,6 +9,10 @@ import useAxiosInstance from "../../hooks/useAxiosInstance";
 import ReactStars from "react-rating-stars-component";
 import { useQueryClient } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
+import { BsCalendarDate } from "react-icons/bs";
+import { BiCategory } from "react-icons/bi";
+import { FiDollarSign } from "react-icons/fi";
+import { MdOutlineStarRate } from "react-icons/md";
 const MealDetails = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
@@ -169,37 +173,41 @@ const MealDetails = () => {
                 {detailsData?.distributor?.name}
               </span>
             </p>
-            <p className="text-gray-700 mb-4">{detailsData?.description}</p>
+            <p className="text-gray-700 mb-5">{detailsData?.description}</p>
 
-            <div className="mb-4">
-              <h2 className="text-xl font-semibold text-gray-800">
-                Ingredients:
-              </h2>
-              <ul className="list-disc list-inside text-gray-700">
+            <div className="">
+              <div className="flex flex-wrap gap-4 ">
                 {detailsData?.ingredients?.map((ingredient, index) => (
-                  <li key={index}>{ingredient}</li>
+                  <span
+                    className="bg-gray-200 text-gray-800 px-4 rounded-full text-sm"
+                    key={index}
+                  >
+                    {ingredient}
+                  </span>
                 ))}
-              </ul>
+              </div>
             </div>
 
-            <p className="text-gray-600 mb-2">
-              <span className="font-semibold">Posted on</span> :{" "}
-              {detailsData?.postTime}
-            </p>
-            <p className="text-gray-600 mb-2">
-              <span className="font-semibold">Category</span> :{" "}
-              {detailsData?.category}
-            </p>
-            <p className="text-gray-600 mb-4">
-              <span className="font-semibold">Price</span> :{" "}
-              {detailsData?.price}$
-            </p>
-            <p className="text-gray-600 mb-4">
-              Rating:{" "}
-              <span className="font-semibold">
-                {detailsData?.averageRating}/5
-              </span>
-            </p>
+            <div className="flex flex-col space-y-2  py-6">
+              <p className="text-gray-700  flex items-center gap-2">
+                <BsCalendarDate className="text-xl" />
+                {detailsData?.postTime}
+              </p>
+              <p className="text-gray-700  flex items-center gap-2">
+                <BiCategory className="text-xl" />
+                {detailsData?.category}
+              </p>
+              <p className="text-gray-700  flex items-center gap-2">
+                <FiDollarSign className="text-xl" />
+                {detailsData?.price}
+              </p>
+              <p className="text-gray-700  flex items-center gap-2">
+                <MdOutlineStarRate className="text-xl" />
+                <span className="font-semibold">
+                  {detailsData?.averageRating}/5
+                </span>
+              </p>
+            </div>
 
             <div className="flex items-center gap-4">
               <button
@@ -291,6 +299,7 @@ const MealDetails = () => {
                           count={5}
                           value={review?.reviewRatings}
                           size={24}
+                          edit={false}
                           isHalf={true}
                           emptyIcon={<i className="far fa-star"></i>}
                           halfIcon={<i className="fa fa-star-half-alt"></i>}

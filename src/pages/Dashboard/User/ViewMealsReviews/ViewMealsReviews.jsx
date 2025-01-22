@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import useAxiosInstance from "../../../../hooks/useAxiosInstance";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
+import { BsCurrencyDollar } from "react-icons/bs";
 
 const ViewMealsReviews = () => {
   const axiosInstance = useAxiosInstance();
@@ -39,10 +40,10 @@ const ViewMealsReviews = () => {
                 {reviews?.foodData?.description}
               </p>
               <div className="mt-4 flex items-center space-x-4">
-                <span className="px-6 py-1 bg-blue-300 text-gray-800 rounded-full text-sm">
+                <span className="px-4  bg-gray-200 text-gray-700 rounded-full text-sm">
                   {reviews?.foodData?.category}
                 </span>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-700">
                   {reviews?.foodData?.postTime}
                 </span>
               </div>
@@ -60,8 +61,9 @@ const ViewMealsReviews = () => {
                   ))}
                 </ul>
                 <div>
-                  <h3 className="text-xl lg:text-2xl font-medium text-blue-600 mt-3">
-                    Price: ${reviews?.foodData?.price}
+                  <h3 className="text-xl lg:text-2xl font-medium text-blue-600 mt-3 flex items-center gap-1">
+                    <BsCurrencyDollar className="text-2xl" />
+                    {reviews?.foodData?.price}
                   </h3>
                 </div>
               </div>
