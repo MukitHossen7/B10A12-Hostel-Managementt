@@ -1,66 +1,61 @@
-// import InfiniteScroll from "react-infinite-scroll-component";
 import { useEffect, useState } from "react";
 import useAxiosPublic from "./../../hooks/useAxiosPublic";
 import AllMealCard from "../../components/AllMealCard/AllMealCard";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { Helmet } from "react-helmet-async";
+import InfiniteScroll from "react-infinite-scroller";
+import { FadeLoader } from "react-spinners";
 
 const MealsPage = () => {
   const [meals, setMeals] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
-  const axiosPublic = useAxiosPublic();
-  // const [page, setPage] = useState(1);
-  // const [hasMore, setHasMore] = useState(true);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [loading, setLoading] = useState(false);
+  const axiosPublic = useAxiosPublic();
+
   const fetchMeals = async () => {
-    const { data } = await axiosPublic.get(
-      `/api/meals?search=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}`
-    );
-    setMeals(data);
+    if (loading) return;
+    setLoading(true);
+
+    try {
+      const { data } = await axiosPublic.get(
+        `/api/meals?search=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&limit=6`
+      );
+      setMeals((prevMeals) => [...prevMeals, ...data.meals]);
+      setHasMore(data.hasMore);
+      setPage((prevPage) => prevPage + 1);
+    } catch (error) {
+      console.error("Error fetching meals:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const resetMeals = () => {
+    setMeals([]);
+    setPage(1);
+    setHasMore(true);
   };
 
-  // const fetchMeals = async (pageNum = 1, reset = false) => {
-  //   try {
-  //     const { data } = await axiosPublic.get(
-  //       `/api/meals?search=${search}&category=${category}&page=${pageNum}`
-  //     );
-  //     if (reset) {
-  //       setMeals(data);
-  //     } else {
-  //       setMeals((prevMeals) => [...prevMeals, ...data]);
-  //     }
-  //     if (data.length === 0) {
-  //       setHasMore(false);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching meals:", error);
-  //     setHasMore(false);
-  //   }
-  // };
-  // const fetchMoreMeals = () => {
-  //   const nextPage = page + 1;
-  //   setPage(nextPage);
-  //   fetchMeals(nextPage);
-  // };
-  useEffect(() => {
-    fetchMeals();
-  }, [search, category, minPrice, maxPrice]);
-
-  // useEffect(() => {
-  //   setPage(1);
-  //   setHasMore(true);
-  //   fetchMeals(1, true);
-  // }, [search, category]);
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
+    resetMeals();
   };
+
   const handlePriceRange = (e) => {
     const { name, value } = e.target;
     if (name === "min") setMinPrice(value);
     if (name === "max") setMaxPrice(value);
+    resetMeals();
   };
+
+  useEffect(() => {
+    resetMeals();
+    fetchMeals();
+  }, [search, category, minPrice, maxPrice]);
+
   return (
     <div className="w-11/12 md:11/12 lg:w-11/12 xl:container mx-auto px-4 pt-8 pb-14">
       <Helmet>
@@ -92,7 +87,7 @@ const MealsPage = () => {
             type="number"
             name="min"
             placeholder="Min"
-            className="border border-gray-300 px-2 py-1 rounded-md w-16 "
+            className="border border-gray-300 px-2 py-1 rounded-md w-16"
             onChange={(e) => handlePriceRange(e)}
           />
           <span>-</span>
@@ -111,19 +106,17 @@ const MealsPage = () => {
         </div>
       )}
       <InfiniteScroll
-        dataLength={meals.length}
-        next={fetchMeals}
-        hasMore={true}
-        loader={<h4>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: "center", marginTop: "20px" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
+        loadMore={fetchMeals}
+        hasMore={hasMore}
+        loader={
+          <div key="loader" className="flex items-center justify-center">
+            <FadeLoader color="#1347e3" width={3} />
+          </div>
         }
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {meals?.map((meal) => (
-            <AllMealCard key={meal._id} meal={meal}></AllMealCard>
+          {meals?.map((meal, idx) => (
+            <AllMealCard key={idx} meal={meal}></AllMealCard>
           ))}
         </div>
       </InfiniteScroll>

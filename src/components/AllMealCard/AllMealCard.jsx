@@ -1,6 +1,5 @@
-import { MdDetails } from "react-icons/md";
 import { Link } from "react-router-dom";
-
+import { FcViewDetails } from "react-icons/fc";
 /* eslint-disable react/prop-types */
 const AllMealCard = ({ meal }) => {
   return (
@@ -20,13 +19,13 @@ const AllMealCard = ({ meal }) => {
           </span>
         </div>
         <p className="text-gray-600 text-base mt-2">
-          {meal?.description.slice(0, 30)}...
+          {meal?.description?.slice(0, 30)}...
         </p>
         <div className="flex justify-between items-center mt-4">
           <span className="text-green-600 font-bold">${meal?.price}</span>
           <Link to={`/meal/${meal._id}`}>
             <button className="hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-md flex flex-row gap-1">
-              <MdDetails className="text-xl" />
+              <FcViewDetails className="text-xl" />
               Details
             </button>
           </Link>

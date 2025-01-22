@@ -2,8 +2,8 @@
 
 ## Admin Credentials :
 
-- **Username:** cr7@gmail.com
-- **Password:** 1412Mu@
+- **Username :** cr7@gmail.com
+- **Password :** 1412Mu@
 
 ## Live Site URL :
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MdDetails } from "react-icons/md";
+import { FcViewDetails } from "react-icons/fc";
 // eslint-disable-next-line react/prop-types
 const MealCard = ({ meal }) => {
   const { title, image, averageRating, price, _id } = meal || {};
@@ -20,7 +20,7 @@ const MealCard = ({ meal }) => {
           </p>
           <Link to={`/meal/${_id}`}>
             <button className="hover:bg-gradient-to-l  bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-md flex flex-row items-center gap-1 ">
-              <MdDetails className="text-xl" />
+              <FcViewDetails className="text-xl" />
               View Details
             </button>
           </Link>
