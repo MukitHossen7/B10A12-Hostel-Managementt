@@ -1,12 +1,11 @@
 const MealNutritionInfo = () => {
   const meal = {
-    name: "Meals Nutations",
+    name: "Average Meal Nutrition",
     calories: 350,
     protein: 30,
     carbs: 12,
     fats: 15,
   };
-  // Destructure the meal object for nutritional information
   const { name, calories, protein, carbs, fats } = meal || {};
 
   return (

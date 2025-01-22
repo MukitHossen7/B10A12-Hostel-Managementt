@@ -17,7 +17,7 @@ const MembershipSection = () => {
   return (
     <section className="py-10 md:py-12">
       <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:container mx-auto ">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 text-gray-800">
+        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-4 text-gray-800">
           Upgrade to Premium
         </h2>
         <p className="text-center text-gray-600 mb-8">
