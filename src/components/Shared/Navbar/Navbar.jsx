@@ -79,28 +79,28 @@ const Navbar = () => {
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 />
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-3 w-40 bg-gray-100 shadow-lg rounded">
+                  <div className="absolute right-0 mt-3 w-36 bg-gray-100 shadow-lg rounded">
                     <p className="px-4 py-2 text-gray-800">
                       {user?.displayName}
                     </p>
                     {role === "admin" ? (
                       <Link
                         to="/dashboard/admin-profile"
-                        className="block px-4  text-gray-800 transition"
+                        className="block px-4  text-gray-800 transition hover:bg-gray-300 w-32  py-2 rounded-md"
                       >
                         Dashboard
                       </Link>
                     ) : (
                       <Link
                         to="/dashboard/user-profile"
-                        className="block px-4  text-gray-800 transition"
+                        className="block  px-4  text-gray-800 transition hover:bg-gray-300 w-32  py-2 rounded-md "
                       >
                         Dashboard
                       </Link>
                     )}
 
                     <button
-                      className="text-left mx-4 mb-4 mt-4 px-4 py-2 text-gray-100 flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-800 transition"
+                      className="text-left mx-4 mb-4 mt-3 px-4 py-2 text-gray-100 flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-800 transition"
                       onClick={handleLogOut}
                     >
                       Logout
