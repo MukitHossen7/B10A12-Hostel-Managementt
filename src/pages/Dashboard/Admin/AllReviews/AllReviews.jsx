@@ -4,6 +4,7 @@ import { FaEye, FaThumbsUp, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 
 const AllReviews = () => {
   const axiosInstance = useAxiosInstance();
@@ -14,6 +15,20 @@ const AllReviews = () => {
       return data;
     },
   });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const reviewsPerPage = 10;
+
+  // Calculate the index range for slicing the reviews
+  const indexOfLastReview = currentPage * reviewsPerPage;
+  const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+  const currentReviews = allReviews.slice(
+    indexOfFirstReview,
+    indexOfLastReview
+  );
+
+  const totalPages = Math.ceil(allReviews.length / reviewsPerPage);
+
   const handleDeleteReview = async (reviewId, foodId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -34,7 +49,7 @@ const AllReviews = () => {
         if (data.deletedCount > 0) {
           Swal.fire({
             title: "Deleted!",
-            text: "Reviews has been deleted",
+            text: "Review has been deleted",
             icon: "success",
           });
           refetch();
@@ -42,6 +57,19 @@ const AllReviews = () => {
       }
     });
   };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <div>
       <div className="py-10 px-5 min-h-screen">
@@ -60,7 +88,7 @@ const AllReviews = () => {
               </tr>
             </thead>
             <tbody>
-              {allReviews.map((review) => (
+              {currentReviews.map((review) => (
                 <tr
                   key={review?._id}
                   className="border-b hover:bg-gray-50 transition duration-200"
@@ -77,8 +105,8 @@ const AllReviews = () => {
                   </td>
                   <td className="py-3 px-4 text-sm flex justify-center space-x-4">
                     <Link to={`/dashboard/view-meals/${review?.foodId}`}>
-                      <button className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded transition ">
-                        <FaEye className="" />
+                      <button className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded transition">
+                        <FaEye />
                       </button>
                     </Link>
                     <button
@@ -87,13 +115,32 @@ const AllReviews = () => {
                       }
                       className="bg-red-100 text-red-500 hover:bg-red-200 p-2 rounded transition"
                     >
-                      <FaTrashAlt className="" />
+                      <FaTrashAlt />
                     </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="flex justify-center items-center mt-6 gap-3">
+          <button
+            className="px-3 text-sm py-1 hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100 rounded"
+            disabled={currentPage === 1}
+            onClick={handlePrevPage}
+          >
+            Previous
+          </button>
+          <span className="font-semibold text-sm">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            className="px-4 text-sm py-1 hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100 rounded"
+            disabled={currentPage === totalPages}
+            onClick={handleNextPage}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

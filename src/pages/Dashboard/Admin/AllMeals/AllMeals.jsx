@@ -12,6 +12,9 @@ const AllMeals = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sortOption, setSortOption] = useState("");
   const [currentMeal, setCurrentMeal] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   const { data: allMeals = [], refetch } = useQuery({
     queryKey: ["allMeals", sortOption],
     queryFn: async () => {
@@ -21,7 +24,22 @@ const AllMeals = () => {
       return data;
     },
   });
-  //delete data
+
+  // Calculate pagination
+  const totalPages = Math.ceil(allMeals.length / itemsPerPage);
+  const displayedMeals = allMeals.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+  };
+
   const handleDelete = async (deleteId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -45,6 +63,7 @@ const AllMeals = () => {
       }
     });
   };
+
   const handleEditClick = (meal) => {
     setCurrentMeal(meal);
     setIsModalOpen(true);
@@ -97,7 +116,7 @@ const AllMeals = () => {
               </tr>
             </thead>
             <tbody>
-              {allMeals.map((meal) => (
+              {displayedMeals.map((meal) => (
                 <tr key={meal._id} className="border-t">
                   <td className="px-4 py-4 text-sm">{meal?.title}</td>
                   <td className="px-4 py-4 text-sm">{meal?.likes}</td>
@@ -106,7 +125,7 @@ const AllMeals = () => {
                   <td className="px-4 py-4 text-sm">
                     {meal?.distributor?.name}
                   </td>
-                  <td className="px-4 py-2 text-center flex flex-row items-center gap-2 ">
+                  <td className="px-4 py-2 text-center flex flex-row items-center gap-2">
                     <Link to={`/dashboard/view-meals/${meal._id}`}>
                       <button
                         className="bg-green-100 text-green-500 hover:bg-green-200 p-2 rounded"
@@ -135,13 +154,40 @@ const AllMeals = () => {
             </tbody>
           </table>
         </div>
+        <div className="flex items-center justify-center mt-6 gap-3">
+          <button
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+            className={`px-3 py-1 rounded text-sm ${
+              currentPage === 1
+                ? "hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100"
+                : "hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100"
+            }`}
+          >
+            Previous
+          </button>
+          <p className="text-gray-700 text-sm font-semibold">
+            Page {currentPage} of {totalPages}
+          </p>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className={`px-4 py-1 rounded text-sm ${
+              currentPage === totalPages
+                ? "hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100"
+                : "hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100"
+            }`}
+          >
+            Next
+          </button>
+        </div>
       </div>
       <AllMealsModal
         isOpen={isModalOpen}
         refetch={refetch}
         onClose={handleModalClose}
         currentMeal={currentMeal}
-      ></AllMealsModal>
+      />
     </div>
   );
 };

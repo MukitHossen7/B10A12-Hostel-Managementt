@@ -8,6 +8,9 @@ import { Helmet } from "react-helmet-async";
 
 const UpComingMeal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const mealsPerPage = 10;
+
   const axiosInstance = useAxiosInstance();
   const { data: upcoming = [], refetch } = useQuery({
     queryKey: ["upcoming"],
@@ -16,12 +19,15 @@ const UpComingMeal = () => {
       return data;
     },
   });
+
   const handleOpenModal = () => {
     setIsOpen(true);
   };
+
   const handleCloseModal = () => {
     setIsOpen(false);
   };
+
   const handlePublish = async (publishId) => {
     const { data } = await axiosInstance.get(
       `/upcoming-meals-admin/${publishId}`
@@ -36,6 +42,25 @@ const UpComingMeal = () => {
       toast.error("The meal needs to have at least 10 likes to be published!");
     }
   };
+
+  // Pagination logic
+  const indexOfLastMeal = currentPage * mealsPerPage;
+  const indexOfFirstMeal = indexOfLastMeal - mealsPerPage;
+  const currentMeals = upcoming.slice(indexOfFirstMeal, indexOfLastMeal);
+  const totalPages = Math.ceil(upcoming.length / mealsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <div>
       <div className="py-10 px-5 min-h-screen ">
@@ -43,10 +68,10 @@ const UpComingMeal = () => {
           <title>Upcoming Meals || Hostel Management</title>
         </Helmet>
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:justify-between mb-5">
-          <h1 className="text-2xl font-semibold  ">Upcoming Meals</h1>
+          <h1 className="text-2xl font-semibold">Upcoming Meals</h1>
           <button
             onClick={handleOpenModal}
-            className=" text-gray-100 px-6 py-2 rounded bg-gradient-to-r from-blue-600 to-blue-800"
+            className="text-gray-100 px-6 py-2 rounded bg-gradient-to-r from-blue-600 to-blue-800"
           >
             Add Upcoming Meal
           </button>
@@ -62,7 +87,7 @@ const UpComingMeal = () => {
               </tr>
             </thead>
             <tbody>
-              {upcoming.map((meal) => (
+              {currentMeals.map((meal) => (
                 <tr key={meal._id} className="border-t">
                   <td className="px-4 py-4 text-sm">
                     <img
@@ -88,6 +113,27 @@ const UpComingMeal = () => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="flex justify-center items-center mt-6 gap-3">
+          <button
+            className="px-3 text-sm py-1 hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100 rounded"
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span className="font-semibold text-sm">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            className="px-4 text-sm py-1 hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100 rounded"
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
         </div>
       </div>
       <UpcomingMealModal

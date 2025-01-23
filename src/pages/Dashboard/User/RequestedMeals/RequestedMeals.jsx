@@ -1,5 +1,5 @@
 import useAxiosInstance from "./../../../../hooks/useAxiosInstance";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -8,6 +8,9 @@ import { Helmet } from "react-helmet-async";
 const RequestedMeals = () => {
   const axiosInstance = useAxiosInstance();
   const { user } = useContext(AuthContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const mealsPerPage = 10;
+
   const { data: requestMeals = [], refetch } = useQuery({
     queryKey: ["requestedMeals", user?.email],
     queryFn: async () => {
@@ -17,23 +20,44 @@ const RequestedMeals = () => {
       return data;
     },
   });
+
   const handleCancel = async (cancelId) => {
     try {
       await axiosInstance.delete(`/request-meal/cancel/${cancelId}`);
       toast.success("Order Cancelled successfully");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       refetch();
     }
   };
+
+  // Pagination Logic
+  const totalPages = Math.ceil(requestMeals.length / mealsPerPage);
+  const currentMeals = requestMeals.slice(
+    (currentPage - 1) * mealsPerPage,
+    currentPage * mealsPerPage
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <div>
       <div className="min-h-screen py-10 px-5">
         <Helmet>
           <title>Requested Meals || Hostel Management</title>
         </Helmet>
-        <h1 className="text-2xl font-semibold text-gray-800 r mb-6">
+        <h1 className="text-2xl font-semibold text-gray-800 mb-6">
           Requested Meals
         </h1>
         <div className="overflow-x-auto bg-white shadow-md rounded-md">
@@ -58,7 +82,7 @@ const RequestedMeals = () => {
               </tr>
             </thead>
             <tbody>
-              {requestMeals?.map((meal) => (
+              {currentMeals.map((meal) => (
                 <tr
                   key={meal?._id}
                   className="hover:bg-gray-50 text-sm transition-colors"
@@ -79,7 +103,7 @@ const RequestedMeals = () => {
                     <button
                       onClick={() => handleCancel(meal?._id)}
                       disabled={meal?.status === "Delivered"}
-                      className={`bg-red-600 text-white px-4 py-1 rounded-full hover:bg-red-600 transition-colors text-sm ${
+                      className={`bg-red-600 text-white px-4 py-1 rounded-full hover:bg-red-700 transition-colors text-sm ${
                         meal?.status === "Delivered" &&
                         "hover:cursor-not-allowed"
                       }`}
@@ -91,6 +115,27 @@ const RequestedMeals = () => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="flex justify-center items-center mt-6 gap-3">
+          <button
+            className="px-3 text-sm py-1 hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100 rounded"
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span className="font-semibold text-sm">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            className="px-4 text-sm py-1 hover:bg-gradient-to-l bg-gradient-to-r from-blue-600 to-blue-800 text-gray-100 rounded"
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

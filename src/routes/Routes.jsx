@@ -14,7 +14,6 @@ import UserProfile from "../pages/Dashboard/User/UserProfile/UserProfile";
 import AdminProfile from "../pages/Dashboard/Admin/AdminProfile/AdminProfile";
 import AllMeals from "../pages/Dashboard/Admin/AllMeals/AllMeals";
 import AllReviews from "../pages/Dashboard/Admin/AllReviews/AllReviews";
-import ServeMeals from "../pages/Dashboard/Admin/ServeMeals/serveMeals";
 import UpComingMeal from "../pages/Dashboard/Admin/UpComingMeal/UpComingMeal";
 import RequestedMeals from "../pages/Dashboard/User/RequestedMeals/RequestedMeals";
 import MyReviews from "../pages/Dashboard/User/MyReviews/MyReviews";
@@ -25,6 +24,7 @@ import ViewMeals from "../pages/Dashboard/Admin/ViewMeals/ViewMeals";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
 import ViewMealsReviews from "../pages/Dashboard/User/ViewMealsReviews/ViewMealsReviews";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import ServeMeals from "../pages/Dashboard/Admin/ServeMeals/ServeMeals";
 
 const router = createBrowserRouter([
   {
