@@ -9,6 +9,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+
 const LogIn = () => {
   const { signInExistingUsers, signInWithGoogle, user } =
     useContext(AuthContext);
