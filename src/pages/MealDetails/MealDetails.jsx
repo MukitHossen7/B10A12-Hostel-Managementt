@@ -176,7 +176,7 @@ const MealDetails = () => {
             <p className="text-gray-700 mb-5">{detailsData?.description}</p>
 
             <div className="">
-              <div className="flex flex-wrap gap-4 ">
+              <div className="flex flex-wrap gap-2 ">
                 {detailsData?.ingredients?.map((ingredient, index) => (
                   <span
                     className="bg-gray-200 text-gray-800 px-4 rounded-full text-sm"
@@ -262,7 +262,9 @@ const MealDetails = () => {
                       required
                       className="w-full border rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      <option value="Select a rating">Select a rating</option>
+                      <option disabled value="Select a rating">
+                        Select a rating
+                      </option>
                       <option value="1">1 - Poor</option>
                       <option value="2">2 - Fair</option>
                       <option value="3">3 - Good</option>

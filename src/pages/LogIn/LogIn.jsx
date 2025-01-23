@@ -168,7 +168,7 @@ const LogIn = () => {
             <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
           </div>
           <button onClick={handleLoginGoogle}>
-            <div className="flex justify-center items-center gap-2 border m-3 p-2 border-blue-500 border-rounded cursor-pointer">
+            <div className="flex justify-center items-center gap-2 rounded-md  border m-3 p-2 border-blue-700 border-rounded cursor-pointer">
               <FcGoogle className="text-2xl" />
               Continue with Google
             </div>

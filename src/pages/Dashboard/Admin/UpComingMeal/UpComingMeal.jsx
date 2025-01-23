@@ -27,7 +27,6 @@ const UpComingMeal = () => {
       `/upcoming-meals-admin/${publishId}`
     );
     if (data.likes >= 10) {
-      console.log(publishId);
       await axiosInstance.patch(
         `/update-status-upcoming-meals-admin/${publishId}`
       );

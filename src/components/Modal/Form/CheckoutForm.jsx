@@ -24,7 +24,6 @@ const CheckoutForm = ({ closeModal, packageData }) => {
       console.log(error);
     }
   };
-  console.log(clientSecret);
   const stripe = useStripe();
   const elements = useElements();
 

@@ -15,7 +15,6 @@ const AllReviews = () => {
     },
   });
   const handleDeleteReview = async (reviewId, foodId) => {
-    console.log(reviewId, foodId);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",

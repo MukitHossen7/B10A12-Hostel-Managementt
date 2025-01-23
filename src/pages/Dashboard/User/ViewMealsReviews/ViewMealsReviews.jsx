@@ -7,7 +7,6 @@ import { BsCurrencyDollar } from "react-icons/bs";
 const ViewMealsReviews = () => {
   const axiosInstance = useAxiosInstance();
   const { id } = useParams();
-  console.log(id);
   const { data: reviews = {} } = useQuery({
     queryKey: ["reviews", id],
     queryFn: async () => {
@@ -36,7 +35,7 @@ const ViewMealsReviews = () => {
               <h1 className="text-2xl md:text-3xl lg:text-3xl font-semibold text-gray-800 tracking-wide">
                 {reviews?.foodData?.title}
               </h1>
-              <p className="mt-2 text-base lg:text-lg text-gray-600">
+              <p className="mt-2 text-sm text-gray-600">
                 {reviews?.foodData?.description}
               </p>
               <div className="mt-4 flex items-center space-x-4">

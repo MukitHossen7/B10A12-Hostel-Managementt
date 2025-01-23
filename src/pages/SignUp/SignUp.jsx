@@ -11,8 +11,12 @@ import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 const SignUp = () => {
-  const { createSignUpNewUsers, updateUserProfile, signInWithGoogle } =
-    useContext(AuthContext);
+  const {
+    createSignUpNewUsers,
+    updateUserProfile,
+    signInWithGoogle,
+    setRefetch,
+  } = useContext(AuthContext);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const [signToggle, setSignToggle] = useState(false);
@@ -33,6 +37,7 @@ const SignUp = () => {
         displayName: name,
         photoURL: photo,
       });
+      setRefetch(Date.now());
       toast.success("Signup Successfully");
       const userData = {
         name: user?.displayName,
@@ -208,7 +213,7 @@ const SignUp = () => {
         </div>
         <button
           onClick={handleSignUpGoogle}
-          className="flex justify-center items-center gap-1 border m-3 p-2 border-blue-500 border-rounded cursor-pointer"
+          className="flex justify-center items-center gap-1 rounded-md border m-3 p-2 border-blue-700 border-rounded cursor-pointer"
         >
           <FcGoogle className="text-2xl" />
           Continue with Google

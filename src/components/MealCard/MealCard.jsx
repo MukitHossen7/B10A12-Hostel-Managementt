@@ -15,7 +15,7 @@ const MealCard = ({ meal }) => {
         <div className="pt-5">
           <h3 className="text-xl font-semibold text-gray-700 mb-2">{title}</h3>
           <p className="text-gray-500 text-sm mb-2">
-            {description.slice(0, 50)}...
+            {description.slice(0, 35)}...
           </p>
           <p className="text-gray-700 mb-1 flex items-center gap-1">
             <BsCurrencyDollar />

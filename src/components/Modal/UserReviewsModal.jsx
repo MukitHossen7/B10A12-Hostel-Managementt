@@ -5,7 +5,6 @@ import useAxiosInstance from "../../hooks/useAxiosInstance";
 
 const UserReviewsModal = ({ isOpen, onClose, reviewData, refetch }) => {
   const axiosInstance = useAxiosInstance();
-  console.log(reviewData);
   const handleReviewsFrom = async (e) => {
     e.preventDefault();
     const description = e.target.description.value;

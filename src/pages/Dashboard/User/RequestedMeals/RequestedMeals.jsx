@@ -17,7 +17,6 @@ const RequestedMeals = () => {
       return data;
     },
   });
-  console.log(requestMeals);
   const handleCancel = async (cancelId) => {
     try {
       await axiosInstance.delete(`/request-meal/cancel/${cancelId}`);

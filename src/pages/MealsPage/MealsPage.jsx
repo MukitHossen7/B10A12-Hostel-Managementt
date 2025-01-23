@@ -2,59 +2,38 @@ import { useEffect, useState } from "react";
 import useAxiosPublic from "./../../hooks/useAxiosPublic";
 import AllMealCard from "../../components/AllMealCard/AllMealCard";
 import { Helmet } from "react-helmet-async";
-import InfiniteScroll from "react-infinite-scroller";
-import { FadeLoader } from "react-spinners";
 
 const MealsPage = () => {
   const [meals, setMeals] = useState([]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [loading, setLoading] = useState(false);
   const axiosPublic = useAxiosPublic();
 
-  const fetchMeals = async () => {
-    if (loading) return;
-    setLoading(true);
-
-    try {
-      const { data } = await axiosPublic.get(
-        `/api/meals?search=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&limit=6`
-      );
-      setMeals((prevMeals) => [...prevMeals, ...data.meals]);
-      setHasMore(data.hasMore);
-      setPage((prevPage) => prevPage + 1);
-    } catch (error) {
-      console.error("Error fetching meals:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  const resetMeals = () => {
-    setMeals([]);
-    setPage(1);
-    setHasMore(true);
-  };
+  useEffect(() => {
+    const fetchMeals = async () => {
+      try {
+        const { data } = await axiosPublic.get(
+          `/api/meals?search=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+        );
+        setMeals(data.meals);
+      } catch (error) {
+        console.error("Error fetching meals:", error);
+      }
+    };
+    fetchMeals();
+  }, [search, category, minPrice, maxPrice]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
-    resetMeals();
   };
 
   const handlePriceRange = (e) => {
     const { name, value } = e.target;
     if (name === "min") setMinPrice(value);
     if (name === "max") setMaxPrice(value);
-    resetMeals();
   };
-
-  useEffect(() => {
-    resetMeals();
-    fetchMeals();
-  }, [search, category, minPrice, maxPrice]);
 
   return (
     <div className="w-11/12 md:11/12 lg:w-11/12 xl:container mx-auto px-4 pt-8 pb-14">
@@ -105,21 +84,11 @@ const MealsPage = () => {
           <h2 className="text-3xl font-semibold italic">No meals found</h2>
         </div>
       )}
-      <InfiniteScroll
-        loadMore={fetchMeals}
-        hasMore={hasMore}
-        loader={
-          <div key="loader" className="flex items-center justify-center">
-            <FadeLoader color="#1347e3" width={3} />
-          </div>
-        }
-      >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {meals?.map((meal, idx) => (
-            <AllMealCard key={idx} meal={meal}></AllMealCard>
-          ))}
-        </div>
-      </InfiniteScroll>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {meals?.map((meal, idx) => (
+          <AllMealCard key={idx} meal={meal}></AllMealCard>
+        ))}
+      </div>
     </div>
   );
 };
