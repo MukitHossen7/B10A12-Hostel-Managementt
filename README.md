@@ -57,6 +57,20 @@
 - **Authentication:** Firebase
 - **Payment Gateway:** Stripe
 
+## Installation and Setup
+
+### Clone the repository
+
+- git clone
+
+### Install dependencies
+
+- npm install
+
+### Start the server
+
+-npm run dev / npx vite
+
 ## dependencies
 
 - "@headlessui/react": "^2.2.0",
