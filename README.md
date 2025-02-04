@@ -69,7 +69,7 @@
 
 ### Start the server
 
--npm run dev / npx vite
+- npm run dev / npx vite
 
 ## dependencies
 
